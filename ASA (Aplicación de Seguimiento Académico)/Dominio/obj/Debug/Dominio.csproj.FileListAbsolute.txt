@@ -1,0 +1,6 @@
+G:\Proyectos\TPC_ASP_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Dominio\bin\Debug\Dominio.dll
+G:\Proyectos\TPC_ASP_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Dominio\bin\Debug\Dominio.pdb
+G:\Proyectos\TPC_ASP_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Dominio\obj\Debug\Dominio.csprojAssemblyReference.cache
+G:\Proyectos\TPC_ASP_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+G:\Proyectos\TPC_ASP_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Dominio\obj\Debug\Dominio.dll
+G:\Proyectos\TPC_ASP_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Dominio\obj\Debug\Dominio.pdb

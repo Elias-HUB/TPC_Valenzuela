@@ -1,0 +1,73 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Principal.master.cs" Inherits="WEB_ASA.Principal" %>
+
+<!DOCTYPE html>
+
+<html>
+
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <%-- Boostrap --%>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+
+<body>
+    <form id="form1" runat="server">
+        <header>
+
+            <style>
+                hr {
+                    /*height: 2px;*/
+                    background-color: black;
+                }
+
+                .Cabecera {
+                    background-color: rgb(46, 140, 228);
+                    /*min-height: 14vh;*/
+                    /*display: flex;*/
+                    /*flex-direction: column;*/
+                    /*align-items: center;*/
+                    justify-content: center;
+                    font-size: calc(10px + 2vmin);
+                    color: white;
+                    /*font-size: 25px;*/
+                }
+            </style>
+
+            <div class="p-3 text-white Cabecera">
+                <div class="row">
+                    <div>
+                        <asp:ImageButton ID="LogoCab" runat="server" ImageUrl="~/Imagenes/Cabecera.png" Width="350px" AlternateText="Imagen no disponible" />
+                    </div>
+                    <div style="margin-top: 45px; justify-content: flex-end">
+                        <p>ASA (Aplicación de Seguimiento Académico)</p>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+        </header>
+
+            <div style="font-family: 'Roboto', sans-serif;">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+
+        <footer>
+            <hr />
+            <p>&copy; <%: DateTime.Now.Year %> - Programación III ASA (Aplicación de Seguimiento Académico)- Valenzuela Elias</p>
+        </footer>
+    </form>
+</body>
+
+</html>
