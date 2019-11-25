@@ -9,3 +9,14 @@ G:\Proyectos\TPC_ASP_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Serv
 G:\Proyectos\TPC_ASP_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Services\obj\Debug\Services.csproj.CopyComplete
 G:\Proyectos\TPC_ASP_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Services\obj\Debug\Services.dll
 G:\Proyectos\TPC_ASP_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Services\obj\Debug\Services.pdb
+G:\Proyectos\TPC_ASP_Valenzuela\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Services\obj\Debug\Services.csprojAssemblyReference.cache
+G:\Proyectos\TPC_ASP_Valenzuela\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Services\obj\Debug\Services.csproj.CoreCompileInputs.cache
+G:\Proyectos\TPC_ASP_Valenzuela\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Services\obj\Debug\Services.dll
+G:\Proyectos\TPC_ASP_Valenzuela\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Services\obj\Debug\Services.pdb
+G:\Proyectos\TPC_ASP_Valenzuela\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Services\bin\Debug\Services.dll
+G:\Proyectos\TPC_ASP_Valenzuela\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Services\bin\Debug\Services.pdb
+G:\Proyectos\TPC_ASP_Valenzuela\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Services\bin\Debug\AccesoaDatos.dll
+G:\Proyectos\TPC_ASP_Valenzuela\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Services\bin\Debug\Dominio.dll
+G:\Proyectos\TPC_ASP_Valenzuela\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Services\bin\Debug\AccesoaDatos.pdb
+G:\Proyectos\TPC_ASP_Valenzuela\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Services\bin\Debug\Dominio.pdb
+G:\Proyectos\TPC_ASP_Valenzuela\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Services\obj\Debug\Services.csproj.CopyComplete
