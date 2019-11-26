@@ -11,5 +11,10 @@ namespace ASA.Models
         public string Nombre { get; set; }
         public Universidad Universidad { get; set; }
         public Boolean Estado { get; set; }
+
+        public override string ToString()
+        {
+            return Nombre;
+        }
     }
 }

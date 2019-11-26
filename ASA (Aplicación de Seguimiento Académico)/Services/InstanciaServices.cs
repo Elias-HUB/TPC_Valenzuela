@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ASA.Models;
+using AccesoDatos;
 
 namespace ASA.Services
 {
@@ -45,5 +47,78 @@ namespace ASA.Services
                 Datos.CerrarConexion();
             }
         }
+
+        public void Modificar(Instancia Aux)
+        {
+            AccesoDatos.AccesoDatos accesoDatos = new AccesoDatos.AccesoDatos();
+            try
+            {
+                accesoDatos.SetearQuery("update Instancia set Nombre = @Nombre, FechaInicio = @FechaInicio, FechaFin = @FechaFin, IdTipoinstancia = @TIins  where id = @Id");
+                accesoDatos.Clear();
+                accesoDatos.agregarParametro("@Nombre",Aux.Nombre);
+                accesoDatos.agregarParametro("@FechaInicio",Aux.FechaInicio);
+                accesoDatos.agregarParametro("@FechaFin",Aux.FechaFin);
+                accesoDatos.agregarParametro("@TIins",Aux.TipoInstancia.Id);
+                accesoDatos.agregarParametro("@Id",Aux.Id);
+                accesoDatos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public void Nuevo (Instancia Aux)
+        {
+            AccesoDatos.AccesoDatos datos = new AccesoDatos.AccesoDatos();
+            //AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearQuery("insert into Instancia (Nombre,FechaInicio,FechaFin,IdTipoinstancia) values ( @Nombre,@FechaInicio,@FechaFin,@IdTipoinstancia )");
+                datos.agregarParametro("@Nombre", Aux.Nombre);
+                datos.agregarParametro("@FechaInicio", Aux.FechaInicio);
+                datos.agregarParametro("@FechaFin", Aux.FechaFin);
+                datos.agregarParametro("@IdTipoinstancia", Aux.TipoInstancia.Id);
+                //datos.agregarParametro("@estado", 1);
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+
+        public void Eliminar (long Id)
+        {
+            AccesoDatos.AccesoDatos accesoDatos = new AccesoDatos.AccesoDatos();
+            try
+            {
+                accesoDatos.SetearQuery("delete [DetComisionInstancia] where IdInstancia = @Id");
+                accesoDatos.Clear();
+                accesoDatos.agregarParametro("@Id", Id);
+                accesoDatos.EjecutarAccion();
+                accesoDatos.SetearQuery("delete [Comentario] where IdInstancia = @Id");
+                accesoDatos.Clear();
+                accesoDatos.agregarParametro("@Id", Id);
+                accesoDatos.EjecutarAccion();
+                accesoDatos.SetearQuery("delete [Instancia] where Id = @Id");
+                accesoDatos.Clear();
+                accesoDatos.agregarParametro("@Id", Id);
+                accesoDatos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                accesoDatos.CerrarConexion();
+            }
+        }
     }
+
+
 }

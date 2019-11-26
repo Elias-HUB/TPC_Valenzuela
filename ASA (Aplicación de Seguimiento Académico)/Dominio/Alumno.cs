@@ -7,8 +7,8 @@ namespace ASA.Models
 {
     public class Alumno : Persona
     {
-        public int Legajo { get; set; }
-        public Boolean Estado { get; set; }
+        public long Legajo { get; set; }
+        //public Boolean Estado { get; set; }
         //public TipoPerfil TipoPerfil { get; set; }
     }
 }

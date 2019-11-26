@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Principal.Master" AutoEventWireup="true" CodeBehind="Comisiones.aspx.cs" Inherits="WEB_ASA.Comisiones" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 
@@ -7,35 +8,34 @@
 
     <style>
         .card:hover {
-  box-shadow: 1px 8px 20px rgb(49, 100, 129);
-   -webkit-transition: box-shadow 0.12s ease-in; 
-}
-
+            box-shadow: 1px 8px 20px rgb(49, 100, 129);
+            -webkit-transition: box-shadow 0.12s ease-in;
+        }
     </style>
 
-        <div class="col-md-6 row">
-          <h3>Comiciones</h3>
-          <button type="button" class="btn mt-50 btn-lg btn-primary">
+    <div class="col-md-6 row">
+        <h3>Comiciones</h3>
+        <button type="button" class="btn mt-50 btn-lg btn-primary">
             Agregar Comisión
-          </button>
-        </div>
-        <div class="card-columns Margen">
+        </button>
+    </div>
+    <div class="card-columns Margen" style="margin-left: 25px; margin-right: 25px;">
 
-            <%--Boton--%>
-        <div class="card text-white bg-dark">
-            <asp:Image ImageUrl="imageurl" runat="server" class="card-img-top"/>
-          <%--<img class="card-img-top" alt="..." src="" />--%>
-          <div class="card-body">
-            <%--<h5 class="card-title">Titulo</h5>--%>
-              <asp:Label Text="DESCRIPCION" runat="server" class="card-text"/>
-              
-            <%--<p class="card-text">DESCRIPCION</p>--%>
-          </div>
-            <a href="#" class="btn btn-secondary btn-lg btn-block"><h6>Quiero este</h6></a>
-       <%--   <Link to="/Alumnos" class="btn btn-secondary btn-lg btn-block">
-            <h6>Quiero este</h6>
-          </Link>--%>
+        <% foreach (var item in Comisions)
+            { %>
+        <div class="card text-center border-info">
+            <div class="card-header bg-white">
+                <% =item.Materia.Carrera.Universidad.Nombre %>
+            </div>
+            <div class="card-body ">
+                <h5 class="card-title"><% =item.Materia.Nombre %></h5>
+                <p class="card-text"><% =item.Materia.Carrera.Nombre %></p>
+                <a href="#" class="btn btn-primary btn-info">Instancias Evaluativas</a>
+            </div>
+            <div class="card-footer bg-transparent">
+                <% =item.Cuatrimestre.Nombre + " " + item.Anio  %>
+            </div>
         </div>
-        </div>
-
+        <% } %>
+    </div>
 </asp:Content>

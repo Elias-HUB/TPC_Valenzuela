@@ -60,7 +60,7 @@ namespace AccesoDatos
             Comando.Parameters.Clear();
         }
 
-        internal void EjecutarAccion()
+        public void EjecutarAccion()
         {
             try
             {

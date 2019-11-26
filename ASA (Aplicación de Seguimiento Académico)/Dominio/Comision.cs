@@ -14,7 +14,12 @@ namespace ASA.Models
         public List<Alumno> ListAlumnos { get; set; }
         public List<Instancia> ListInstancia { get; set; }
         public Docente docente { get; set; }
-        public DateTime Anio { get; set; }
-        public Boolean Estado { get; set; }
+        public int Anio { get; set; }
+        //public Boolean Estado { get; set; }
+
+        public override string ToString()
+        {
+            return Anio.ToString();
+        }
     }
 }
