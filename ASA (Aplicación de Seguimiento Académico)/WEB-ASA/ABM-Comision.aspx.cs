@@ -19,7 +19,6 @@ namespace WEB_ASA
                 if (!IsPostBack)
                 {
                     CargaDList();
-                    CargaDGVInstancia();
                 }
             }
             catch (Exception)
@@ -43,144 +42,30 @@ namespace WEB_ASA
             DlistCuatrimestre.DataTextField = "Nombre";
             DlistCuatrimestre.DataSource = cuatrimestreServices.Listar();
             DlistCuatrimestre.DataBind();
-            //DlistTipo.DataValueField = "Id";
-            //DlistTipo.DataTextField = "Nombre";
-            //DlistTipo.DataSource = tipoInstanciaServices.Listar();
-            //DlistTipo.DataBind();
             DlistTurno.DataValueField = "Id";
             DlistTurno.DataTextField = "Nombre";
             DlistTurno.DataSource = turnoServices.Listar();
             DlistTurno.DataBind();
         }
 
-        public void CargaDGVInstancia()
+        protected void BtnInstancias_click(object sender, EventArgs e)
         {
-            InstanciaServices instanciaServices = new InstanciaServices();
-            TipoInstanciaServices tipoInstanciaServices = new TipoInstanciaServices();
-            List<Instancia> instancias = instanciaServices.Listar();
-            DGVInstancia.DataSourceID = null;
-            DGVInstancia.DataSource = instancias;
-            DGVInstancia.DataBind();
-            ((DropDownList)DGVInstancia.FooterRow.FindControl("DGBDlistTipoFooter")).DataValueField = "Id";
-            ((DropDownList)DGVInstancia.FooterRow.FindControl("DGBDlistTipoFooter")).DataTextField = "Nombre";
-            ((DropDownList)DGVInstancia.FooterRow.FindControl("DGBDlistTipoFooter")).DataSource = tipoInstanciaServices.Listar();
-            ((DropDownList)DGVInstancia.FooterRow.FindControl("DGBDlistTipoFooter")).DataBind();
-        }
+            ComisionServices comisionServices = new ComisionServices();
+            Comision comision = new Comision();
+            comision.Materia = new Materia();
+            comision.Materia.Id = Convert.ToInt64(DlistMateria.SelectedValue);
+            comision.Turno = new Turno();
+            comision.Turno.Id = Convert.ToInt64(DlistTurno.SelectedValue);
+            comision.Cuatrimestre = new Cuatrimestre();
+            comision.Cuatrimestre.Id = Convert.ToInt64(DlistCuatrimestre.SelectedValue);
+            //VERIFICAR DOCENTE 
+            comision.docente = new Docente();
+            comision.docente.Legajo = Convert.ToInt64(2);
+            comision.Anio = Convert.ToInt32(TboxAnio.Text);
+            comisionServices.Nuevo(comision);
+            Int64 IdCom = comisionServices.UltimoRegistro();
 
-        protected void dgvIntancia_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            try
-            {
-                if (e.CommandName.Equals("AddNew"))
-                {
-                    InstanciaServices instanciaServices = new InstanciaServices();
-                    Instancia instancia = new Instancia();
-                    instancia.Nombre = (DGVInstancia.FooterRow.FindControl("txbNombreFooter") as TextBox).Text;
-                    instancia.FechaInicio = Convert.ToDateTime((DGVInstancia.FooterRow.FindControl("TboxFechaInicioFooter") as TextBox).Text);
-                    instancia.FechaFin = Convert.ToDateTime((DGVInstancia.FooterRow.FindControl("TboxFechaFinFooter") as TextBox).Text);
-
-                    instancia.TipoInstancia = new TipoInstancia();
-                    instancia.TipoInstancia.Nombre = (DGVInstancia.FooterRow.FindControl("DGBDlistTipoFooter") as DropDownList).SelectedItem.ToString();
-                    instancia.TipoInstancia.Id = Convert.ToInt64((DGVInstancia.FooterRow.FindControl("DGBDlistTipoFooter") as DropDownList).SelectedValue);
-
-                    instanciaServices.Nuevo(instancia);
-                    lblCorrecto.Text = "Se a agregado la instancia de manera correctamente.";
-                    lblIncorrecto.Text = "";
-                    CargaDGVInstancia();
-                }
-            }
-            catch (Exception ex)
-            {
-                lblCorrecto.Text = "";
-                lblIncorrecto.Text = ex.Message;
-            }
-        }
-
-        protected void dgvIntancia_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            try
-            {
-                DGVInstancia.ShowFooter = false;
-                DGVInstancia.EditIndex = e.NewEditIndex;
-                CargaDGVInstancia();
-                InstanciaServices instanciaServices = new InstanciaServices();
-                TipoInstanciaServices tipoInstanciaServices = new TipoInstanciaServices();
-                ((DropDownList)DGVInstancia.Rows[e.NewEditIndex].FindControl("DGBDlistTipo")).DataValueField = "Id";
-                ((DropDownList)DGVInstancia.Rows[e.NewEditIndex].FindControl("DGBDlistTipo")).DataTextField = "Nombre";
-                ((DropDownList)DGVInstancia.Rows[e.NewEditIndex].FindControl("DGBDlistTipo")).DataSource = tipoInstanciaServices.Listar(); ;
-                ((DropDownList)DGVInstancia.Rows[e.NewEditIndex].FindControl("DGBDlistTipo")).DataBind();
-                Instancia instancia = (instanciaServices.Listar(e.NewEditIndex + 1))[0];
-                ((DropDownList)DGVInstancia.Rows[e.NewEditIndex].FindControl("DGBDlistTipo")).Items.FindByValue(instancia.TipoInstancia.Id.ToString()).Selected = true;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        protected void dgvIntancia_RowUpdating(object sender, GridViewUpdateEventArgs e)
-        {
-            try
-            {
-                InstanciaServices instanciaServices = new InstanciaServices();
-                Instancia instancia = new Instancia();
-                instancia.Id = Convert.ToInt64((DGVInstancia.Rows[e.RowIndex].FindControl("LBLId") as Label).Text);
-                instancia.Nombre = (DGVInstancia.Rows[e.RowIndex].FindControl("TboxNombre") as TextBox).Text;
-                instancia.FechaInicio = Convert.ToDateTime((DGVInstancia.Rows[e.RowIndex].FindControl("TboxFechaInicio") as TextBox).Text);
-                instancia.FechaFin = Convert.ToDateTime((DGVInstancia.Rows[e.RowIndex].FindControl("TboxFechaFin") as TextBox).Text);
-
-                instancia.TipoInstancia = new TipoInstancia();
-                instancia.TipoInstancia.Nombre = (DGVInstancia.Rows[e.RowIndex].FindControl("DGBDlistTipo") as DropDownList).SelectedItem.ToString();
-                instancia.TipoInstancia.Id = Convert.ToInt64((DGVInstancia.Rows[e.RowIndex].FindControl("DGBDlistTipo") as DropDownList).SelectedValue);
-                instanciaServices.Modificar(instancia);
-                lblCorrecto.Text = "Se Modifico la Instancia de manera correctamente.";
-                lblIncorrecto.Text = "";
-                DGVInstancia.ShowFooter = true;
-                Response.Redirect("ABM-Comision.aspx");
-                            }
-            catch (Exception ex)
-            {
-                lblCorrecto.Text = "";
-                lblIncorrecto.Text = ex.Message;
-            }
-        }
-
-        protected void dgvIntancia_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            DGVInstancia.EditIndex = -1;
-            DGVInstancia.ShowFooter = true;
-            CargaDGVInstancia();
-        }
-
-        protected void dgvIntancia_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-
-        }
-
-        protected void dgvIntancia_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            try
-            {
-                InstanciaServices instanciaServices = new InstanciaServices();
-                Instancia instancia = new Instancia();
-                instancia.Id = Convert.ToInt64((DGVInstancia.Rows[e.RowIndex].FindControl("LBLId") as Label).Text);
-                instanciaServices.Eliminar(instancia.Id);
-                lblCorrecto.Visible = true;
-                lblCorrecto.Text = "Se elimino la instancia de manera correcta";
-                lblIncorrecto.Text = "";
-                CargaDGVInstancia();
-            }
-            catch (Exception ex)
-            {
-                lblCorrecto.Text = "";
-                lblIncorrecto.Text = ex.Message;
-            }
-        }
-
-        protected void DGVInstancia_RowCreated(object sender, GridViewRowEventArgs e)
-        {
-            e.Row.Cells[0].Visible = false;
-            //e.Row.Cells[2].Visible = false;
+            Response.Redirect("ABM-Instancia.aspx?IdComision=" + IdCom);
         }
     }
 }

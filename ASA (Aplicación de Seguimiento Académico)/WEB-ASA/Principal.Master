@@ -44,7 +44,7 @@
                 }
             </style>
 
-            <div class="p-3 text-white Cabecera">
+            <div class="p-3 text-white Cabecera" style="font-family:Arial, Helvetica, sans-serif">
                 <div class="row">
                     <div>
                         <asp:ImageButton ID="LogoCab" runat="server" ImageUrl="~/Imagenes/Cabecera.png" Width="350px" AlternateText="Imagen no disponible" />
@@ -58,12 +58,12 @@
             <hr />
         </header>
 
-            <div style="font-family: 'Roboto', sans-serif;">
+            <div style="font-family:Arial, Helvetica, sans-serif">
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
 
-        <footer>
+        <footer style="font-family:Arial, Helvetica, sans-serif">
             <hr />
             <p>&copy; <%: DateTime.Now.Year %> - Programación III ASA (Aplicación de Seguimiento Académico)- Valenzuela Elias</p>
         </footer>

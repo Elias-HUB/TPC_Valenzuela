@@ -9,17 +9,16 @@
     <style>
         .card:hover {
             box-shadow: 1px 8px 20px rgb(49, 100, 129);
-            -webkit-transition: box-shadow 0.12s ease-in;
+            -webkit-transition: box-shadow 0.35s ease-in;
         }
     </style>
 
     <div class="col-md-6 row">
-        <h3>Comiciones</h3>
-        <button type="button" class="btn mt-50 btn-lg btn-primary">
-            Agregar Comisión
-        </button>
+        <h3>Comisiones</h3>
+        <asp:Button Text="Agregar Comisión" runat="server" class="btn btn-lg btn-info" style="margin-left: 100px;" OnClick="BtnComision_Click"/>
     </div>
-    <div class="card-columns Margen" style="margin-left: 25px; margin-right: 25px;">
+
+    <div class="card-columns Margen" style="margin-left: 25px; margin-right: 25px; margin-top: 10px;">
 
         <% foreach (var item in Comisions)
             { %>
@@ -30,10 +29,11 @@
             <div class="card-body ">
                 <h5 class="card-title"><% =item.Materia.Nombre %></h5>
                 <p class="card-text"><% =item.Materia.Carrera.Nombre %></p>
-                <a href="#" class="btn btn-primary btn-info">Instancias Evaluativas</a>
+                <%--<asp:Button ID="<% =item.Id %>" runat="server" Text="Instancias Evaluativas" class="btn btn-primary btn-info" OnClick="BtnClick"/>--%>
+                <a href="List-Instancia.aspx?valor=<% =item.Id %>" class="btn btn-lg btn-info">Instancias Evaluativas</a>
             </div>
             <div class="card-footer bg-transparent">
-                <% =item.Cuatrimestre.Nombre + " " + item.Anio  %>
+                <% =item.Cuatrimestre.Nombre + " " + item.Anio %>
             </div>
         </div>
         <% } %>

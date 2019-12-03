@@ -11,9 +11,9 @@
             margin-top: 10px;
         }
 
-        .HV:hover {
-            box-shadow: 1px 8px 20px rgb(46, 140, 228);
-        }
+            .HV:hover {
+                box-shadow: 1px 8px 20px rgb(46, 140, 228);
+            }
 
         .Margen {
             margin-top: 20px;
@@ -29,49 +29,44 @@
         <div class="form-group row">
             <div class="col-3"></div>
             <div class=" col-6">
-                <asp:Label Text="Comentario:" runat="server" />
-                <%--<asp:TextBox runat="server" class="form-control HV" />--%>
-                <%--<label for="comment">Comentario:</label>--%>
-                <%--<textarea runat="server" class="form-control HV" rows="7" id="TboxComentario"></textarea>--%>
-                <asp:TextBox ID="textarea" class="form-control HV"  height="200px" runat="server" TextMode="MultiLine" />
+                <asp:Label Text="Nuevo Comentario:" runat="server" />
+                <asp:TextBox ID="TboxDescripcion" class="form-control HV" Height="200px" runat="server" TextMode="MultiLine" />
 
-                <div class="HV">
-                    <asp:Button Text="Enviar Comentario por mail" runat="server" class="btn btn-info btn-lg btn-block" />
-                    <%-- <button class="btn btn-info btn-lg btn-block">
-                        Enviar Comentario por mail
-                    </button>--%>
+                <div class="form-group">
+                    <asp:Button Text="Guardar" runat="server" class="btn btn-info btn-lg btn-block" OnClick="BtnGuardar_Click" />
+                    <asp:Button Text="Enviar por mail" runat="server" class="btn btn-info btn-lg btn-block" />
                 </div>
             </div>
         </div>
+
+
         <div class="row Margen">
+
+            <% foreach (var item in comentarios)
+                { %>
+
             <div class="form-group col-4">
-                <label for="comment">Comentario Fecha Alta: </label>
-                <textarea class="form-control HV" rows="5" id="comment"></textarea>
-                <div class="HV">
-                    <button class="btn btn-info btn-lg btn-block">Enviar Comentario por mail</button>
+                <div class="row-group">
+                    <label for="comment">Fecha Alta: </label>
+                    <label for="comment"><% =item.FechaAlta %></label>
+                </div>
+                <div class="row-group">
+                    <label for="comment">Ultima Modificaion: </label>
+                    <label for="comment"><% =item.FechaModificacion %></label>
+                </div>
+                <textarea class="form-control"  ID="LblDescr"  style="height: 100px" disabled="disabled"><% =item.Descripcion%></textarea>
+                <div class=" form-group">
+                    <%--<asp:Button Id="BtnModificar" Text="Modificar" class="btn btn-info btn-lg" runat="server" OnClick="Btnmodificar_Click"/>--%>
+                    <a href="List-Alumnos.aspx?valor=<% = (Session["IdComision-Alumno" + Session.SessionID]) + "&Mail=" + item.Id + "&LegajoAlumno=" + (Session["IdComision-Alumno" + Session.SessionID]) %>" class="btn btn-info btn-lg btn-block">Reenviar por mail</a>
+                    <%--<button id="<% =item.Id %>" class="btn btn-info btn-lg" >Enviar por mail</button>--%>
+                    <%--<asp:Button Id="BtnMail" Text="Enviar por mail" class="btn btn-info btn-lg btn-block" runat="server"/>--%>
+                    <%--<label Visible="false" ><% =item.Id %></label>--%>
                 </div>
             </div>
-            <div class="form-group col-4">
-                <label for="comment">Comentario Fecha Alta: </label>
-                <textarea class="form-control HV" rows="5" id="comment"></textarea>
-                <div class="HV">
-                    <button class="btn btn-info btn-lg btn-block">
-                        Enviar Comentario por mail
-                    </button>
-                </div>
-            </div>
-            <div class="form-group col-4">
-                <label for="comment">Comentario Fecha Alta: </label>
-                <textarea
-                    class="form-control HV"
-                    rows="5"
-                    id="comment"></textarea>
-                <div class="HV">
-                    <button class="btn btn-info btn-lg btn-block">
-                        Enviar Comentario por mail
-                    </button>
-                </div>
-            </div>
+            <% } %>
+
+
+
         </div>
     </div>
 

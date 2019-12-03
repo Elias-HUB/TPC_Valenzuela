@@ -17,7 +17,7 @@ namespace ASA.Services
             AccesoDatos.AccesoDatos Datos = new AccesoDatos.AccesoDatos();
             try
             {
-                Datos.SetearQuery("SELECT Comision.Id, Materia.Id, Materia.Nombre, Carrera.Id, Carrera.Nombre, Universidad.Id, Universidad.Nombre, Turno.Id, Turno.Nombre, Cuatrimestre.Id, Cuatrimestre.Nombre, Comision.Anio FROM  Comision inner join Materia on IdMateria = Materia.Id inner join Carrera on Carrera.Id = Materia.IdCarrera inner join Universidad on Universidad.Id = Carrera.IdUniversidad inner join Turno on  Turno.id = IdTurno inner join Cuatrimestre on IdCuatrimestre = Cuatrimestre.Id inner join Docente on IdDocente = Docente.Legajo where IdDocente = @IdDocente");
+                Datos.SetearQuery("SELECT Comision.Id, Materia.Id, Materia.Nombre, Carrera.Id, Carrera.Nombre, Universidad.Id, Universidad.Nombre, Turno.Id, Turno.Nombre, Cuatrimestre.Id, Cuatrimestre.Nombre, Comision.Anio FROM  Comision inner join Materia on IdMateria = Materia.Id inner join Carrera on Carrera.Id = Materia.IdCarrera inner join Universidad on Universidad.Id = Carrera.IdUniversidad inner join Turno on  Turno.id = IdTurno inner join Cuatrimestre on IdCuatrimestre = Cuatrimestre.Id inner join Docente on IdDocente = Docente.Legajo where IdDocente = @IdDocente order by Anio desc,Cuatrimestre.Nombre desc");
                 Datos.agregarParametro("@IdDocente", IdDocente);
                 Datos.EjecutarLector();
 
@@ -53,9 +53,61 @@ namespace ASA.Services
 
                     ListarAlumnosComision(Aux);
 
+                    ListarInstanciaComision(Aux);
+
                     Listado.Add(Aux);
                 }
                 return Listado;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Datos.CerrarConexion();
+            }
+        }
+
+        public void Nuevo(Comision Aux)
+        {
+            AccesoDatos.AccesoDatos datos = new AccesoDatos.AccesoDatos();
+            //AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearQuery("insert into Comision (IdMateria,IdTurno,IdCuatrimestre,IdDocente,Anio) values (@IdMateria,@IdTurno,@IdCuatrimestre,@IdDocente,@Anio)");
+                datos.agregarParametro("@IdMateria", Aux.Materia.Id);
+                datos.agregarParametro("@IdTurno", Aux.Turno.Id);
+                datos.agregarParametro("@IdCuatrimestre", Aux.Cuatrimestre.Id);
+                datos.agregarParametro("@IdDocente", Aux.docente.Legajo);
+                datos.agregarParametro("@Anio", Aux.Anio);
+                //datos.agregarParametro("@estado", 1);
+                datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
+
+        public long UltimoRegistro()
+        {
+            AccesoDatos.AccesoDatos Datos = new AccesoDatos.AccesoDatos();
+            long Registro = 0;
+            List<Instancia> alumnos = new List<Instancia>();
+            try
+            {
+                Datos.SetearQuery("SELECT TOP 1 [Id] FROM [Valenzuela_DB].[dbo].[Comision] order by Id desc");
+                Datos.EjecutarLector();
+                while (Datos.Lector.Read())
+                {
+                    Registro = Datos.Lector.GetInt64(0);
+                }
+                return Registro;
             }
             catch (Exception ex)
             {
@@ -92,6 +144,40 @@ namespace ASA.Services
 
                     comision.ListAlumnos = new List<Alumno>();
                     comision.ListAlumnos.Add(Alumno);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Datos.CerrarConexion();
+            }
+        }
+
+        public void ListarInstanciaComision(Comision comision)
+        {
+            AccesoDatos.AccesoDatos Datos = new AccesoDatos.AccesoDatos();
+            Instancia Instancia;
+            List<Instancia> alumnos = new List<Instancia>();
+            try
+            {
+                Datos.SetearQuery("SELECT Ins.Id, Ins.Nombre, Ins.FechaInicio, Ins.FechaFin, TI.Id, TI.Nombre  FROM Instancia as Ins inner join TipoInstancia as TI on IdTipoinstancia = TI.Id inner join DetComisionInstancia on DetComisionInstancia.IdInstancia = Ins.Id where DetComisionInstancia.idComision =  '" + comision.Id + "'");
+                Datos.EjecutarLector();
+                while (Datos.Lector.Read())
+                {
+                    Instancia = new Instancia();
+                    Instancia.Id = Datos.Lector.GetInt64(0);
+                    Instancia.Nombre = Datos.Lector.GetString(1);
+                    Instancia.FechaInicio = Datos.Lector.GetDateTime(2);
+                    Instancia.FechaFin = Datos.Lector.GetDateTime(3);
+                    Instancia.TipoInstancia = new Models.TipoInstancia();
+                    Instancia.TipoInstancia.Id = Datos.Lector.GetInt64(4);
+                    Instancia.TipoInstancia.Nombre = Datos.Lector.GetString(5);
+
+                    comision.ListInstancia = new List<Instancia>();
+                    comision.ListInstancia.Add(Instancia);
                 }
             }
             catch (Exception ex)

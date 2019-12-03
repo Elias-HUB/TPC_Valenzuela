@@ -14,7 +14,14 @@ namespace WEB_ASA
         public List<Comision> Comisions = new List<Comision>();
         protected void Page_Load(object sender, EventArgs e)
         {
+            //ACOMODAR PARA PROFESOR
             Comisions = (new ComisionServices().Listar(2));
+        }
+
+        protected void BtnComision_Click(object sender, EventArgs e)
+        {
+            //ACOMODAR PARA PROFESOR
+            Response.Redirect("ABM-Comision.aspx");
         }
     }
 }

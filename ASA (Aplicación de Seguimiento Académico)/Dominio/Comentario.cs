@@ -9,7 +9,7 @@ namespace ASA.Models
     {
         public long Id { get; set; }
         public string Descripcion { get; set; }
-        public Instancia Instancia { get; set; }
+        //public Instancia Instancia { get; set; }
         public DateTime FechaAlta { get; set; }
         public DateTime FechaModificacion { get; set; }
     }

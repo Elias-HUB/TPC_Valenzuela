@@ -4,3 +4,9 @@ G:\Proyectos\TPC_ASP_Valenzuela\TPC_Valenzuela\ASA (Aplicación de Seguimiento A
 G:\Proyectos\TPC_ASP_Valenzuela\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\AccesoaDatos\obj\Debug\AccesoaDatos.dll
 G:\Proyectos\TPC_ASP_Valenzuela\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\AccesoaDatos\obj\Debug\AccesoaDatos.pdb
 G:\Proyectos\TPC_ASP_Valenzuela\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\AccesoaDatos\obj\Debug\AccesoDatos.csprojAssemblyReference.cache
+G:\Proyectos\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\AccesoaDatos\bin\Debug\AccesoaDatos.dll
+G:\Proyectos\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\AccesoaDatos\bin\Debug\AccesoaDatos.pdb
+G:\Proyectos\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\AccesoaDatos\obj\Debug\AccesoDatos.csprojAssemblyReference.cache
+G:\Proyectos\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\AccesoaDatos\obj\Debug\AccesoDatos.csproj.CoreCompileInputs.cache
+G:\Proyectos\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\AccesoaDatos\obj\Debug\AccesoaDatos.dll
+G:\Proyectos\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\AccesoaDatos\obj\Debug\AccesoaDatos.pdb
