@@ -36,64 +36,57 @@
             }
     </style>
 
-
     <div>
         <div class="container  row">
-            <div class="col-4">
-                <p>COMISION</p>
+            <div>
+                <a href="Comisiones.aspx">Comisiones </a>
             </div>
-            <div class="col-4">
-                 <a href="ABM-Alumno-List.aspx?IdComision=<% =(Session["IdComision" + Session.SessionID]) %>" class="btn btn-info">Agregar Alumno</a>
-                <%--<button type="button" class="btn btn-info">
-                    Agregar Alumno
-                </button>--%>
-            </div>
-            <div class="col-4">
-                <button type="button" class="btn btn-info">
-                    Info
-                </button>
+            <p>> </p>
+            <div>
+                <a href="List-Instancia.aspx?valor=<% =Session["IdComision" + Session.SessionID] %>">Instancias Evaluativas</a>
             </div>
         </div>
-        <div class="container">
 
+
+        <div class="container">
+            <a href="ABM-Alumno-List.aspx?IdComision=<% =(Session["IdComision" + Session.SessionID]) %>" class="btn btn-info btn-block">Agregar Alumno</a>
             <%--Inicio GridView Alumnos--%>
 
-            <div class="container">
-                <asp:GridView ID="DGVAlumnos" runat="server" Class="customers" AutoGenerateColumns="false">
-                    <Columns>
-                        <asp:TemplateField HeaderText="Legajo">
-                            <ItemTemplate>
-                                <asp:Label ID="LBLegajo" Text='<%# Eval("Legajo")%>' runat="server" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
 
-                        <%--Nombre--%>
-                        <asp:TemplateField HeaderText="Nombre">
-                            <ItemTemplate>
-                                <asp:Label Text='<%# Eval("Nombre")%>' runat="server" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                                            
-                        <%--Apellido--%>
-                        <asp:TemplateField HeaderText="Apellido">
-                            <ItemTemplate>
-                                <asp:Label Text='<%# Eval("Apellido")%>' runat="server" />
-                            </ItemTemplate>
-                        </asp:TemplateField>
+            <asp:GridView ID="DGVAlumnos" Style="margin-top: 10px" runat="server" Class="customers" AutoGenerateColumns="false">
+                <Columns>
+                    <asp:TemplateField HeaderText="Legajo">
+                        <ItemTemplate>
+                            <asp:Label ID="LBLegajo" Text='<%# Eval("Legajo")%>' runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <%--Nombre--%>
+                    <asp:TemplateField HeaderText="Nombre">
+                        <ItemTemplate>
+                            <asp:Label Text='<%# Eval("Nombre")%>' runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+
+                    <%--Apellido--%>
+                    <asp:TemplateField HeaderText="Apellido">
+                        <ItemTemplate>
+                            <asp:Label Text='<%# Eval("Apellido")%>' runat="server" />
+                        </ItemTemplate>
+                    </asp:TemplateField>
 
 
-                        <%--Alumnos--%>
-                        <asp:TemplateField HeaderText="">
-                            <ItemTemplate>
-                                <a href="Comentario.aspx?valor=<%# Eval("Legajo")%>" class="btn btn-info btn-block">Comentario</a>
-                                <%--<asp:Button Text="Alumnos" runat="server" />--%>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                </asp:GridView>
+                    <%--Alumnos--%>
+                    <asp:TemplateField HeaderText="">
+                        <ItemTemplate>
+                            <a href="Comentario.aspx?valor=<%# Eval("Legajo")%>" class="btn btn-info btn-block">Comentario</a>
+                            <%--<asp:Button Text="Alumnos" runat="server" />--%>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
 
-                <%--Fin GridView Alumnos--%>
-            </div>
+            <%--Fin GridView Alumnos--%>
         </div>
     </div>
 </asp:Content>

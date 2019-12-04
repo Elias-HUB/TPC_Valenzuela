@@ -36,8 +36,22 @@
             }
     </style>
 
+    <div class="container  row">
+        <div>
+            <a href="Comisiones.aspx">Comisiones </a>
+        </div>
+        <p>> </p>
+        <div>
+            <a href="List-Instancia.aspx?valor=<% =Session["IdComision" + Session.SessionID] %>">Instancias Evaluativas</a>
+        </div>
+        <p>> </p>
+        <div>
+            <a href="List-Alumnos.aspx?valor=<% =(Session["IdComision-Instancia" + Session.SessionID]) %>">Alumnos Insciptos</a>
+        </div>
+    </div>
 
-    <a href="List-Alumnos.aspx?valor=<% =Session["IdComision" + Session.SessionID] %>" class="btn btn-lg btn-info">Alumnos</a>
+
+    <%--<a href="List-Alumnos.aspx?valor=<% =Session["IdComision" + Session.SessionID] %>" class="btn btn-lg btn-info">Alumnos</a>--%>
     <div class="container-fluid">
         <asp:Label ID="lblCorrecto" Text="" runat="server" ForeColor="Green" />
         <br />

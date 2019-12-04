@@ -56,6 +56,7 @@
     <Compile Include="TipoPerfil.cs" />
     <Compile Include="Turno.cs" />
     <Compile Include="Universidad.cs" />
+    <Compile Include="Usuario.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

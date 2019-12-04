@@ -35,16 +35,52 @@ namespace WEB_ASA
             InstanciaServices instanciaServices = new InstanciaServices();
             TipoInstanciaServices tipoInstanciaServices = new TipoInstanciaServices();
             var ValorComision = Request.QueryString["valor"];
-            //Session["IdComision" + Session.SessionID] = ValorComision;
-            List<Instancia> instancias = instanciaServices.ListarXComision(Convert.ToInt64(ValorComision));
+            List<Instancia> instancias = new List<Instancia>();
+            if (Request.QueryString["valor"] != "22041997")
+            {
+                instancias = instanciaServices.ListarXComision(Convert.ToInt64(ValorComision)); 
+            }
+            else
+            {
+                instancias = Session["ABMComisionNuevo-ListInstancias" + Session.SessionID] as List<Instancia>;
+            }
             DGVInstancia.DataSourceID = null;
             DGVInstancia.DataSource = instancias;
-            DGVInstancia.DataBind();
+
+            if (instancias.Count == 0)
+            {
+                List<Instancia> Listado = new List<Instancia>();
+                Instancia Aux = new Instancia();
+                Aux.Id = 0;
+                Aux.Nombre = "";
+                Aux.FechaInicio = DateTime.Now;
+                Aux.FechaFin = DateTime.Now;
+                Aux.TipoInstancia = new TipoInstancia();
+                Aux.TipoInstancia.Id = 0;
+                Aux.TipoInstancia.Nombre = "";
+                Listado.Add(Aux);
+                DGVInstancia.DataSource = Listado;
+                DGVInstancia.DataBind();
+                DGVInstancia.Rows[0].Visible = false;
+                lblIncorrecto.Text = "No hay instancias, por favor agrege instancias";
+            }
+            else
+            {
+                DGVInstancia.DataBind();
+            }
+
+
         }
+        
+   
 
         protected void DGVInstancia_RowCreated(object sender, GridViewRowEventArgs e)
         {
             e.Row.Cells[0].Visible = false;
+            if (Request.QueryString["valor"] == "22041997")
+            {
+                e.Row.Cells[5].Visible = false;
+            }
         }
 
     }

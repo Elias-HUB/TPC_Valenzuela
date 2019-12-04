@@ -107,9 +107,21 @@ namespace WEB_ASA
                     Aux = alumno;                    
                     if ((alumnoServices.BuscarAlumnosComision(Convert.ToInt64(Session["IdComision" + Session.SessionID]), Aux.Legajo)) == false)
                     {
-                        alumnoServices.Nuevo(alumno);
-                        alumnoServices.NuevoComAlu(Convert.ToInt64((Session["IdComision" + Session.SessionID])), Convert.ToInt64(TboxLegajo.Text));
-                        Response.Redirect("ABM-Alumno-List.aspx?IdComision=" + (Session["IdComision" + Session.SessionID]));
+                        Aux = null;
+                        Aux = alumnoServices.BuscarAlumno(alumno.Legajo);
+                        if (Aux == null)
+                        {
+                            alumnoServices.Nuevo(alumno);
+                            alumnoServices.NuevoComAlu(Convert.ToInt64((Session["IdComision" + Session.SessionID])), Convert.ToInt64(TboxLegajo.Text));
+                            Response.Redirect("ABM-Alumno-List.aspx?IdComision=" + (Session["IdComision" + Session.SessionID]));
+                        }
+                        else
+                        {
+                            alumnoServices.Modificar(alumno);
+                            alumnoServices.NuevoComAlu(Convert.ToInt64((Session["IdComision" + Session.SessionID])), Convert.ToInt64(TboxLegajo.Text));
+                            Response.Redirect("ABM-Alumno-List.aspx?IdComision=" + (Session["IdComision" + Session.SessionID]));
+                        }
+                        
                     }
                     else
                     {

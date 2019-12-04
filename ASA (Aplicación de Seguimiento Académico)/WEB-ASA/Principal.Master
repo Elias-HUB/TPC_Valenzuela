@@ -6,7 +6,11 @@
 
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
+    <title>ASA</title>
+
+
+    <link href="~/Imagenes/Login.png" rel="shortcut icon" type="" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <%-- Boostrap --%>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -32,24 +36,26 @@
                 }
 
                 .Cabecera {
-                    background-color: rgb(46, 140, 228);
+                    background-color: rgb(91,192,222);
+                    /*background-color: skyblue;*/
                     /*min-height: 14vh;*/
                     /*display: flex;*/
                     /*flex-direction: column;*/
                     /*align-items: center;*/
-                    justify-content: center;
+                    /*justify-content: center;*/
                     font-size: calc(10px + 2vmin);
                     color: white;
                     /*font-size: 25px;*/
                 }
             </style>
 
-            <div class="p-3 text-white Cabecera" style="font-family:Arial, Helvetica, sans-serif">
-                <div class="row">
-                    <div>
-                        <asp:ImageButton ID="LogoCab" runat="server" ImageUrl="~/Imagenes/Cabecera.png" Width="350px" AlternateText="Imagen no disponible" />
+            <div class="text-white Cabecera" style="font-family: 'Roboto', sans-serif;">
+                <div class="row" style="margin-left: 20px;">
+                    <div class="display-field" style="justify-content: center;">
+                        <a href='Comisiones.aspx'>
+                            <asp:Image runat="server" ImageUrl="~/Imagenes/Cabecera.png" Width="350px" /></a>
                     </div>
-                    <div style="margin-top: 45px; justify-content: flex-end">
+                    <div style="margin-top: 45px;">
                         <p>ASA (Aplicación de Seguimiento Académico)</p>
                     </div>
                 </div>
@@ -58,14 +64,15 @@
             <hr />
         </header>
 
-            <div style="font-family:Arial, Helvetica, sans-serif">
-                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                </asp:ContentPlaceHolder>
-            </div>
-
-        <footer style="font-family:Arial, Helvetica, sans-serif">
-            <hr />
+        <div style="font-family: 'Roboto', sans-serif;">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <hr />
+        <footer style="font-family: 'Roboto', sans-serif; ">
+            <div class="col-12" style="justify-content: center;">
             <p>&copy; <%: DateTime.Now.Year %> - Programación III ASA (Aplicación de Seguimiento Académico)- Valenzuela Elias</p>
+                </div>
         </footer>
     </form>
 </body>

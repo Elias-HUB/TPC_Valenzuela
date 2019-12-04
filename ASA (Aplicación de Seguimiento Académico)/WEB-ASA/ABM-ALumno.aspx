@@ -144,15 +144,28 @@
         }
     </style>
 
+
+        <div class="container  row">
+        <div>
+            <a href="Comisiones.aspx">Comisiones </a>
+        </div>
+        <p>> </p>
+        <div>
+            <a href="List-Instancia.aspx?valor=<% =Session["IdComision" + Session.SessionID] %>">Instancias Evaluativas</a>
+        </div>
+        <p>> </p>
+        <div>
+            <a href="List-Alumnos.aspx?valor=<% =(Session["IdComision-Instancia" + Session.SessionID]) %>">Alumnos Insciptos</a>
+        </div>
+                    <p>> </p>
+        <div>
+            <a href="ABM-Alumno-List.aspx?IdComision=<% =Session["IdComision" + Session.SessionID] %>">Ventana Anterior</a>
+        </div>
+    </div>
+
+
+
     <div class="container">
-
-        <%--        <div class="form-row">
-            <div class="form-group col-md-4">
-                <h2>Ingresá tus datos</h2>
-            </div>
-        </div>--%>
-
-
         <div class="form-row">
 
             <%--LEGAJO--%>

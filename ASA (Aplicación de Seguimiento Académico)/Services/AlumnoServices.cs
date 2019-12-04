@@ -123,7 +123,7 @@ namespace ASA.Services
             AccesoDatos.AccesoDatos Datos = new AccesoDatos.AccesoDatos();
             try
             {
-                Datos.SetearQuery("SELECT Comision.Id, Alumno.* FROM [Valenzuela_DB].[dbo].[DetComisionAlumnos] inner join Comision on Comision.Id = DetComisionAlumnos.idComision inner join Alumno on Alumno.Legajo = DetComisionAlumnos.IdAlumno where Comision.Id = '" + comision + "' and Alumno.Legajo = " + IdAlumno);
+                Datos.SetearQuery("SELECT Comision.Id, Alumno.* FROM [Valenzuela_DB].[dbo].[DetComisionAlumnos] inner join Comision on Comision.Id = DetComisionAlumnos.idComision inner join Alumno on Alumno.Legajo = DetComisionAlumnos.IdAlumno where Comision.Id =" + comision + " and Alumno.Legajo = " + IdAlumno + " and DetComisionAlumnos.IdAlumno is not null");
                 Datos.EjecutarLector();
                 while (Datos.Lector.Read())
                 {

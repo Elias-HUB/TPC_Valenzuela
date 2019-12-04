@@ -1,0 +1,38 @@
+double PU = Convert.ToDouble((dgvDetalles.Rows[e.RowIndex].FindControl("LblTprod") as Label).Text);
+txbFecha.Text = DateTime.Now.ToString("dd/MM/yyyy")
+
+Cosas a revisar
+*ABM Comision
+Request.QueryString["IdComision"]) = 22041997
+Session["ABMComisionNuevo-Materia" + Session.SessionID]
+Session["ABMComisionNuevo-Turno" + Session.SessionID]
+Session["ABMComisionNuevo-Cuatrimestre" + Session.SessionID]
+Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID]
+Session["ABMComisionNuevo-ListInstancias" + Session.SessionID]
+Session["ABMComisionNuevo-Anio" + Session.SessionID]
+*Tratar de guardar en sesion el abm de comision
+
+InstanciaServices instanciaServices = new InstanciaServices();
+List<Instancia> instancias = instanciaServices.ListarXComision(Convert.ToInt64(22041997));
+Session["ABMComisionNuevo-ListInstancias" + Session.SessionID] = instancias;
+
+///////ANALIZAR EL GUARDAR LOS LEGAJOS Y ID EN CUANDO SE CREEN 
+Solucion 
+List<Instancia> abc = Session["ABMComisionNuevo-ListInstancias" + Session.SessionID] as List<Instancia>;
+foreach (Instancia avx in abc)
+{            Insert into TAbla              }
+
+
+*Al eliminar una instancia/alumno verificar que no tenga comentarios, igual que los alumnos 
+ori lo hizo en Marcas en rowdeleting , despues de ver pregunta por pantalla DESPUESSSSS HDP
+*Validaciones mas detallada en DGW, verificar nombres Vacios nombre vacio en DGV
+*Login     logeo trae info del docente, cheto mal
+*Legajovacio 
+*Si hay vacio poner algo en las comisiones while
+
+
+*Enviar mail cargando desde 0	LISTORTI
+*Mejorar navegabilidad 		LISTORTI
+*Reparar envio de mail         	LISTORTI
+*Verificar atras y adelante :p 	LISTOOOOORTI
+

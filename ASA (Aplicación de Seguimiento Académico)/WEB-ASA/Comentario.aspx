@@ -22,10 +22,23 @@
         }
     </style>
 
-    <div class="Container">
+        <div class="container  row">
         <div>
-            <p>Comision>Alumno>Instancia</p>
+            <a href="Comisiones.aspx">Comisiones </a>
         </div>
+        <p> > </p>
+        <div>
+            <a href="List-Instancia.aspx?valor=<% =Session["IdComision" + Session.SessionID] %>"> Instancias Evaluativas</a>
+        </div>
+                <p> > </p>
+        <div>
+            <a href="List-Alumnos.aspx?valor=<% =(Session["IdComision-Instancia" + Session.SessionID]) %>"> Alumnos Insciptos</a>
+        </div>
+    </div>
+
+
+    <div class="Container">
+
         <div class="form-group row">
             <div class="col-3"></div>
             <div class=" col-6">
@@ -34,7 +47,7 @@
 
                 <div class="form-group">
                     <asp:Button Text="Guardar" runat="server" class="btn btn-info btn-lg btn-block" OnClick="BtnGuardar_Click" />
-                    <asp:Button Text="Enviar por mail" runat="server" class="btn btn-info btn-lg btn-block" />
+                    <asp:Button Text="Guardar y Enviar por mail" runat="server" ID="BtnGuardarEnviarMail" class="btn btn-info btn-lg btn-block" OnClick="BtnGuardarEnviarMail_Click"/>
                 </div>
             </div>
         </div>
@@ -56,11 +69,8 @@
                 </div>
                 <textarea class="form-control"  ID="LblDescr"  style="height: 100px" disabled="disabled"><% =item.Descripcion%></textarea>
                 <div class=" form-group">
-                    <%--<asp:Button Id="BtnModificar" Text="Modificar" class="btn btn-info btn-lg" runat="server" OnClick="Btnmodificar_Click"/>--%>
-                    <a href="List-Alumnos.aspx?valor=<% = (Session["IdComision-Alumno" + Session.SessionID]) + "&Mail=" + item.Id + "&LegajoAlumno=" + (Session["IdComision-Alumno" + Session.SessionID]) %>" class="btn btn-info btn-lg btn-block">Reenviar por mail</a>
-                    <%--<button id="<% =item.Id %>" class="btn btn-info btn-lg" >Enviar por mail</button>--%>
-                    <%--<asp:Button Id="BtnMail" Text="Enviar por mail" class="btn btn-info btn-lg btn-block" runat="server"/>--%>
-                    <%--<label Visible="false" ><% =item.Id %></label>--%>
+                    <a href="List-Alumnos.aspx?valor=<% = (Session["IdComision-Instancia" + Session.SessionID]) + "&Mail=" + item.Id + "&LegajoAlumno=" + (Session["IdComision-Alumno" + Session.SessionID]) %>" class="btn btn-info btn-lg btn-block">Enviar por mail</a>
+                   
                 </div>
             </div>
             <% } %>

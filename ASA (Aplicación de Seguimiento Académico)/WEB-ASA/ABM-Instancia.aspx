@@ -6,7 +6,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-        <style>
+    <style>
         .customers {
             font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
             border-collapse: collapse;
@@ -36,7 +36,18 @@
             }
     </style>
 
-    <a href="List-Instancia.aspx?valor=<% =Session["IdComision" + Session.SessionID] %>" class="btn btn-lg btn-info">Instancias Evaluativas</a>
+    <div class="container  row">
+        <div>
+            <a href="Comisiones.aspx">Comisiones </a>
+        </div>
+        <p> > </p>        
+        <div>
+            <a href="List-Instancia.aspx?valor=<% =Session["IdComision" + Session.SessionID] %>"> Instancias Evaluativas</a>
+        </div>
+    </div>
+
+
+    
     <div class="container-fluid">
         <asp:Label ID="lblCorrecto" Text="" runat="server" ForeColor="Green" />
         <br />
@@ -45,9 +56,9 @@
         <%--* Inicio GRID Instancia*--%>
 
         <asp:GridView ID="DGVInstancia" runat="server" ShowFooterWhenEmpty="True" Class="customers" AutoGenerateColumns="false" ShowFooter="true" DataKeyNames="Id"
-            OnRowCommand="dgvIntancia_RowCommand" OnRowEditing="dgvIntancia_RowEditing" OnRowCancelingEdit="dgvIntancia_RowCancelingEdit" 
+            OnRowCommand="dgvIntancia_RowCommand" OnRowEditing="dgvIntancia_RowEditing" OnRowCancelingEdit="dgvIntancia_RowCancelingEdit"
             OnRowUpdating="dgvIntancia_RowUpdating" OnRowDeleting="dgvIntancia_RowDeleting"
-            OnRowDataBound="dgvIntancia_RowDataBound" OnRowCreated="DGVInstancia_RowCreated" ShowHeaderWhenEmpty="True" >
+            OnRowDataBound="dgvIntancia_RowDataBound" OnRowCreated="DGVInstancia_RowCreated" ShowHeaderWhenEmpty="True">
             <Columns>
                 <%--ID--%>
                 <asp:TemplateField HeaderText="ID">
@@ -127,7 +138,7 @@
                         <asp:ImageButton ImageUrl="~/Imagenes/Atras.svg" runat="server" CommandName="Cancel" ToolTip="Cancelar" Width="30px" Height="30px" Style="margin-left: 10px" />
                     </EditItemTemplate>
                     <FooterTemplate>
-                        <asp:ImageButton ImageUrl="~/Imagenes/Nuevo.png" runat="server" CommandName="AddNew" ToolTip="Nuevo" Width="35px" Height="35px" Style="margin-left: 20px"/>
+                        <asp:ImageButton ImageUrl="~/Imagenes/Nuevo.png" runat="server" CommandName="AddNew" ToolTip="Nuevo" Width="35px" Height="35px" Style="margin-left: 20px" />
                     </FooterTemplate>
                 </asp:TemplateField>
             </Columns>

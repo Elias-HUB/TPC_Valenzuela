@@ -86,7 +86,7 @@ values (22012,'Elias','Valenzuela',1157490469,'Elias_valenzuela51@yahoo.com.ar',
 go
 
 CREATE TABLE Docente(
-Legajo bigINT NOT NULL PRIMARY KEY IDENTITY (1,1),
+Legajo bigINT NOT NULL PRIMARY KEY,
 Nombre VARCHAR (50) NOT NULL,
 Apellido VARCHAR (50) NOT NULL,
 Telefono int NOT NULL,
@@ -97,11 +97,20 @@ CodigoPostal int NOT NULL,
 TipoPerfil varchar (1)
 )
 go
-insert into Docente (Nombre,Apellido,Telefono,Email,Direccion,Ciudad,CodigoPostal)
-values ('Angel','Simon',1157450480,'asimon@docentes.frgp.utn.edu.ar','avenida siempre viva 742','Talar',1716),
-	   ('Maxi','Fernandez',1154590470,'msarfernandez@docentes.frgp.utn.edu.ar','República Galáctica','Talar',1716)
+insert into Docente (Legajo,Nombre,Apellido,Telefono,Email,Direccion,Ciudad,CodigoPostal)
+values (123456,'Angel','Simon',1157450480,'asimon@docentes.frgp.utn.edu.ar','avenida siempre viva 742','Talar',1716),
+	   (789456,'Maxi','Fernandez',1154590470,'msarfernandez@docentes.frgp.utn.edu.ar','República Galáctica','Talar',1716)
 go
 
+CREATE TABLE Usuario(
+Id bigINT NOT NULL PRIMARY KEY IDENTITY (1,1),
+LegajoDocente bigINT NOT NULL FOREIGN KEY REFERENCES Docente(Legajo),
+Clave VARCHAR (50) NOT NULL
+)
+
+insert into Usuario (LegajoDocente,Clave) values (789456,1234)
+
+go
 CREATE TABLE Comision(
 Id bigINT NOT NULL PRIMARY KEY IDENTITY (1,1),
 IdMateria bigINT NOT NULL FOREIGN KEY REFERENCES Materia(Id),

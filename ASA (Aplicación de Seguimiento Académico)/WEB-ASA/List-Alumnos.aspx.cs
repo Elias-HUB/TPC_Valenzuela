@@ -27,7 +27,10 @@ namespace WEB_ASA
                     if (Mail != 0)
                     {
                         EnvioMail(Convert.ToInt64(Mail), Convert.ToInt64(Alumno));
+                        Response.Redirect("List-Alumnos.aspx?valor=" + (Session["IdComision-Instancia" + Session.SessionID]));
                     }
+
+
                 }
             }
             catch (Exception)

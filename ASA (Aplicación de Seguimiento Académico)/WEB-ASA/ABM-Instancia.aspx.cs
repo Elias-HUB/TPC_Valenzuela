@@ -22,7 +22,6 @@ namespace WEB_ASA
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -33,7 +32,16 @@ namespace WEB_ASA
             {
                 InstanciaServices instanciaServices = new InstanciaServices();
                 TipoInstanciaServices tipoInstanciaServices = new TipoInstanciaServices();
-                List<Instancia> instancias = instanciaServices.ListarXComision(Convert.ToInt64(Request.QueryString["IdComision"]));
+                List<Instancia> instancias = new List<Instancia>();
+                var IdComision = Request.QueryString["IdComision"];
+                if (Request.QueryString["IdComision"] != "22041997")
+                {
+                    instancias = instanciaServices.ListarXComision(Convert.ToInt64(Request.QueryString["IdComision"]));
+                }
+                else
+                {
+                    instancias = Session["ABMComisionNuevo-ListInstancias" + Session.SessionID] as List<Instancia>;
+                }
                 DGVInstancia.DataSourceID = null;
                 DGVInstancia.DataSource = instancias;
                 if (instancias.Count == 0)
@@ -52,12 +60,10 @@ namespace WEB_ASA
                     DGVInstancia.DataBind();
                     DGVInstancia.Rows[0].Visible = false;
                 }
-
                 else
                 {
                     DGVInstancia.DataBind();
                 }
-
                 ((DropDownList)DGVInstancia.FooterRow.FindControl("DGBDlistTipoFooter")).DataValueField = "Id";
                 ((DropDownList)DGVInstancia.FooterRow.FindControl("DGBDlistTipoFooter")).DataTextField = "Nombre";
                 ((DropDownList)DGVInstancia.FooterRow.FindControl("DGBDlistTipoFooter")).DataSource = tipoInstanciaServices.Listar();
@@ -75,25 +81,50 @@ namespace WEB_ASA
             {
                 if (e.CommandName.Equals("AddNew"))
                 {
-                    InstanciaServices instanciaServices = new InstanciaServices();
-                    Instancia instancia = new Instancia();
-                    instancia.Nombre = (DGVInstancia.FooterRow.FindControl("txbNombreFooter") as TextBox).Text;
-                    instancia.FechaInicio = Convert.ToDateTime((DGVInstancia.FooterRow.FindControl("TboxFechaInicioFooter") as TextBox).Text);
-                    instancia.FechaFin = Convert.ToDateTime((DGVInstancia.FooterRow.FindControl("TboxFechaFinFooter") as TextBox).Text);
+                    if (Request.QueryString["IdComision"] != "22041997")
+                    {
+                        InstanciaServices instanciaServices = new InstanciaServices();
+                        Instancia instancia = new Instancia();
+                        instancia.Nombre = (DGVInstancia.FooterRow.FindControl("txbNombreFooter") as TextBox).Text;
+                        instancia.FechaInicio = Convert.ToDateTime((DGVInstancia.FooterRow.FindControl("TboxFechaInicioFooter") as TextBox).Text);
+                        instancia.FechaFin = Convert.ToDateTime((DGVInstancia.FooterRow.FindControl("TboxFechaFinFooter") as TextBox).Text);
 
-                    instancia.TipoInstancia = new TipoInstancia();
-                    instancia.TipoInstancia.Nombre = (DGVInstancia.FooterRow.FindControl("DGBDlistTipoFooter") as DropDownList).SelectedItem.ToString();
-                    instancia.TipoInstancia.Id = Convert.ToInt64((DGVInstancia.FooterRow.FindControl("DGBDlistTipoFooter") as DropDownList).SelectedValue);
+                        instancia.TipoInstancia = new TipoInstancia();
+                        instancia.TipoInstancia.Nombre = (DGVInstancia.FooterRow.FindControl("DGBDlistTipoFooter") as DropDownList).SelectedItem.ToString();
+                        instancia.TipoInstancia.Id = Convert.ToInt64((DGVInstancia.FooterRow.FindControl("DGBDlistTipoFooter") as DropDownList).SelectedValue);
 
-                    
-                    instanciaServices.Nuevo(instancia);
-                    instanciaServices.NuevoComIns(Convert.ToInt64(Request.QueryString["IdComision"]), instanciaServices.UltimoRegistro());
-                    lblCorrecto.Text = "Se a agregado la instancia de manera correctamente.";
-                    lblIncorrecto.Text = "";
 
-                    //Aca recargar
-                    Response.Redirect("ABM-Instancia.aspx?IdComision=" + Session["IdComision" + Session.SessionID]);
-                    //CargaDGVInstancia();
+                        instanciaServices.Nuevo(instancia);
+                        instanciaServices.NuevoComIns(Convert.ToInt64(Request.QueryString["IdComision"]), instanciaServices.UltimoRegistro());
+                        lblCorrecto.Text = "Se a agregado la instancia de manera correctamente.";
+                        lblIncorrecto.Text = "";
+
+                        //Aca recargar
+                        Response.Redirect("ABM-Instancia.aspx?IdComision=" + Session["IdComision" + Session.SessionID]);
+
+                    }
+                    else
+                    {
+                        InstanciaServices instanciaServices = new InstanciaServices();
+                        Instancia instancia = new Instancia();
+                        List<Instancia> instancias = Session["ABMComisionNuevo-ListInstancias" + Session.SessionID] as List<Instancia>;
+                        instancia.Nombre = (DGVInstancia.FooterRow.FindControl("txbNombreFooter") as TextBox).Text;
+                        instancia.FechaInicio = Convert.ToDateTime((DGVInstancia.FooterRow.FindControl("TboxFechaInicioFooter") as TextBox).Text);
+                        instancia.FechaFin = Convert.ToDateTime((DGVInstancia.FooterRow.FindControl("TboxFechaFinFooter") as TextBox).Text);
+
+                        instancia.TipoInstancia = new TipoInstancia();
+                        instancia.TipoInstancia.Nombre = (DGVInstancia.FooterRow.FindControl("DGBDlistTipoFooter") as DropDownList).SelectedItem.ToString();
+                        instancia.TipoInstancia.Id = Convert.ToInt64((DGVInstancia.FooterRow.FindControl("DGBDlistTipoFooter") as DropDownList).SelectedValue);
+
+                        instancias.Add(instancia);
+                        Session["ABMComisionNuevo-ListInstancias" + Session.SessionID] = instancias;
+
+                        lblCorrecto.Text = "Se a agregado la instancia de manera correctamente.";
+                        lblIncorrecto.Text = "";
+
+                        //Aca recargar
+                        Response.Redirect("ABM-Instancia.aspx?IdComision=" + Session["IdComision" + Session.SessionID]);
+                    }
                 }
             }
             catch (Exception ex)
@@ -127,10 +158,15 @@ namespace WEB_ASA
 
         protected void dgvIntancia_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
+
+            //ANALIZARLO
             try
             {
                 InstanciaServices instanciaServices = new InstanciaServices();
                 Instancia instancia = new Instancia();
+
+                int index = Convert.ToInt32(DGVInstancia.EditIndex);
+
                 instancia.Id = Convert.ToInt64((DGVInstancia.Rows[e.RowIndex].FindControl("LBLId") as Label).Text);
                 instancia.Nombre = (DGVInstancia.Rows[e.RowIndex].FindControl("TboxNombre") as TextBox).Text;
                 instancia.FechaInicio = Convert.ToDateTime((DGVInstancia.Rows[e.RowIndex].FindControl("TboxFechaInicio") as TextBox).Text);
@@ -139,11 +175,26 @@ namespace WEB_ASA
                 instancia.TipoInstancia = new TipoInstancia();
                 instancia.TipoInstancia.Nombre = (DGVInstancia.Rows[e.RowIndex].FindControl("DGBDlistTipo") as DropDownList).SelectedItem.ToString();
                 instancia.TipoInstancia.Id = Convert.ToInt64((DGVInstancia.Rows[e.RowIndex].FindControl("DGBDlistTipo") as DropDownList).SelectedValue);
-                instanciaServices.Modificar(instancia);
+
+                if (Request.QueryString["IdComision"] != "22041997")
+                {
+                    instanciaServices.Modificar(instancia);
+                }
+                else
+                {
+                    Instancia AUX = new Instancia();
+                    List<Instancia> instancias = Session["ABMComisionNuevo-ListInstancias" + Session.SessionID] as List<Instancia>;
+                    instancias[index] = instancia;
+                    Session["ABMComisionNuevo-ListInstancias" + Session.SessionID] = instancias;
+                }
+
+
+
                 lblCorrecto.Text = "Se Modifico la Instancia de manera correctamente.";
                 lblIncorrecto.Text = "";
                 DGVInstancia.ShowFooter = true;
-                Response.Redirect("ABM-Comision.aspx");
+                //Response.Redirect("ABM-Comision.aspx");
+                Response.Redirect("ABM-Instancia.aspx?IdComision=" + Session["IdComision" + Session.SessionID]);
             }
             catch (Exception ex)
             {
@@ -171,7 +222,18 @@ namespace WEB_ASA
                 InstanciaServices instanciaServices = new InstanciaServices();
                 Instancia instancia = new Instancia();
                 instancia.Id = Convert.ToInt64((DGVInstancia.Rows[e.RowIndex].FindControl("LBLId") as Label).Text);
-                instanciaServices.Eliminar(instancia.Id);
+                int index = Convert.ToInt32(DGVInstancia.DataKeys[e.RowIndex].Value.ToString());
+
+                if (Request.QueryString["IdComision"] != "22041997")
+                {
+                    instanciaServices.Eliminar(instancia.Id);
+                }
+                else
+                {
+                    List<Instancia> instancias = Session["ABMComisionNuevo-ListInstancias" + Session.SessionID] as List<Instancia>;
+                    instancias.RemoveAt(index);
+                    Session["ABMComisionNuevo-ListInstancias" + Session.SessionID] = instancias;
+                }
                 lblCorrecto.Visible = true;
                 lblCorrecto.Text = "Se elimino la instancia de manera correcta";
                 lblIncorrecto.Text = "";

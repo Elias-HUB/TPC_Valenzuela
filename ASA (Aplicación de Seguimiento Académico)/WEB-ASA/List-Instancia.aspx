@@ -35,25 +35,26 @@
             }
     </style>
 
-    <div>
-        <div class="container  row">
-            <div class="col-4">
-                <p>COMISION > INSTANCIA </p>
-            </div>
-            <div class="col-4">
-                <a href="ABM-Instancia.aspx?IdComision=<% =(Session["IdComision" + Session.SessionID]) %>" class="btn btn-info">Agregar Instancias</a>
-            </div>
-            <div class="col-4">
-                <button type="button" class="btn btn-info">
-                    Info
-                </button>
-            </div>
+
+    <div class="container  row">
+        <div>
+            <a href="Comisiones.aspx">Comisiones</a>
         </div>
+    </div>
+
+
+
+
+
+    <%--Inicio GridView Instancias--%>
+    <div class="container">
+
         
 
-        <%--Inicio GridView Instancias--%>
-        <div class="container">
-            <asp:GridView ID="DGVInstancia" runat="server" Class="customers" AutoGenerateColumns="false" DataKeyNames="Id" OnRowCreated="DGVInstancia_RowCreated">
+        <div class="container-fluid">
+            <a href="ABM-Instancia.aspx?IdComision=<% =(Session["IdComision" + Session.SessionID]) %>" class="btn btn-info btn-block">Agregar o Modificar Instancias</a>
+            <asp:GridView ID="DGVInstancia" Style="margin-top: 20px" runat="server" Class="customers" AutoGenerateColumns="false" DataKeyNames="Id" OnRowCreated="DGVInstancia_RowCreated" EmptyDataText="No tiene nada">
+                <EmptyDataRowStyle BackColor="LightBlue" ForeColor="Red" />
                 <Columns>
                     <asp:TemplateField HeaderText="ID">
                         <ItemTemplate>
@@ -89,6 +90,8 @@
                             <asp:Label Text='<%# Eval("FechaFin")%>' runat="server" />
                         </ItemTemplate>
                     </asp:TemplateField>
+
+
                     <%--Alumnos--%>
                     <asp:TemplateField HeaderText="">
                         <ItemTemplate>
@@ -96,12 +99,18 @@
                             <%--<asp:Button Text="Alumnos" runat="server" />--%>
                         </ItemTemplate>
                     </asp:TemplateField>
+
+
                 </Columns>
+
             </asp:GridView>
-            
+            <asp:Label ID="lblCorrecto" Text="" runat="server" ForeColor="Green" />
+            <asp:Label ID="lblIncorrecto" Text="" runat="server" ForeColor="Red" />
             <%--Fin GridView Instancias--%>
+            <% if (Request.QueryString["valor"] == "22041997" && lblIncorrecto.Text =="" )
+                { %>
+            <a href="List-Alumnos.aspx?valor=22041997" class="btn btn-info btn-info btn-block">Agregar Alumnos</a>
+            <%} %>
         </div>
-
     </div>
-
 </asp:Content>

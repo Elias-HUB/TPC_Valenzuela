@@ -13,12 +13,13 @@
         }
     </style>
 
-    <div class="col-md-6 row">
-        <h3>Comisiones</h3>
-        <asp:Button Text="Agregar Comisión" runat="server" class="btn btn-lg btn-info" style="margin-left: 100px;" OnClick="BtnComision_Click"/>
+    <div class="form-row align-content-center" style="margin-left: 25px; margin-right: 25px; justify-content: center;">
+        <div>
+            <h3>Comisiones</h3>
+        </div>
     </div>
-
-    <div class="card-columns Margen" style="margin-left: 25px; margin-right: 25px; margin-top: 10px;">
+    <asp:Button Text="Agregar Comisión" runat="server" class="btn btn-lg btn-info" Style="margin-left: 100px;" OnClick="BtnComision_Click" />
+    <div class="card-columns " style="margin-left: 25px; margin-right: 25px; margin-top: 10px;">
 
         <% foreach (var item in Comisions)
             { %>
@@ -33,7 +34,7 @@
                 <a href="List-Instancia.aspx?valor=<% =item.Id %>" class="btn btn-lg btn-info">Instancias Evaluativas</a>
             </div>
             <div class="card-footer bg-transparent">
-                <% =item.Cuatrimestre.Nombre + " " + item.Anio %>
+                <% =item.Cuatrimestre.Nombre + ", Turno " + item.Turno.Nombre + ", Año " + item.Anio %>
             </div>
         </div>
         <% } %>

@@ -69,6 +69,64 @@ namespace ASA.Services
             }
         }
 
+        public Models.Comision Busqueda(long IdDocente, Comision comision)
+        {
+            Models.Comision Aux = null;
+            DocenteServices docenteServices = new DocenteServices();
+            AccesoDatos.AccesoDatos Datos = new AccesoDatos.AccesoDatos();
+            try
+            {
+                Datos.SetearQuery("SELECT Comision.Id, Materia.Id, Materia.Nombre, Carrera.Id, Carrera.Nombre, Universidad.Id, Universidad.Nombre, Turno.Id, Turno.Nombre, Cuatrimestre.Id, Cuatrimestre.Nombre, Comision.Anio FROM  Comision inner join Materia on IdMateria = Materia.Id inner join Carrera on Carrera.Id = Materia.IdCarrera inner join Universidad on Universidad.Id = Carrera.IdUniversidad inner join Turno on  Turno.id = IdTurno inner join Cuatrimestre on IdCuatrimestre = Cuatrimestre.Id inner join Docente on IdDocente = Docente.Legajo where IdDocente = @IdDocente and Materia.Id = @Materia and Turno.Id = @Turno and Cuatrimestre.Id = @Cuatrimestre and Comision.Anio = @ComisionAnio order by Anio desc,Cuatrimestre.Nombre desc");
+                Datos.agregarParametro("@IdDocente", IdDocente);
+                Datos.agregarParametro("@Materia", comision.Materia.Id);
+                Datos.agregarParametro("@Turno", comision.Turno.Id);
+                Datos.agregarParametro("@Cuatrimestre", comision.Cuatrimestre.Id);
+                Datos.agregarParametro("@ComisionAnio", comision.Anio);
+                Datos.EjecutarLector();
+
+                while (Datos.Lector.Read())
+                {
+                    Aux = new Models.Comision();
+                    Aux.Id = Datos.Lector.GetInt64(0);
+
+                    Aux.Materia = new Materia();
+                    Aux.Materia.Id = Datos.Lector.GetInt64(1);
+                    Aux.Materia.Nombre = Datos.Lector.GetString(2);
+
+                    Aux.Materia.Carrera = new Carrera();
+                    Aux.Materia.Carrera.Id = Datos.Lector.GetInt64(3);
+                    Aux.Materia.Carrera.Nombre = Datos.Lector.GetString(4);
+
+                    Aux.Materia.Carrera.Universidad = new Universidad();
+                    Aux.Materia.Carrera.Universidad.Id = Datos.Lector.GetInt64(5);
+                    Aux.Materia.Carrera.Universidad.Nombre = Datos.Lector.GetString(6);
+
+                    Aux.Turno = new Turno();
+                    Aux.Turno.Id = Datos.Lector.GetInt64(7);
+                    Aux.Turno.Nombre = Datos.Lector.GetString(8);
+
+                    Aux.Cuatrimestre = new Cuatrimestre();
+                    Aux.Cuatrimestre.Id = Datos.Lector.GetInt64(9);
+                    Aux.Cuatrimestre.Nombre = Datos.Lector.GetString(10);
+
+                    Aux.Anio = Datos.Lector.GetInt32(11);
+
+                    Aux.docente = new Docente();
+                    Aux.docente = docenteServices.BuscarDocente(IdDocente);
+                    
+                }
+                return Aux;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Datos.CerrarConexion();
+            }
+        }
+
         public void Nuevo(Comision Aux)
         {
             AccesoDatos.AccesoDatos datos = new AccesoDatos.AccesoDatos();

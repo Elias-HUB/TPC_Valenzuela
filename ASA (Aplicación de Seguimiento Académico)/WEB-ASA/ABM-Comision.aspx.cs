@@ -54,18 +54,40 @@ namespace WEB_ASA
             Comision comision = new Comision();
             comision.Materia = new Materia();
             comision.Materia.Id = Convert.ToInt64(DlistMateria.SelectedValue);
+            Session["ABMComisionNuevo-Materia" + Session.SessionID] = Convert.ToInt64(DlistMateria.SelectedValue);
+
             comision.Turno = new Turno();
             comision.Turno.Id = Convert.ToInt64(DlistTurno.SelectedValue);
+            Session["ABMComisionNuevo-Turno" + Session.SessionID] = Convert.ToInt64(DlistTurno.SelectedValue);
+
             comision.Cuatrimestre = new Cuatrimestre();
             comision.Cuatrimestre.Id = Convert.ToInt64(DlistCuatrimestre.SelectedValue);
+            Session["ABMComisionNuevo-Cuatrimestre" + Session.SessionID] = Convert.ToInt64(DlistCuatrimestre.SelectedValue);
+
+
             //VERIFICAR DOCENTE 
             comision.docente = new Docente();
             comision.docente.Legajo = Convert.ToInt64(2);
-            comision.Anio = Convert.ToInt32(TboxAnio.Text);
-            comisionServices.Nuevo(comision);
-            Int64 IdCom = comisionServices.UltimoRegistro();
 
-            Response.Redirect("ABM-Instancia.aspx?IdComision=" + IdCom);
+            comision.Anio = Convert.ToInt32(TboxAnio.Text);
+            Session["ABMComisionNuevo-Anio" + Session.SessionID] = Convert.ToInt32(TboxAnio.Text);
+
+            Comision Aux = new Comision();
+            Aux = comisionServices.Busqueda(Convert.ToInt64(2), comision);
+            if (Aux == null)
+            {
+                InstanciaServices instanciaServices = new InstanciaServices();
+                List<Instancia> instancias = instanciaServices.ListarXComision(Convert.ToInt64(22041997));
+                Session["ABMComisionNuevo-ListInstancias" + Session.SessionID] = instancias;
+                Response.Redirect("List-Instancia.aspx?valor=" + 22041997);
+            }
+            LblIntancia.Text = "Ya posee una instancia igual, cargue una nueva!";
+            Session["ABMComisionNuevo-Materia" + Session.SessionID] = "";
+            Session["ABMComisionNuevo-Turno" + Session.SessionID] = "";
+            Session["ABMComisionNuevo-Cuatrimestre" + Session.SessionID] = "";
+            Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] = "";
+            Session["ABMComisionNuevo-ListInstancias" + Session.SessionID] = "";
+            Session["ABMComisionNuevo-Anio" + Session.SessionID] = "";
         }
     }
 }
