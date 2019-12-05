@@ -45,10 +45,42 @@ namespace WEB_ASA
             try
             {
                 AlumnoServices alumnoServices = new AlumnoServices();
-                List<Alumno> alumnos = alumnoServices.Listar(Convert.ToInt64(Session["IdComision" + Session.SessionID]));
+                List<Alumno> alumnos = new List<Alumno>();
+                if (Request.QueryString["valor"] != "22041997")
+                {
+                    alumnos = alumnoServices.Listar(Convert.ToInt64(Session["IdComision" + Session.SessionID]));
+                }
+                else
+                {
+                    alumnos = Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] as List<Alumno>;
+                }
                 DGVAlumnos.DataSourceID = null;
                 DGVAlumnos.DataSource = alumnos;
-                DGVAlumnos.DataBind();
+
+                if (alumnos.Count == 0)
+                {
+                    List<Alumno> Listado = new List<Alumno>();
+                    Alumno Aux = new Alumno();
+                    Aux.Legajo = 0;
+                    Aux.Nombre = "";
+                    Aux.Apellido = "";
+                    Aux.Email = "";
+                    Aux.Telefono = 0;
+
+                    Aux.Dirreccion = new Dirreccion();
+                    Aux.Dirreccion.Ciudad = "";
+                    Aux.Dirreccion.CodPostal = 0;
+                    Aux.Dirreccion.Direccion = "";
+                    Listado.Add(Aux);
+                    DGVAlumnos.DataSource = Listado;
+                    DGVAlumnos.DataBind();
+                    DGVAlumnos.Rows[0].Visible = false;
+                    lblIncorrecto.Text = "No hay Alumnos, por favor agrege Alumnos a la comision";
+                }
+                else
+                {
+                    DGVAlumnos.DataBind();
+                }                
             }
             catch (Exception)
             {
@@ -81,6 +113,14 @@ namespace WEB_ASA
             ASA.Models.Alumno alumno = new Alumno();
             alumno = alumnoServices.BuscarAlumno(Legajo);
             SendMail(alumno, comentario);
+        }
+
+        protected void DGVAlumnos_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            if (Request.QueryString["valor"] == "22041997")
+            {
+                e.Row.Cells[3].Visible = false;
+            }
         }
     }
 }

@@ -79,6 +79,10 @@ namespace WEB_ASA
                 InstanciaServices instanciaServices = new InstanciaServices();
                 List<Instancia> instancias = instanciaServices.ListarXComision(Convert.ToInt64(22041997));
                 Session["ABMComisionNuevo-ListInstancias" + Session.SessionID] = instancias;
+
+                AlumnoServices alumnoServices = new AlumnoServices();
+                List<Alumno> alumnos = alumnoServices.ListarAlumnosComision(Convert.ToInt64(22041997));
+                Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] = alumnos;
                 Response.Redirect("List-Instancia.aspx?valor=" + 22041997);
             }
             LblIntancia.Text = "Ya posee una instancia igual, cargue una nueva!";

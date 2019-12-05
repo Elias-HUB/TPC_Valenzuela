@@ -31,7 +31,6 @@ namespace WEB_ASA
 
         public void CargaDGVInstancia()
         {
-
             InstanciaServices instanciaServices = new InstanciaServices();
             TipoInstanciaServices tipoInstanciaServices = new TipoInstanciaServices();
             var ValorComision = Request.QueryString["valor"];
@@ -68,8 +67,6 @@ namespace WEB_ASA
             {
                 DGVInstancia.DataBind();
             }
-
-
         }
         
    

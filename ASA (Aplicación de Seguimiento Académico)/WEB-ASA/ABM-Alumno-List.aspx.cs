@@ -32,7 +32,15 @@ namespace WEB_ASA
             try
             {
                 AlumnoServices alumnoServices = new AlumnoServices();
-                List<Alumno> alumnos = alumnoServices.ListarAlumnosComision(Convert.ToInt64(Request.QueryString["IdComision"]));
+                List<Alumno> alumnos = new List<Alumno>();
+                if (Request.QueryString["IdComision"] != "22041997")
+                {
+                    alumnos = alumnoServices.ListarAlumnosComision(Convert.ToInt64(Request.QueryString["IdComision"]));
+                }
+                else
+                {
+                    alumnos = Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] as List<Alumno>;
+                }
                 DGVAlumnos.DataSourceID = null;
                 DGVAlumnos.DataSource = alumnos;
                 if (alumnos.Count == 0)
@@ -118,14 +126,28 @@ namespace WEB_ASA
 
         }
 
+
         protected void dgvIntancia_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             try
             {
                 AlumnoServices alumnoServices = new  AlumnoServices();
                 Alumno alumno = new Alumno();
+                List<Alumno> alumnos = new List<Alumno>();
                 alumno.Legajo = Convert.ToInt64((DGVAlumnos.DataKeys[e.RowIndex].Value));
-                alumnoServices.Eliminar(alumno.Legajo, Convert.ToInt64(Session["IdComision" + Session.SessionID]));
+                var index = (e.RowIndex);
+                Session["Index" + Session.SessionID] = index;
+                int IndexNice = Convert.ToInt32(index.ToString());
+                if (Request.QueryString["IdComision"] != "22041997")
+                {
+                    alumnoServices.Eliminar(alumno.Legajo, Convert.ToInt64(Session["IdComision" + Session.SessionID]));
+                }
+                else
+                {
+                     alumnos = Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] as List<Alumno>;
+                    alumnos.RemoveAt(index);
+                    Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] = alumnos;
+                }
                 CargaDGVInstancia();
             }
             catch (Exception ex)
@@ -137,7 +159,7 @@ namespace WEB_ASA
 
         protected void DGVInstancia_RowCreated(object sender, GridViewRowEventArgs e)
         {
-            //e.Row.Cells[0].Visible = false;
+
             //e.Row.Cells[2].Visible = false;
         }
 

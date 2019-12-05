@@ -25,10 +25,11 @@ foreach (Instancia avx in abc)
 
 *Al eliminar una instancia/alumno verificar que no tenga comentarios, igual que los alumnos 
 ori lo hizo en Marcas en rowdeleting , despues de ver pregunta por pantalla DESPUESSSSS HDP
-*Validaciones mas detallada en DGW, verificar nombres Vacios nombre vacio en DGV
+*Validaciones mas detallada en DGW, verificar nombres Vacios nombre vacio en DGV, Fechas!!!!!
 *Login     logeo trae info del docente, cheto mal
 *Legajovacio 
-*Si hay vacio poner algo en las comisiones while
+*Si hay vacio poner algo en las Instancias
+*Validad mail vacio
 
 
 *Enviar mail cargando desde 0	LISTORTI

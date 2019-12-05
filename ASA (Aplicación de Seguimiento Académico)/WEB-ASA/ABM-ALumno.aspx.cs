@@ -19,7 +19,16 @@ namespace WEB_ASA
                 {
                     Alumno alumno = new Alumno();
                     AlumnoServices alumnoServices = new AlumnoServices();
-                    alumno = alumnoServices.BuscarAlumno(Convert.ToInt64(Request.QueryString["Legajo"]));
+                    if (Request.QueryString["IdComision"] != "22041997")
+                    {
+                        alumno = alumnoServices.BuscarAlumno(Convert.ToInt64(Request.QueryString["Legajo"]));
+                    }
+                    else
+                    {
+                        List<Alumno> alumnos = (Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] as List<Alumno>);
+                        int Index = Indice(alumnos, (Convert.ToInt64(Request.QueryString["Legajo"])));
+                        alumno = alumnos[Index];
+                    }
                     TboxLegajo.Text = alumno.Legajo.ToString();
                     TboxNombre.Text = alumno.Nombre;
                     TboxApellido.Text = alumno.Apellido;
@@ -84,6 +93,32 @@ namespace WEB_ASA
             alumno.Dirreccion.CodPostal = Convert.ToInt32(TboxCP.Text);
         }
 
+        public bool Busqueda(List<Alumno> alumnos, Alumno Aux)
+        {
+            foreach (Alumno alumnoAux in alumnos)
+            {
+                if (alumnoAux.Legajo == Aux.Legajo)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public int Indice(List<Alumno> alumnos, long Aux)
+        {
+            int cont = -1;
+            foreach (Alumno alumnoAux in alumnos)
+            {
+                cont++;
+                if (alumnoAux.Legajo == Aux)
+                {
+                    return cont;
+                }
+            }
+            return -1;
+        }
+
         protected void BtnAgregar_Click(object sender, EventArgs e)
         {
             try
@@ -93,35 +128,95 @@ namespace WEB_ASA
                 //Aca es para modificar
                 if (Request.QueryString["Legajo"] != "Vacio")
                 {
-                    //alumno = alumnoServices.BuscarAlumno(Convert.ToInt64(Request.QueryString["Legajo"]));
                     AltaAlumno(alumno);
-                    alumnoServices.Modificar(alumno);
-                    //alumnoServices.NuevoComAlu(Convert.ToInt64((Session["IdComision" + Session.SessionID])), Convert.ToInt64(TboxLegajo.Text));
-                    Response.Redirect("ABM-Alumno-List.aspx?IdComision=" + (Session["IdComision" + Session.SessionID]));
+                    if (Request.QueryString["IdComision"] != "22041997")
+                    {
+                        alumnoServices.Modificar(alumno);
+                        Response.Redirect("ABM-Alumno-List.aspx?IdComision=" + (Session["IdComision" + Session.SessionID]));
+                    }
+                    else
+                    {
+                        int Cont = -1;
+                        List<Alumno> alumnos = Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] as List<Alumno>;
+                        foreach (Alumno alumnoAux in alumnos)
+                        {
+                            Cont++;
+                            if (alumnoAux.Legajo == alumno.Legajo)
+                            {
+                                AltaAlumno(alumnos[Cont]);
+                            }
+                        }
+                        Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] = alumnos;
+                        Response.Redirect("ABM-Alumno-List.aspx?IdComision=" + (Session["IdComision" + Session.SessionID]));
+                    }
                 }
+
                 //Aca para uno nuevo 
                 else
                 {
                     AltaAlumno(alumno);
                     Alumno Aux = new Alumno();
-                    Aux = alumno;                    
+                    Aux = alumno;
                     if ((alumnoServices.BuscarAlumnosComision(Convert.ToInt64(Session["IdComision" + Session.SessionID]), Aux.Legajo)) == false)
                     {
-                        Aux = null;
-                        Aux = alumnoServices.BuscarAlumno(alumno.Legajo);
-                        if (Aux == null)
+                        //List<Alumno> pru = Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] as List<Alumno>;
+                        if ((Busqueda(Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] as List<Alumno>, alumno)) == false)
                         {
-                            alumnoServices.Nuevo(alumno);
-                            alumnoServices.NuevoComAlu(Convert.ToInt64((Session["IdComision" + Session.SessionID])), Convert.ToInt64(TboxLegajo.Text));
-                            Response.Redirect("ABM-Alumno-List.aspx?IdComision=" + (Session["IdComision" + Session.SessionID]));
+                            Aux = null;
+                            Aux = alumnoServices.BuscarAlumno(alumno.Legajo);
+                            if (Aux == null)
+                            {
+                                if (Request.QueryString["IdComision"] != "22041997")
+                                {
+                                    alumnoServices.Nuevo(alumno);
+                                    alumnoServices.NuevoComAlu(Convert.ToInt64((Session["IdComision" + Session.SessionID])), Convert.ToInt64(TboxLegajo.Text));
+                                    Response.Redirect("ABM-Alumno-List.aspx?IdComision=" + (Session["IdComision" + Session.SessionID]));
+                                }
+                                else
+                                {
+                                    List<Alumno> alumnos = Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] as List<Alumno>;
+                                    alumnos.Add(alumno);
+                                    Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] = alumnos;
+                                    Response.Redirect("ABM-Alumno-List.aspx?IdComision=" + (Session["IdComision" + Session.SessionID]));
+                                }
+                            }
+                            else
+                            {
+                                if (Request.QueryString["IdComision"] != "22041997")
+                                {
+                                    alumnoServices.Modificar(alumno);
+                                    alumnoServices.NuevoComAlu(Convert.ToInt64((Session["IdComision" + Session.SessionID])), Convert.ToInt64(TboxLegajo.Text));
+                                    Response.Redirect("ABM-Alumno-List.aspx?IdComision=" + (Session["IdComision" + Session.SessionID]));
+                                }
+                                else
+                                {
+                                    int Cont = -1;
+                                    List<Alumno> alumnos = Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] as List<Alumno>;
+                                    foreach (Alumno alumnoAux in alumnos)
+                                    {
+                                        Cont++;
+                                        if (alumnoAux.Legajo == alumno.Legajo)
+                                        {
+                                            AltaAlumno(alumnos[Cont]);
+                                        }
+                                    }
+                                    alumnos.Add(alumno);
+                                    Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] = alumnos;
+                                    Response.Redirect("ABM-Alumno-List.aspx?IdComision=" + (Session["IdComision" + Session.SessionID]));
+                                }
+                            }
                         }
                         else
                         {
-                            alumnoServices.Modificar(alumno);
-                            alumnoServices.NuevoComAlu(Convert.ToInt64((Session["IdComision" + Session.SessionID])), Convert.ToInt64(TboxLegajo.Text));
-                            Response.Redirect("ABM-Alumno-List.aspx?IdComision=" + (Session["IdComision" + Session.SessionID]));
+                            TboxError.Text = "El legajo ya existe en la comision, por favor ingrese un nuevo Alumno";
+                            TboxNombre.Text = "";
+                            TboxApellido.Text = "";
+                            TboxEmail.Text = "";
+                            TboxTelefono.Text = "";
+                            TboxDirreccion.Text = "";
+                            TboxCiudad.Text = "";
+                            TboxCP.Text = "";
                         }
-                        
                     }
                     else
                     {
@@ -132,9 +227,9 @@ namespace WEB_ASA
                         TboxTelefono.Text = "";
                         TboxDirreccion.Text = "";
                         TboxCiudad.Text = "";
-                        TboxCP.Text = "";                        
+                        TboxCP.Text = "";
                     }
-                    
+
                 }
             }
             catch (System.FormatException)

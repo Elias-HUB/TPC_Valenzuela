@@ -77,6 +77,12 @@
         }
     </script>
 
+        <div class="container  row">
+        <div>
+            <a href="Comisiones.aspx">Comisiones</a>
+        </div>
+    </div>
+
 
     <div class="container">
         <div class="form-row">

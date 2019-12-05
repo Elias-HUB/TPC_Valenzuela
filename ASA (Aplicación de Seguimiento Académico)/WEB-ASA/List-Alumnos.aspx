@@ -49,11 +49,11 @@
 
 
         <div class="container">
-            <a href="ABM-Alumno-List.aspx?IdComision=<% =(Session["IdComision" + Session.SessionID]) %>" class="btn btn-info btn-block">Agregar Alumno</a>
+            <a href="ABM-Alumno-List.aspx?IdComision=<% =(Session["IdComision" + Session.SessionID]) %>" class="btn btn-info btn-block">Agregar o Modificar Alumnos</a>
             <%--Inicio GridView Alumnos--%>
 
 
-            <asp:GridView ID="DGVAlumnos" Style="margin-top: 10px" runat="server" Class="customers" AutoGenerateColumns="false">
+            <asp:GridView ID="DGVAlumnos" Style="margin-top: 10px" runat="server" Class="customers" AutoGenerateColumns="false" OnRowCreated="DGVAlumnos_RowCreated">
                 <Columns>
                     <asp:TemplateField HeaderText="Legajo">
                         <ItemTemplate>
@@ -85,8 +85,14 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-
+            <asp:Label ID="lblCorrecto" Text="" runat="server" ForeColor="Green" />
+            <asp:Label ID="lblIncorrecto" Text="" runat="server" ForeColor="Red" />
             <%--Fin GridView Alumnos--%>
+
+                        <% if (Request.QueryString["valor"] == "22041997" && lblIncorrecto.Text =="" )
+                { %>
+            <asp:Button ID="BtnGuardarComision" Text="Guardar Comision" class="btn btn-info btn-info btn-block" runat="server" />
+            <%} %>
         </div>
     </div>
 </asp:Content>
