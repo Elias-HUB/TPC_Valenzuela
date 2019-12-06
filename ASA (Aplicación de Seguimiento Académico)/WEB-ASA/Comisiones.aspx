@@ -14,8 +14,9 @@
     </style>
 
     <div class="form-row align-content-center" style="margin-left: 25px; margin-right: 25px; justify-content: center;">
-        <div>
-            <h3>Comisiones</h3>
+        <div >
+            <h3>Comisiones</h3>            
+            <asp:Label Text="" runat="server" ID="LblLogin" />
         </div>
     </div>
     <asp:Button Text="Agregar Comisión" runat="server" class="btn btn-lg btn-info" Style="margin-left: 100px;" OnClick="BtnComision_Click" />

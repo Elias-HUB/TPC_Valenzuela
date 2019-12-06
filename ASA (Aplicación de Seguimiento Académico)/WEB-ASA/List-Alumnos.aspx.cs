@@ -83,10 +83,10 @@ namespace WEB_ASA
                     DGVAlumnos.DataBind();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Session["Error" + Session.SessionID] = ex;
+                Response.Redirect("Error.aspx");
             }
         }
 

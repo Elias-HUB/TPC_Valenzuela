@@ -7,8 +7,9 @@
     <div class="jumbotron">
         <div class="alert alert-danger" role="alert" style="margin-top: 10px">
             <p>
-                <% = Session["Error" + Session.SessionID] %>  ALTO ERROR WACHO
+                <% = Session["Error" + Session.SessionID] %>  
             </p>
+            <p>  Por favor comunicarse con el servicio Técnico</p>
         </div>        
     </div>
 

@@ -47,6 +47,12 @@
                     color: white;
                     /*font-size: 25px;*/
                 }
+
+                .topcorner {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                }
             </style>
 
             <div class="text-white Cabecera" style="font-family: 'Roboto', sans-serif;">
@@ -59,6 +65,16 @@
                         <p>ASA (Aplicación de Seguimiento Académico)</p>
                     </div>
                 </div>
+                <% if (Session["DocenteLegajo" + Session.SessionID] != null)
+                    {%>
+                <div class="topcorner">
+                    <div>
+                    <asp:Label Text="ghfhfgh" ID="LblSession" runat="server" />
+
+                    <asp:Button Text="Cerrar sessión" OnClick="BtnSession_Click" class="btn btn-link" ForeColor="#0000cc" ID="BtnSession"  runat="server" />
+                        </div>
+                </div>
+                <% }%>
             </div>
 
             <hr />

@@ -56,6 +56,7 @@
     <Compile Include="TipoPerfilServices.cs" />
     <Compile Include="TurnoServices.cs" />
     <Compile Include="UniversidadServices.cs" />
+    <Compile Include="UsuarioServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AccesoaDatos\AccesoDatos.csproj">

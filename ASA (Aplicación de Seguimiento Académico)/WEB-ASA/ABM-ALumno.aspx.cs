@@ -247,8 +247,8 @@ namespace WEB_ASA
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                Session["Error" + Session.SessionID] = ex;
+                Response.Redirect("Error.aspx");
             }
 
         }

@@ -14,14 +14,14 @@ namespace WEB_ASA
         public List<Comision> Comisions = new List<Comision>();
         protected void Page_Load(object sender, EventArgs e)
         {
+
             try
             {
-                //ACOMODAR PARA PROFESOR
-                Session["DocenteLegajo" + Session.SessionID] = 2;
-                //////////////////////////////
-                ///
-
-                Comisions = (new ComisionServices().Listar(Convert.ToInt32(Session["DocenteLegajo" + Session.SessionID])));
+                if (!IsPostBack)
+                {
+                    Comisions = (new ComisionServices().Listar(Convert.ToInt32(Session["DocenteLegajo" + Session.SessionID])));
+                    LblLogin.Text = "";
+                }
             }
             catch (Exception ex)
             {
@@ -33,7 +33,6 @@ namespace WEB_ASA
 
         protected void BtnComision_Click(object sender, EventArgs e)
         {
-            //ACOMODAR PARA PROFESOR
             Response.Redirect("ABM-Comision.aspx");
         }
     }

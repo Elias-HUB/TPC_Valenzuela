@@ -286,6 +286,13 @@
         }
     </style>
 
+    <script>
+        function soloNumeros(e) {
+            var key = window.Event ? e.which : e.keyCode
+            return (key >= 48 && key <= 57)
+        }
+    </script>
+
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
@@ -296,7 +303,7 @@
             </div>
 
             <!-- Login Form -->
-            <asp:TextBox ID="TboxUsuario" runat="server" Style="margin-top: 20PX" class="fadeIn second" name="login" placeholder="Legajo"></asp:TextBox>
+            <asp:TextBox ID="TboxUsuario" runat="server" onKeyPress="return soloNumeros(event)" Style="margin-top: 20PX" class="fadeIn second" name="login" placeholder="Legajo"></asp:TextBox>
             <asp:TextBox ID="TboxContrasenia" runat="server" class="fadeIn third" name="login" placeholder="Contraseña"></asp:TextBox>
             <%--            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" />
             <input type="text" id="password" class="fadeIn third" name="login" placeholder="password" />--%>
@@ -304,13 +311,13 @@
             <asp:Button ID="BtnAceptar" autoposback="false" ClientIDMode="Static" runat="server" Text="Ingreso" type="submit" class="fadeIn fourth" OnClick="BtnAceptar_Click" />
             </div>
             <div>
-            <asp:Label Text="Usuario o Contraseña incorrecto, vuelva a intentar" runat="server" ForeColor="Red" Visible="false" />
+            <asp:Label Text="Usuario o Contraseña incorrecto, vuelva a intentar" ID="LblIncorrecto" runat="server" ForeColor="Red" Visible="false" />
             </div>
 
 
             <!-- Remind Passowrd -->
             <div id="formFooter">
-                <a class="underlineHover" href="#">Olvido su contraseña?</a>
+                <%--<a class="underlineHover" href="#">Olvido su contraseña?</a>--%>
             </div>
         </div>
     </div>

@@ -109,6 +109,7 @@ Clave VARCHAR (50) NOT NULL
 )
 
 insert into Usuario (LegajoDocente,Clave) values (2,1234)
+insert into Usuario (LegajoDocente,Clave) values (1,1234)
 
 go
 CREATE TABLE Comision(
