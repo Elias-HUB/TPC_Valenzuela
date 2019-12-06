@@ -33,9 +33,10 @@ namespace WEB_ASA
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Session["Error" + Session.SessionID] = ex;
+                Response.Redirect("Error.aspx");
             }
 
         }
@@ -151,7 +152,7 @@ namespace WEB_ASA
             Instancia instancia = new Instancia();
             int Indice = 0;
             foreach (Instancia Ins in instancias)
-            {                
+            {
                 instancias[Indice].Id = instanciaServices.Nuevo(instancias[Indice]);
                 instanciaServices.NuevoComIns((Convert.ToInt64(Session["IdComision" + Session.SessionID])), instancias[Indice].Id);
                 Indice++;

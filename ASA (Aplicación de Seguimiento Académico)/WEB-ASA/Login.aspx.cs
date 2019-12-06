@@ -11,6 +11,19 @@ namespace WEB_ASA
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Session["Error" + Session.SessionID] = ex;
+                Response.Redirect("Error.aspx");
+            }
+        }
+
+        protected void BtnAceptar_Click(object sender, EventArgs e)
+        {
 
         }
     }

@@ -78,7 +78,7 @@
                         <asp:Label Text='<%# Eval("Nombre")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:TextBox runat="server" ID="TboxNombre" Text='<%# Eval("Nombre")%>' class="form-control col-12" />
+                        <asp:TextBox runat="server" ID="TboxNombre" Text='<%# Eval("Nombre")%>'  />
                     </EditItemTemplate>
                     <FooterTemplate>
                         <asp:TextBox runat="server" ID="txbNombreFooter" />

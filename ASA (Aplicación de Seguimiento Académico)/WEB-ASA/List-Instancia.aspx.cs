@@ -22,10 +22,10 @@ namespace WEB_ASA
                     CargaDGVInstancia();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Session["Error" + Session.SessionID] = ex;
+                Response.Redirect("Error.aspx");
             }
         }
 
@@ -37,7 +37,7 @@ namespace WEB_ASA
             List<Instancia> instancias = new List<Instancia>();
             if (Request.QueryString["valor"] != "22041997")
             {
-                instancias = instanciaServices.ListarXComision(Convert.ToInt64(ValorComision)); 
+                instancias = instanciaServices.ListarXComision(Convert.ToInt64(ValorComision));
             }
             else
             {
@@ -68,8 +68,8 @@ namespace WEB_ASA
                 DGVInstancia.DataBind();
             }
         }
-        
-   
+
+
 
         protected void DGVInstancia_RowCreated(object sender, GridViewRowEventArgs e)
         {

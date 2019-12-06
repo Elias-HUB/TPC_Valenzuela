@@ -254,7 +254,7 @@ namespace ASA.Services
                 accesoDatos.SetearQuery("delete [DetComisionInstancia] where IdInstancia = @Id");
                 accesoDatos.Clear();
                 accesoDatos.agregarParametro("@Id", Id);
-                accesoDatos.EjecutarAccion();
+                //accesoDatos.EjecutarAccion();
                 //accesoDatos.SetearQuery("delete [Comentario] where IdInstancia = @Id");
                 //accesoDatos.Clear();
                 //accesoDatos.agregarParametro("@Id", Id);
@@ -271,6 +271,30 @@ namespace ASA.Services
             finally
             {
                 accesoDatos.CerrarConexion();
+            }
+        }
+
+        public bool ProtecEliminar(long id)
+        {
+            AccesoDatos.AccesoDatos Datos = new AccesoDatos.AccesoDatos();
+            try
+            {
+                Datos.SetearQuery("SELECT Ins.Id, Ins.Nombre, Ins.FechaInicio, Ins.FechaFin  FROM [Valenzuela_DB].[dbo].[Instancia] as Ins  inner join Comentario on Comentario.IdInstancia = Ins.Id where Ins.Id =" + id);
+                Datos.EjecutarLector();
+
+                while (Datos.Lector.Read())
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Datos.CerrarConexion();
             }
         }
     }

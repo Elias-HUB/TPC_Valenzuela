@@ -20,10 +20,10 @@ namespace WEB_ASA
                     CargaDGVInstancia();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Session["Error" + Session.SessionID] = ex;
+                Response.Redirect("Error.aspx");
             }
         }
 
@@ -131,7 +131,7 @@ namespace WEB_ASA
         {
             try
             {
-                AlumnoServices alumnoServices = new  AlumnoServices();
+                AlumnoServices alumnoServices = new AlumnoServices();
                 Alumno alumno = new Alumno();
                 List<Alumno> alumnos = new List<Alumno>();
                 alumno.Legajo = Convert.ToInt64((DGVAlumnos.DataKeys[e.RowIndex].Value));
@@ -140,11 +140,22 @@ namespace WEB_ASA
                 int IndexNice = Convert.ToInt32(index.ToString());
                 if (Request.QueryString["IdComision"] != "22041997")
                 {
-                    alumnoServices.Eliminar(alumno.Legajo, Convert.ToInt64(Session["IdComision" + Session.SessionID]));
+                    if ((alumnoServices.ProtecEliminar(alumno.Legajo)) == false)
+                    {
+                        alumnoServices.Eliminar(alumno.Legajo, Convert.ToInt64(Session["IdComision" + Session.SessionID]));
+                    }
+                    else
+                    {
+                        lblIncorrecto.Visible = true;
+                        lblIncorrecto.Text = "Este Alumno no puede ser eliminado ya que tiene comentarios realizos en la instancia.";
+                        lblCorrecto.Text = "";
+                        CargaDGVInstancia();
+                    }
+
                 }
                 else
                 {
-                     alumnos = Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] as List<Alumno>;
+                    alumnos = Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] as List<Alumno>;
                     alumnos.RemoveAt(index);
                     Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] = alumnos;
                 }
@@ -164,8 +175,8 @@ namespace WEB_ASA
         }
 
         protected void DGVAlumnos_SelectedIndexChanged(object sender, EventArgs e)
-        {            
-            Alumno alumno = new Alumno();            
+        {
+            Alumno alumno = new Alumno();
             alumno.Legajo = Convert.ToInt64(DGVAlumnos.SelectedDataKey.Value);
             Response.Redirect("ABM-Alumno.aspx?IdComision=" + (Session["IdComision" + Session.SessionID]) + "&Legajo=" + alumno.Legajo);
         }

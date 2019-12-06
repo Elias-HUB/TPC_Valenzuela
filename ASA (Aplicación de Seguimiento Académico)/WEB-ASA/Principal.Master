@@ -69,10 +69,10 @@
             </asp:ContentPlaceHolder>
         </div>
         <hr />
-        <footer style="font-family: 'Roboto', sans-serif; ">
-            <div class="col-12" style="justify-content: center;">
-            <p>&copy; <%: DateTime.Now.Year %> - Programación III ASA (Aplicación de Seguimiento Académico)- Valenzuela Elias</p>
-                </div>
+        <footer style="font-family: 'Roboto', sans-serif;">
+            <div style="text-align: center;">
+                <p>&copy; <%: DateTime.Now.Year %> -  ASA (Aplicación de Seguimiento Académico)  -  <a target="_blank" href="https://www.instagram.com/elias_pachu/">Valenzuela Elias</a></p>
+            </div>
         </footer>
     </form>
 </body>

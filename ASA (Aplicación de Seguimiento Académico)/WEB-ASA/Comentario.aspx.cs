@@ -27,9 +27,10 @@ namespace WEB_ASA
                 ComentarioServices comentarioServices = new ComentarioServices();
                 comentarios = comentarioServices.ComentariosCIA(Comision, Instancia, Alumno);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                Session["Error" + Session.SessionID] = ex;
+                Response.Redirect("Error.aspx");
             }
         }
 

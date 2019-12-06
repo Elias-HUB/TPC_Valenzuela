@@ -13,39 +13,48 @@ namespace WEB_ASA
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            try
             {
-                if (Request.QueryString["Legajo"] != "Vacio")
+                if (!IsPostBack)
                 {
-                    Alumno alumno = new Alumno();
-                    AlumnoServices alumnoServices = new AlumnoServices();
-                    if (Request.QueryString["IdComision"] != "22041997")
+                    if (Request.QueryString["Legajo"] != "Vacio")
                     {
-                        alumno = alumnoServices.BuscarAlumno(Convert.ToInt64(Request.QueryString["Legajo"]));
+                        Alumno alumno = new Alumno();
+                        AlumnoServices alumnoServices = new AlumnoServices();
+                        if (Request.QueryString["IdComision"] != "22041997")
+                        {
+                            alumno = alumnoServices.BuscarAlumno(Convert.ToInt64(Request.QueryString["Legajo"]));
+                        }
+                        else
+                        {
+                            List<Alumno> alumnos = (Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] as List<Alumno>);
+                            int Index = Indice(alumnos, (Convert.ToInt64(Request.QueryString["Legajo"])));
+                            alumno = alumnos[Index];
+                        }
+                        TboxLegajo.Text = alumno.Legajo.ToString();
+                        TboxNombre.Text = alumno.Nombre;
+                        TboxApellido.Text = alumno.Apellido;
+                        TboxEmail.Text = alumno.Email;
+                        TboxTelefono.Text = alumno.Telefono.ToString();
+                        TboxDirreccion.Text = alumno.Dirreccion.Direccion;
+                        TboxCiudad.Text = alumno.Dirreccion.Ciudad;
+                        TboxCP.Text = alumno.Dirreccion.CodPostal.ToString();
+                        TboxLegajo.Enabled = false;
+                        BtnBuscar.Visible = false;
+                        BtnAgregar.Text = "Modificar";
                     }
                     else
                     {
-                        List<Alumno> alumnos = (Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] as List<Alumno>);
-                        int Index = Indice(alumnos, (Convert.ToInt64(Request.QueryString["Legajo"])));
-                        alumno = alumnos[Index];
-                    }
-                    TboxLegajo.Text = alumno.Legajo.ToString();
-                    TboxNombre.Text = alumno.Nombre;
-                    TboxApellido.Text = alumno.Apellido;
-                    TboxEmail.Text = alumno.Email;
-                    TboxTelefono.Text = alumno.Telefono.ToString();
-                    TboxDirreccion.Text = alumno.Dirreccion.Direccion;
-                    TboxCiudad.Text = alumno.Dirreccion.Ciudad;
-                    TboxCP.Text = alumno.Dirreccion.CodPostal.ToString();
-                    TboxLegajo.Enabled = false;
-                    BtnBuscar.Visible = false;
-                    BtnAgregar.Text = "Modificar";
-                }
-                else
-                {
 
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                Session["Error" + Session.SessionID] = ex;
+                Response.Redirect("Error.aspx");
+            }
+
         }
 
         protected void BtnBuscar_Click(object sender, EventArgs e)

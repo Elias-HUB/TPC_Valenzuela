@@ -151,11 +151,11 @@ namespace ASA.Services
                 accesoDatos.agregarParametro("@Id", IdAlumno);
                 accesoDatos.agregarParametro("@IdCom", IdComision);
                 accesoDatos.EjecutarAccion();
-                accesoDatos.SetearQuery("delete [Comentario] where IdAlumno = @Id and idComision = @IdCom");
-                accesoDatos.Clear();
-                accesoDatos.agregarParametro("@Id", IdAlumno);
-                accesoDatos.agregarParametro("@IdCom", IdComision);
-                accesoDatos.EjecutarAccion();
+                //accesoDatos.SetearQuery("delete [Comentario] where IdAlumno = @Id and idComision = @IdCom");
+                //accesoDatos.Clear();
+                //accesoDatos.agregarParametro("@Id", IdAlumno);
+                //accesoDatos.agregarParametro("@IdCom", IdComision);
+                //accesoDatos.EjecutarAccion();
                 //accesoDatos.SetearQuery("delete [Instancia] where Id = @Id");
                 //accesoDatos.Clear();
                 //accesoDatos.agregarParametro("@Id", IdAlumno);
@@ -241,6 +241,30 @@ namespace ASA.Services
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public bool ProtecEliminar(long id)
+        {
+            AccesoDatos.AccesoDatos Datos = new AccesoDatos.AccesoDatos();
+            try
+            {
+                Datos.SetearQuery("SELECT * FROM[Valenzuela_DB].[dbo].[Alumno]  inner join Comentario on Comentario.IdAlumno = Alumno.Legajo where Alumno.Legajo =" + id);
+                Datos.EjecutarLector();
+
+                while (Datos.Lector.Read())
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Datos.CerrarConexion();
             }
         }
     }

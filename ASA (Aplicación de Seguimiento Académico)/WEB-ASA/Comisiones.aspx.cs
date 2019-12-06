@@ -14,9 +14,21 @@ namespace WEB_ASA
         public List<Comision> Comisions = new List<Comision>();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //ACOMODAR PARA PROFESOR
-            Session["DocenteLegajo" + Session.SessionID] = 2;
-            Comisions = (new ComisionServices().Listar(Convert.ToInt32(Session["DocenteLegajo" + Session.SessionID])));
+            try
+            {
+                //ACOMODAR PARA PROFESOR
+                Session["DocenteLegajo" + Session.SessionID] = 2;
+                //////////////////////////////
+                ///
+
+                Comisions = (new ComisionServices().Listar(Convert.ToInt32(Session["DocenteLegajo" + Session.SessionID])));
+            }
+            catch (Exception ex)
+            {
+                Session["Error" + Session.SessionID] = ex;
+                Response.Redirect("Error.aspx");
+            }
+
         }
 
         protected void BtnComision_Click(object sender, EventArgs e)
