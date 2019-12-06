@@ -98,8 +98,8 @@ TipoPerfil varchar (1)
 )
 go
 insert into Docente (Legajo,Nombre,Apellido,Telefono,Email,Direccion,Ciudad,CodigoPostal)
-values (123456,'Angel','Simon',1157450480,'asimon@docentes.frgp.utn.edu.ar','avenida siempre viva 742','Talar',1716),
-	   (789456,'Maxi','Fernandez',1154590470,'msarfernandez@docentes.frgp.utn.edu.ar','República Galáctica','Talar',1716)
+values (1,'Angel','Simon',1157450480,'asimon@docentes.frgp.utn.edu.ar','avenida siempre viva 742','Talar',1716),
+	   (2,'Maxi','Fernandez',1154590470,'msarfernandez@docentes.frgp.utn.edu.ar','República Galáctica','Talar',1716)
 go
 
 CREATE TABLE Usuario(
@@ -108,7 +108,7 @@ LegajoDocente bigINT NOT NULL FOREIGN KEY REFERENCES Docente(Legajo),
 Clave VARCHAR (50) NOT NULL
 )
 
-insert into Usuario (LegajoDocente,Clave) values (789456,1234)
+insert into Usuario (LegajoDocente,Clave) values (2,1234)
 
 go
 CREATE TABLE Comision(
@@ -120,7 +120,8 @@ IdCuatrimestre bigINT NOT NULL FOREIGN KEY REFERENCES Cuatrimestre(Id),
 --IdDetComisionInstancia bigINT NOT NULL FOREIGN KEY REFERENCES DetComisionInstancia(Codigo),
 IdDocente bigINT NOT NULL FOREIGN KEY REFERENCES Docente(Legajo),
 Anio int not null,
-Estado bit 
+Estado bit
+unique (IdMateria,IdTurno,IdCuatrimestre,IdDocente,Anio) 
 )
 go
 insert into Comision (IdMateria,IdTurno,IdCuatrimestre,IdDocente,Anio)

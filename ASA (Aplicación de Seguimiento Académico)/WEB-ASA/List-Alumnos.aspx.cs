@@ -80,7 +80,7 @@ namespace WEB_ASA
                 else
                 {
                     DGVAlumnos.DataBind();
-                }                
+                }
             }
             catch (Exception)
             {
@@ -121,6 +121,65 @@ namespace WEB_ASA
             {
                 e.Row.Cells[3].Visible = false;
             }
+        }
+
+        protected void BtnGuardarComision_Click(object sender, EventArgs e)
+        {
+            Comision comision = new Comision();
+
+            comision.Materia = new Materia();
+            comision.Materia = Session["ABMComisionNuevo-Materia" + Session.SessionID] as Materia;
+
+            comision.Turno = new Turno();
+            comision.Turno = Session["ABMComisionNuevo-Turno" + Session.SessionID] as Turno;
+
+            comision.Cuatrimestre = new Cuatrimestre();
+            comision.Cuatrimestre = Session["ABMComisionNuevo-Cuatrimestre" + Session.SessionID] as Cuatrimestre;
+
+            comision.docente = new Docente();
+            comision.docente.Legajo = Convert.ToInt64(Session["DocenteLegajo" + Session.SessionID]);
+
+            comision.Anio = Convert.ToInt32(Session["ABMComisionNuevo-Anio" + Session.SessionID]);
+
+            ComisionServices comisionServices = new ComisionServices();
+            Session["IdComision" + Session.SessionID] = comisionServices.Nuevo(comision);
+            int a = Convert.ToInt32(Session["IdComision" + Session.SessionID]);
+            InstanciaServices instanciaServices = new InstanciaServices();
+
+
+            List<Instancia> instancias = Session["ABMComisionNuevo-ListInstancias" + Session.SessionID] as List<Instancia>;
+            Instancia instancia = new Instancia();
+            int Indice = 0;
+            foreach (Instancia Ins in instancias)
+            {                
+                instancias[Indice].Id = instanciaServices.Nuevo(instancias[Indice]);
+                instanciaServices.NuevoComIns((Convert.ToInt64(Session["IdComision" + Session.SessionID])), instancias[Indice].Id);
+                Indice++;
+            }
+
+
+            Indice = 0;
+            List<Alumno> alumnos = Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] as List<Alumno>;
+            Alumno alumno = new Alumno();
+            AlumnoServices alumnoServices = new AlumnoServices();
+            foreach (Alumno Alu in alumnos)
+            {
+                if ((alumnoServices.BuscarAlumno(alumnos[Indice].Legajo)) == null)
+                {
+                    alumnoServices.Nuevo(alumnos[Indice]);
+                    alumnoServices.NuevoComAlu(Convert.ToInt64((Session["IdComision" + Session.SessionID])), alumnos[Indice].Legajo);
+                    Indice++;
+                }
+                else
+                {
+                    alumnoServices.Modificar(alumnos[Indice]);
+                    alumnoServices.NuevoComAlu(Convert.ToInt64((Session["IdComision" + Session.SessionID])), alumnos[Indice].Legajo);
+                    Indice++;
+                }
+            }
+
+            Response.Redirect("Comisiones.aspx");
+
         }
     }
 }

@@ -93,9 +93,12 @@ namespace WEB_ASA
                         instancia.TipoInstancia.Nombre = (DGVInstancia.FooterRow.FindControl("DGBDlistTipoFooter") as DropDownList).SelectedItem.ToString();
                         instancia.TipoInstancia.Id = Convert.ToInt64((DGVInstancia.FooterRow.FindControl("DGBDlistTipoFooter") as DropDownList).SelectedValue);
 
+                        long id;
+                        id=instanciaServices.Nuevo(instancia);
 
-                        instanciaServices.Nuevo(instancia);
-                        instanciaServices.NuevoComIns(Convert.ToInt64(Request.QueryString["IdComision"]), instanciaServices.UltimoRegistro());
+                        //VERIRICAAAAAAAAAAAAAAAR
+
+                        instanciaServices.NuevoComIns(Convert.ToInt64(Request.QueryString["IdComision"]), id);
                         lblCorrecto.Text = "Se a agregado la instancia de manera correctamente.";
                         lblIncorrecto.Text = "";
 
@@ -158,7 +161,6 @@ namespace WEB_ASA
 
         protected void dgvIntancia_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-
             //ANALIZARLO
             try
             {

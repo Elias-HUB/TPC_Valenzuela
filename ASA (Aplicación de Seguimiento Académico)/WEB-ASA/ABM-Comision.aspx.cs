@@ -54,26 +54,26 @@ namespace WEB_ASA
             Comision comision = new Comision();
             comision.Materia = new Materia();
             comision.Materia.Id = Convert.ToInt64(DlistMateria.SelectedValue);
-            Session["ABMComisionNuevo-Materia" + Session.SessionID] = Convert.ToInt64(DlistMateria.SelectedValue);
+            Session["ABMComisionNuevo-Materia" + Session.SessionID] = comision.Materia;
 
             comision.Turno = new Turno();
             comision.Turno.Id = Convert.ToInt64(DlistTurno.SelectedValue);
-            Session["ABMComisionNuevo-Turno" + Session.SessionID] = Convert.ToInt64(DlistTurno.SelectedValue);
+            Session["ABMComisionNuevo-Turno" + Session.SessionID] = comision.Turno;
 
             comision.Cuatrimestre = new Cuatrimestre();
             comision.Cuatrimestre.Id = Convert.ToInt64(DlistCuatrimestre.SelectedValue);
-            Session["ABMComisionNuevo-Cuatrimestre" + Session.SessionID] = Convert.ToInt64(DlistCuatrimestre.SelectedValue);
+            Session["ABMComisionNuevo-Cuatrimestre" + Session.SessionID] = comision.Cuatrimestre;
 
 
             //VERIFICAR DOCENTE 
             comision.docente = new Docente();
-            comision.docente.Legajo = Convert.ToInt64(2);
+            comision.docente.Legajo = Convert.ToInt64(Session["DocenteLegajo" + Session.SessionID]);
 
             comision.Anio = Convert.ToInt32(TboxAnio.Text);
             Session["ABMComisionNuevo-Anio" + Session.SessionID] = Convert.ToInt32(TboxAnio.Text);
 
             Comision Aux = new Comision();
-            Aux = comisionServices.Busqueda(Convert.ToInt64(2), comision);
+            Aux = comisionServices.Busqueda(Convert.ToInt64(Session["DocenteLegajo" + Session.SessionID]), comision);
             if (Aux == null)
             {
                 InstanciaServices instanciaServices = new InstanciaServices();

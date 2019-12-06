@@ -75,6 +75,10 @@
                 objeto.style.boxShadow = "0 0 0 0.2rem rgba(255, 0, 0, 0.23)";
             }
         }
+
+
+
+
     </script>
 
         <div class="container  row">
@@ -117,7 +121,7 @@
                 <asp:Label Text="Año" runat="server" class="col-sm-2 col-form-label" />
             </div>
             <div class="col-sm-2">
-                <asp:TextBox ID="TboxAnio" ClientIDMode="Static" runat="server" onKeyPress="return soloNumeros(event)" onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)" class="form-control custom-control" placeholder="2019" MaxLength="4" />
+                <asp:TextBox ID="TboxAnio" ClientIDMode="Static" min="2000"  runat="server" onKeyPress="return soloNumeros(event)" onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)" class="form-control custom-control" placeholder="2019" MaxLength="4" />
             </div>
         </div>
         <div class="row">

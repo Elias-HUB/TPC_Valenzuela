@@ -48,12 +48,12 @@ namespace ASA.Services
 
                     Aux.Anio= Datos.Lector.GetInt32(11);
 
-                    Aux.docente = new Docente();
-                    Aux.docente = docenteServices.BuscarDocente(IdDocente);
+                    //Aux.docente = new Docente();
+                    //Aux.docente = docenteServices.BuscarDocente(IdDocente);
 
-                    ListarAlumnosComision(Aux);
+                    //ListarAlumnosComision(Aux);
 
-                    ListarInstanciaComision(Aux);
+                    //ListarInstanciaComision(Aux);
 
                     Listado.Add(Aux);
                 }
@@ -127,20 +127,23 @@ namespace ASA.Services
             }
         }
 
-        public void Nuevo(Comision Aux)
+        public long Nuevo(Comision Aux)
         {
             AccesoDatos.AccesoDatos datos = new AccesoDatos.AccesoDatos();
             //AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.SetearQuery("insert into Comision (IdMateria,IdTurno,IdCuatrimestre,IdDocente,Anio) values (@IdMateria,@IdTurno,@IdCuatrimestre,@IdDocente,@Anio)");
+                datos.Clear();
+                datos.SetearQuery("insert into Comision (IdMateria,IdTurno,IdCuatrimestre,IdDocente,Anio) values (@IdMateria,@IdTurno,@IdCuatrimestre,@IdDocente,@Anio)  SELECT CAST(scope_identity() AS int);");
                 datos.agregarParametro("@IdMateria", Aux.Materia.Id);
                 datos.agregarParametro("@IdTurno", Aux.Turno.Id);
                 datos.agregarParametro("@IdCuatrimestre", Aux.Cuatrimestre.Id);
                 datos.agregarParametro("@IdDocente", Aux.docente.Legajo);
                 datos.agregarParametro("@Anio", Aux.Anio);
                 //datos.agregarParametro("@estado", 1);
-                datos.EjecutarAccion();
+                //datos.EjecutarAccionSinCerrar();
+                long ID = datos.getExecuteScalar();
+                return ID;
             }
             catch (Exception ex)
             {

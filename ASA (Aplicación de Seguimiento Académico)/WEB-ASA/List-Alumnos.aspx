@@ -91,7 +91,7 @@
 
                         <% if (Request.QueryString["valor"] == "22041997" && lblIncorrecto.Text =="" )
                 { %>
-            <asp:Button ID="BtnGuardarComision" Text="Guardar Comision" class="btn btn-info btn-info btn-block" runat="server" />
+            <asp:Button ID="BtnGuardarComision" Text="Guardar Comision" class="btn btn-info btn-info btn-block" runat="server" OnClick="BtnGuardarComision_Click" />
             <%} %>
         </div>
     </div>

@@ -20,7 +20,7 @@ namespace AccesoDatos
             Comando.Connection = Conexion;
         }
 
-        public void SetearQuery (string Consulta )
+        public void SetearQuery(string Consulta)
         {
             Comando.CommandType = System.Data.CommandType.Text;
             Comando.CommandText = Consulta;
@@ -55,6 +55,12 @@ namespace AccesoDatos
             Comando.Parameters.AddWithValue(nombre, valor);
         }
 
+        public int getExecuteScalar()
+        {
+            Conexion.Open();
+            return Convert.ToInt32(Comando.ExecuteScalar());
+        }
+
         public void Clear()
         {
             Comando.Parameters.Clear();
@@ -74,6 +80,20 @@ namespace AccesoDatos
             finally
             {
                 Conexion.Close();
+            }
+
+        }
+
+        public void EjecutarAccionSinCerrar()
+        {
+            try
+            {
+                Conexion.Open();
+                Comando.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
         }

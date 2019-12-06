@@ -15,7 +15,8 @@ namespace WEB_ASA
         protected void Page_Load(object sender, EventArgs e)
         {
             //ACOMODAR PARA PROFESOR
-            Comisions = (new ComisionServices().Listar(2));
+            Session["DocenteLegajo" + Session.SessionID] = 2;
+            Comisions = (new ComisionServices().Listar(Convert.ToInt32(Session["DocenteLegajo" + Session.SessionID])));
         }
 
         protected void BtnComision_Click(object sender, EventArgs e)
