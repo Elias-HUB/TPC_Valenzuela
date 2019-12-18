@@ -46,7 +46,7 @@
                 }
             });
 
-                function validarVacio(text) {
+        function validarVacio(text) {
             objeto = document.getElementById(text);
             valueForm = objeto.value;
             if (valueForm != "" && valueForm.length != 0) {
@@ -58,7 +58,7 @@
                 objeto.style.boxShadow = "0 0 0 0.2rem rgba(255, 0, 0, 0.23)";
             }
         }
-                function Seleccionar(text) {
+        function Seleccionar(text) {
             objeto = document.getElementById(text);
             if (objeto.classList.contains("border-success")) {
                 objeto.style.boxShadow = "0 0 0 0.2rem rgba(79, 162, 51, 0.25)";
@@ -99,7 +99,7 @@
             <a href="List-Alumnos.aspx?valor=<% =(Session["IdComision-Instancia" + Session.SessionID]) %>">Alumnos Insciptos</a>
         </div>
     </div>
-
+    <hr style="margin-top: 0rem;    margin-bottom: 0,3rem;"/>
 
     <div class="Container">
 
@@ -107,11 +107,11 @@
             <div class="col-3"></div>
             <div class=" col-6">
                 <asp:Label Text="Nuevo Comentario:" runat="server" />
-                <asp:TextBox ID="TboxDescripcion" class="form-control HV" Height="200px" runat="server" TextMode="MultiLine" onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)" ClientIDMode="Static"/>
+                <asp:TextBox ID="TboxDescripcion" class="form-control HV" Height="200px" runat="server" TextMode="MultiLine" onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)" ClientIDMode="Static" />
 
                 <div class="form-group">
-                    <asp:Button Text="Guardar" runat="server" ID="BtnGuardar" class="btn btn-info btn-lg btn-block" OnClick="BtnGuardar_Click" disabled="true" ClientIDMode="Static"/>
-                    <asp:Button Text="Guardar y Enviar por mail" runat="server" ID="BtnGuardarEnviarMail" class="btn btn-info btn-lg btn-block" OnClick="BtnGuardarEnviarMail_Click" disabled="true" ClientIDMode="Static"/>
+                    <asp:Button Text="Guardar" runat="server" ID="BtnGuardar" class="btn btn-info btn-lg btn-block" OnClick="BtnGuardar_Click" disabled="true" ClientIDMode="Static" />
+                    <asp:Button Text="Guardar y Enviar por mail" runat="server" ID="BtnGuardarEnviarMail" class="btn btn-info btn-lg btn-block" OnClick="BtnGuardarEnviarMail_Click" disabled="true" ClientIDMode="Static" />
                 </div>
             </div>
         </div>

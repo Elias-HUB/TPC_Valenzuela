@@ -104,11 +104,14 @@ namespace WEB_ASA
 
         public bool Busqueda(List<Alumno> alumnos, Alumno Aux)
         {
-            foreach (Alumno alumnoAux in alumnos)
+            if (alumnos != null)
             {
-                if (alumnoAux.Legajo == Aux.Legajo)
+                foreach (Alumno alumnoAux in alumnos)
                 {
-                    return true;
+                    if (alumnoAux.Legajo == Aux.Legajo)
+                    {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -244,6 +247,10 @@ namespace WEB_ASA
             catch (System.FormatException)
             {
                 TboxError.Text = "Complete los Datos antes de agregar";
+            }
+            catch (System.Threading.ThreadAbortException)
+            {
+
             }
             catch (Exception ex)
             {

@@ -16,3 +16,9 @@ G:\Proyectos\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Dominio\
 G:\Proyectos\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
 G:\Proyectos\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Dominio\obj\Debug\Dominio.dll
 G:\Proyectos\TPC_Valenzuela\ASA (Aplicación de Seguimiento Académico)\Dominio\obj\Debug\Dominio.pdb
+C:\Users\Elias\Desktop\TPC_Valenzuela-master\ASA (Aplicación de Seguimiento Académico)\Dominio\bin\Debug\Dominio.dll
+C:\Users\Elias\Desktop\TPC_Valenzuela-master\ASA (Aplicación de Seguimiento Académico)\Dominio\bin\Debug\Dominio.pdb
+C:\Users\Elias\Desktop\TPC_Valenzuela-master\ASA (Aplicación de Seguimiento Académico)\Dominio\obj\Debug\Dominio.csprojAssemblyReference.cache
+C:\Users\Elias\Desktop\TPC_Valenzuela-master\ASA (Aplicación de Seguimiento Académico)\Dominio\obj\Debug\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\Elias\Desktop\TPC_Valenzuela-master\ASA (Aplicación de Seguimiento Académico)\Dominio\obj\Debug\Dominio.dll
+C:\Users\Elias\Desktop\TPC_Valenzuela-master\ASA (Aplicación de Seguimiento Académico)\Dominio\obj\Debug\Dominio.pdb

@@ -41,7 +41,7 @@
             <a href="Comisiones.aspx">Comisiones</a>
         </div>
     </div>
-
+    <hr style="margin-top: 0rem;    margin-bottom: 0,3rem;"/>
 
 
 
@@ -49,7 +49,7 @@
     <%--Inicio GridView Instancias--%>
     <div class="container">
 
-        
+        <p> </p>
 
         <div class="container-fluid">
             <a href="ABM-Instancia.aspx?IdComision=<% =(Session["IdComision" + Session.SessionID]) %>" class="btn btn-info btn-block">Agregar o Modificar Instancias</a>
@@ -78,18 +78,18 @@
                     </asp:TemplateField>
 
                     <%--Fecha inicio--%>
-                    <asp:TemplateField HeaderText="Fecha Inicio">
+                 <%--   <asp:TemplateField HeaderText="Fecha Inicio">
                         <ItemTemplate>
-                            <asp:Label Text='<%# Eval("FechaInicio")%>' runat="server" />
+                            <asp:Label Text='<%# Eval("FechaInicio","{0:d}")%>' runat="server" />
                         </ItemTemplate>
-                    </asp:TemplateField>
+                    </asp:TemplateField>--%>
 
                     <%--Fecha Fin--%>
-                    <asp:TemplateField HeaderText="Fecha Fin">
+                    <%--<asp:TemplateField HeaderText="Fecha Fin">
                         <ItemTemplate>
-                            <asp:Label Text='<%# Eval("FechaFin")%>' runat="server" />
+                            <asp:Label Text='<%# Eval("FechaFin","{0:d}")%>' runat="server" />
                         </ItemTemplate>
-                    </asp:TemplateField>
+                    </asp:TemplateField>--%>
 
 
                     <%--Alumnos--%>
@@ -107,7 +107,7 @@
             <asp:Label ID="lblCorrecto" Text="" runat="server" ForeColor="Green" />
             <asp:Label ID="lblIncorrecto" Text="" runat="server" ForeColor="Red" />
             <%--Fin GridView Instancias--%>
-            <% if (Request.QueryString["valor"] == "22041997" && lblIncorrecto.Text =="" )
+            <% if (Request.QueryString["valor"] == "22041997" && lblIncorrecto.Text == "")
                 { %>
             <a href="List-Alumnos.aspx?valor=22041997" class="btn btn-info btn-info btn-block">Agregar Alumnos</a>
             <%} %>

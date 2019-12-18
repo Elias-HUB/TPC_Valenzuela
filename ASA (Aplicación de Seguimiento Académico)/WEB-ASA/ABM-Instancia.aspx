@@ -36,18 +36,15 @@
             }
     </style>
 
-    <div class="container  row">
-        <div>
-            <a href="Comisiones.aspx">Comisiones </a>
-        </div>
-        <p> > </p>        
-        <div>
-            <a href="List-Instancia.aspx?valor=<% =Session["IdComision" + Session.SessionID] %>"> Instancias Evaluativas</a>
-        </div>
+    <div class=" container row">
+        <a href="Comisiones.aspx">Comisiones </a>
+        <p>> </p>
+        <a href="List-Instancia.aspx?valor=<% =Session["IdComision" + Session.SessionID] %>">Instancias Evaluativas</a>
     </div>
 
+    <hr style="margin-top: 0rem;" />
 
-    
+
     <div class="container-fluid">
         <asp:Label ID="lblCorrecto" Text="" runat="server" ForeColor="Green" />
         <br />
@@ -78,7 +75,7 @@
                         <asp:Label Text='<%# Eval("Nombre")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:TextBox runat="server" ID="TboxNombre" Text='<%# Eval("Nombre")%>'  />
+                        <asp:TextBox runat="server" ID="TboxNombre" Text='<%# Eval("Nombre")%>' />
                     </EditItemTemplate>
                     <FooterTemplate>
                         <asp:TextBox runat="server" ID="txbNombreFooter" />
@@ -102,30 +99,30 @@
                 </asp:TemplateField>
 
                 <%--Fecha inicio--%>
-                <asp:TemplateField HeaderText="Fecha Inicio">
+            <%--    <asp:TemplateField HeaderText="Fecha Inicio">
                     <ItemTemplate>
-                        <asp:Label Text='<%# Eval("FechaInicio")%>' runat="server" />
+                        <asp:Label Text='<%# Eval("FechaInicio","{0:d}")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:TextBox runat="server" ID="TboxFechaInicio" Text='<%# Eval("FechaInicio")%>' class="form-control" TextMode="DateTime" />
+                        <asp:TextBox runat="server" ID="TboxFechaInicio" Text='<%# Eval("FechaInicio")%>' class="form-control" TextMode="Date" />
                     </EditItemTemplate>
                     <FooterTemplate>
-                        <asp:TextBox runat="server" ID="TboxFechaInicioFooter" class="form-control" TextMode="DateTimeLocal" />
+                        <asp:TextBox runat="server" ID="TboxFechaInicioFooter" class="form-control" TextMode="Date" />
                     </FooterTemplate>
-                </asp:TemplateField>
+                </asp:TemplateField>--%>
 
                 <%--Fecha Fin--%>
-                <asp:TemplateField HeaderText="Fecha Fin">
+               <%-- <asp:TemplateField HeaderText="Fecha Fin">
                     <ItemTemplate>
-                        <asp:Label Text='<%# Eval("FechaFin")%>' runat="server" />
+                        <asp:Label Text='<%# Eval("FechaFin","{0:d}")%>' runat="server" />
                     </ItemTemplate>
                     <EditItemTemplate>
-                        <asp:TextBox runat="server" ID="TboxFechaFin" Text='<%# Eval("FechaFin")%>' class="form-control" TextMode="DateTime" />
+                        <asp:TextBox runat="server" ID="TboxFechaFin" Text='<%# Eval("FechaFin")%>' class="form-control" TextMode="Date" />
                     </EditItemTemplate>
                     <FooterTemplate>
-                        <asp:TextBox runat="server" ID="TboxFechaFinFooter" class="form-control" TextMode="DateTimeLocal" />
+                        <asp:TextBox runat="server" ID="TboxFechaFinFooter" class="form-control" TextMode="Date" />
                     </FooterTemplate>
-                </asp:TemplateField>
+                </asp:TemplateField>--%>
 
                 <%--<ACCIONES >--%>
                 <asp:TemplateField HeaderText="Acciones">

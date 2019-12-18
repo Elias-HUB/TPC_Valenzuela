@@ -56,6 +56,9 @@
             </style>
 
             <div class="text-white Cabecera" style="font-family: 'Roboto', sans-serif;">
+
+                <% if (Session["DocenteLegajo" + Session.SessionID] != null)
+                    {%>
                 <div class="row" style="margin-left: 20px;">
                     <div class="display-field" style="justify-content: center;">
                         <a href='Comisiones.aspx'>
@@ -65,19 +68,27 @@
                         <p>ASA (Aplicación de Seguimiento Académico)</p>
                     </div>
                 </div>
-                <% if (Session["DocenteLegajo" + Session.SessionID] != null)
-                    {%>
                 <div class="topcorner">
                     <div>
-                    <asp:Label Text="ghfhfgh" ID="LblSession" runat="server" />
+                        <asp:Label Text="ghfhfgh" ID="LblSession" runat="server" />
 
-                    <asp:Button Text="Cerrar sessión" OnClick="BtnSession_Click" class="btn btn-link" ForeColor="#0000cc" ID="BtnSession"  runat="server" />
-                        </div>
+                        <asp:Button Text="Cerrar sessión" OnClick="BtnSession_Click" class="btn btn-link" ForeColor="#0000cc" ID="BtnSession" runat="server" />
+                    </div>
                 </div>
-                <% }%>
-            </div>
+                <% }
+                    else
+                    {%>
+                <div class="row" style="margin-left: 20px;">
+                    <div class="display-field" style="justify-content: center;">
 
-            <hr />
+                        <asp:Image runat="server" ImageUrl="~/Imagenes/Cabecera.png" Width="350px" />
+                    </div>
+                    <div style="margin-top: 45px;">
+                        <p>ASA (Aplicación de Seguimiento Académico)</p>
+                    </div>
+                </div>
+                <%} %>
+            </div>
         </header>
 
         <div style="font-family: 'Roboto', sans-serif;">

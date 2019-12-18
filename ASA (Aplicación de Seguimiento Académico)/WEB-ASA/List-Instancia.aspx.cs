@@ -19,6 +19,9 @@ namespace WEB_ASA
                 if (!IsPostBack)
                 {
                     Session["IdComision" + Session.SessionID] = Request.QueryString["valor"];
+                    ComisionServices comisionServices = new ComisionServices();
+                    Comision comision = new Comision();
+                    comision = comisionServices.Busqueda(Convert.ToInt32(Session["DocenteLegajo" + Session.SessionID]), Convert.ToInt64(Session["IdComision" + Session.SessionID]));
                     CargaDGVInstancia();
                 }
             }

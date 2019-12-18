@@ -81,11 +81,12 @@
 
     </script>
 
-        <div class="container  row">
+    <div class="container  row">
         <div>
             <a href="Comisiones.aspx">Comisiones</a>
         </div>
     </div>
+    <hr style="margin-top: 0rem;    margin-bottom: 0,3rem;"/>
 
 
     <div class="container">
@@ -121,12 +122,12 @@
                 <asp:Label Text="Año" runat="server" class="col-sm-2 col-form-label" />
             </div>
             <div class="col-sm-2">
-                <asp:TextBox ID="TboxAnio" ClientIDMode="Static" min="2000"  runat="server" onKeyPress="return soloNumeros(event)" onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)" class="form-control custom-control" placeholder="2019" MaxLength="4" />
+                <asp:TextBox ID="TboxAnio" ClientIDMode="Static" min="2000" runat="server" onKeyPress="return soloNumeros(event)" onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)" class="form-control custom-control" placeholder="2019" MaxLength="4" />
             </div>
         </div>
         <div class="row">
             <asp:Button Text="Instancias" ID="BtnIntancia" ClientIDMode="Static" autoposback="false" runat="server" class="btn btn-lg btn-info" OnClick="BtnInstancias_click" disabled="true" />
-            <asp:Label Text="" ID="LblIntancia" runat="server" ClientIDMode="Static"  />
+            <asp:Label Text="" ID="LblIntancia" runat="server" ClientIDMode="Static" />
         </div>
     </div>
 

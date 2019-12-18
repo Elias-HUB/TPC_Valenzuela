@@ -37,7 +37,7 @@
     </style>
 
     <div>
-        <div class="container  row">
+        <div class="container  row" style="margin-left: 10px">
             <div>
                 <a href="Comisiones.aspx">Comisiones </a>
             </div>
@@ -46,7 +46,7 @@
                 <a href="List-Instancia.aspx?valor=<% =Session["IdComision" + Session.SessionID] %>">Instancias Evaluativas</a>
             </div>
         </div>
-
+    <hr style="margin-top: 0rem;    margin-bottom: 0,3rem;"/>
 
         <div class="container">
             <a href="ABM-Alumno-List.aspx?IdComision=<% =(Session["IdComision" + Session.SessionID]) %>" class="btn btn-info btn-block">Agregar o Modificar Alumnos</a>
@@ -89,7 +89,7 @@
             <asp:Label ID="lblIncorrecto" Text="" runat="server" ForeColor="Red" />
             <%--Fin GridView Alumnos--%>
 
-                        <% if (Request.QueryString["valor"] == "22041997" && lblIncorrecto.Text =="" )
+            <% if (Request.QueryString["valor"] == "22041997" && lblIncorrecto.Text == "")
                 { %>
             <asp:Button ID="BtnGuardarComision" Text="Guardar Comision" class="btn btn-info btn-info btn-block" runat="server" OnClick="BtnGuardarComision_Click" />
             <%} %>

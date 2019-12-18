@@ -218,6 +218,11 @@
             }
         }
 
+        input.pass{
+            -webkit-text-security: disc;
+        }
+
+
         .fadeIn {
             opacity: 0;
             -webkit-animation: fadeIn ease-in 1;
@@ -304,7 +309,7 @@
 
             <!-- Login Form -->
             <asp:TextBox ID="TboxUsuario" runat="server" onKeyPress="return soloNumeros(event)" Style="margin-top: 20PX" class="fadeIn second" name="login" placeholder="Legajo"></asp:TextBox>
-            <asp:TextBox ID="TboxContrasenia" runat="server" class="fadeIn third" name="login" placeholder="Contraseña"></asp:TextBox>
+            <asp:TextBox ID="TboxContrasenia" runat="server" class="fadeIn third pass"  name="login" placeholder="Contraseña"></asp:TextBox>
             <%--            <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" />
             <input type="text" id="password" class="fadeIn third" name="login" placeholder="password" />--%>
             <div>
