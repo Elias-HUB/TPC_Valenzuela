@@ -29,8 +29,11 @@ namespace WEB_ASA
                         EnvioMail(Convert.ToInt64(Mail), Convert.ToInt64(Alumno));
                         Response.Redirect("List-Alumnos.aspx?valor=" + (Session["IdComision-Instancia" + Session.SessionID]));
                     }
-
-
+                    Instancia instancia = new Instancia();
+                    InstanciaServices instanciaServices = new InstanciaServices();
+                    instancia=instanciaServices.Busqueda(Convert.ToInt64(Request.QueryString["valor"]));
+                    Session["DatosInstancia" + Session.SessionID] = instancia.Nombre.ToString();
+                    LblTitulo.Text = Session["DatosComision" + Session.SessionID] + " - " + Session["DatosInstancia" + Session.SessionID];
                 }
             }
             catch (Exception ex)

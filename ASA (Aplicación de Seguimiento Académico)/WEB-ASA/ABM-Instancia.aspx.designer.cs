@@ -13,6 +13,15 @@ namespace WEB_ASA {
     public partial class ABM_Instancia {
         
         /// <summary>
+        /// Control LblTitABM.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblTitABM;
+        
+        /// <summary>
         /// Control lblCorrecto.
         /// </summary>
         /// <remarks>

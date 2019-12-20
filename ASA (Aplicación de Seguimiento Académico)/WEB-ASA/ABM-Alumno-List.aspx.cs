@@ -18,54 +18,7 @@ namespace WEB_ASA
                 if (!IsPostBack)
                 {
                     CargaDGVInstancia();
-                }
-            }
-            catch (Exception ex)
-            {
-                Session["Error" + Session.SessionID] = ex;
-                Response.Redirect("Error.aspx");
-            }
-        }
-
-        public void CargaDGVInstancia()
-        {
-            try
-            {
-                AlumnoServices alumnoServices = new AlumnoServices();
-                List<Alumno> alumnos = new List<Alumno>();
-                if (Request.QueryString["IdComision"] != "22041997")
-                {
-                    alumnos = alumnoServices.ListarAlumnosComision(Convert.ToInt64(Request.QueryString["IdComision"]));
-                }
-                else
-                {
-                    alumnos = Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] as List<Alumno>;
-                }
-                DGVAlumnos.DataSourceID = null;
-                DGVAlumnos.DataSource = alumnos;
-                if (alumnos.Count == 0)
-                {
-                    List<Alumno> Listado = new List<Alumno>();
-                    Alumno Aux = new Alumno();
-                    Aux.Legajo = 0;
-                    Aux.Nombre = "";
-                    Aux.Apellido = "";
-                    Aux.Telefono = 0;
-                    Aux.Email = "";
-
-                    Aux.Dirreccion = new Dirreccion();
-                    Aux.Dirreccion.Direccion = "";
-                    Aux.Dirreccion.Ciudad = "";
-                    Aux.Dirreccion.CodPostal = 0;
-
-                    Listado.Add(Aux);
-                    DGVAlumnos.DataSource = Listado;
-                    DGVAlumnos.DataBind();
-                    DGVAlumnos.Rows[0].Visible = false;
-                }
-                else
-                {
-                    DGVAlumnos.DataBind();
+                    LblTitulo.Text = Session["DatosComision" + Session.SessionID].ToString();
                 }
             }
             catch (Exception ex)
@@ -181,6 +134,84 @@ namespace WEB_ASA
             Alumno alumno = new Alumno();
             alumno.Legajo = Convert.ToInt64(DGVAlumnos.SelectedDataKey.Value);
             Response.Redirect("ABM-Alumno.aspx?IdComision=" + (Session["IdComision" + Session.SessionID]) + "&Legajo=" + alumno.Legajo);
+        }
+
+        protected void DGV_PageIndChamging(object sender, GridViewPageEventArgs e)
+        {
+            DGVAlumnos.PageIndex = e.NewPageIndex;
+            CargaDGVInstancia();
+        }
+
+        protected void BtnAlumno_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ABM-Alumno.aspx?IdComision=" + (Session["IdComision" + Session.SessionID]) + "&Legajo=Vacio");
+        }
+
+        protected void BtnBuscar_Click(object sender, EventArgs e)
+        {
+            CargaDGVInstancia();
+        }
+        public void CargaDGVInstancia()
+        {
+            try
+            {
+                AlumnoServices alumnoServices = new AlumnoServices();
+                List<Alumno> alumnos = new List<Alumno>();
+                if (Request.QueryString["IdComision"] != "22041997")
+                {
+                    if ("" == TboxLegajo.Text)
+                    {
+                        TboxLegajo.Text = "%%";
+                    }
+                    if ("" == TboxNombre.Text)
+                    {
+                        TboxNombre.Text = "%%";
+                    }
+                    if ("" == TboxApellido.Text)
+                    {
+                        TboxApellido.Text = "%%";
+                    }
+                    alumnos = alumnoServices.ListarAlumnosComision(Convert.ToInt64(Request.QueryString["IdComision"]), TboxLegajo.Text, TboxNombre.Text, TboxApellido.Text);
+                    TboxApellido.Text = "";
+                    TboxLegajo.Text = "";
+                    TboxNombre.Text = "";
+                }
+                else
+                {
+                    alumnos = Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] as List<Alumno>;
+                }
+                DGVAlumnos.DataSourceID = null;
+                DGVAlumnos.DataSource = alumnos;
+                if (alumnos.Count == 0)
+                {
+                    List<Alumno> Listado = new List<Alumno>();
+                    Alumno Aux = new Alumno();
+                    Aux.Legajo = 0;
+                    Aux.Nombre = "";
+                    Aux.Apellido = "";
+                    Aux.Telefono = 0;
+                    Aux.Email = "";
+
+                    Aux.Dirreccion = new Dirreccion();
+                    Aux.Dirreccion.Direccion = "";
+                    Aux.Dirreccion.Ciudad = "";
+                    Aux.Dirreccion.CodPostal = 0;
+
+                    Listado.Add(Aux);
+                    DGVAlumnos.DataSource = Listado;
+                    DGVAlumnos.DataBind();
+                    DGVAlumnos.Rows[0].Visible = false;
+                }
+                else
+                {
+                    DGVAlumnos.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                Session["Error" + Session.SessionID] = ex;
+                Response.Redirect("Error.aspx");
+            }
         }
     }
 }

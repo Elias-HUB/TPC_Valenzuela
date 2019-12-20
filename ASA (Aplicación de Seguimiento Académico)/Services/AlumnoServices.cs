@@ -81,14 +81,19 @@ namespace ASA.Services
             }
         }
 
-        public List<Alumno> ListarAlumnosComision(long comision)
+        public List<Alumno> ListarAlumnosComision(long comision, string Legajo = "%%", string Nombre = "%%", string Apellido = "%%")
         {
             AccesoDatos.AccesoDatos Datos = new AccesoDatos.AccesoDatos();
             Alumno Alumno;
             List<Alumno> alumnos = new List<Alumno>();
             try
             {
-                Datos.SetearQuery("SELECT Comision.Id, Alumno.* FROM [Valenzuela_DB].[dbo].[DetComisionAlumnos] inner join Comision on Comision.Id = DetComisionAlumnos.idComision inner join Alumno on Alumno.Legajo = DetComisionAlumnos.IdAlumno where Comision.Id = '" + comision + "'");
+                Datos.SetearQuery("exec sp_ComiAlumnos @IdCom , @Legajo , @Nombre, @Apellido");
+                Datos.Clear();
+                Datos.agregarParametro("@IdCom", comision);                
+                Datos.agregarParametro("@Legajo", Legajo);
+                Datos.agregarParametro("@Nombre", Nombre);
+                Datos.agregarParametro("@Apellido", Apellido);
                 Datos.EjecutarLector();
                 while (Datos.Lector.Read())
                 {

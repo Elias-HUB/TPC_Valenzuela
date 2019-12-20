@@ -36,7 +36,7 @@
             }
     </style>
 
-    <div class=" container row">
+    <div class=" container row" style="margin-left: 20px;">
         <a href="Comisiones.aspx">Comisiones </a>
         <p>> </p>
         <a href="List-Instancia.aspx?valor=<% =Session["IdComision" + Session.SessionID] %>">Instancias Evaluativas</a>
@@ -44,8 +44,11 @@
 
     <hr style="margin-top: 0rem;" />
 
-
+    <div class="container">
     <div class="container-fluid">
+                <p>
+            <asp:Label Text="" ID="LblTitABM" runat="server" />
+        </p>
         <asp:Label ID="lblCorrecto" Text="" runat="server" ForeColor="Green" />
         <br />
         <asp:Label ID="lblIncorrecto" Text="" runat="server" ForeColor="Red" />
@@ -143,4 +146,5 @@
 
         <%--* Fin GRID Instancia*--%>
     </div>
+        </div>
 </asp:Content>

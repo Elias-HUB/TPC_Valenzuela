@@ -95,9 +95,10 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-        <hr />
-        <footer style="font-family: 'Roboto', sans-serif;">
+        
+        <footer style="font-family: 'Roboto', sans-serif; height: 22px;"">
             <div style="text-align: center;">
+                <hr  style="margin-top: 2rem; margin-bottom: 2px"/>
                 <p>&copy; <%: DateTime.Now.Year %> -  ASA (Aplicación de Seguimiento Académico)  -  <a target="_blank" href="https://www.instagram.com/elias_pachu/">Valenzuela Elias</a></p>
             </div>
         </footer>

@@ -21,7 +21,11 @@ namespace WEB_ASA
                     Session["IdComision" + Session.SessionID] = Request.QueryString["valor"];
                     ComisionServices comisionServices = new ComisionServices();
                     Comision comision = new Comision();
-                    comision = comisionServices.Busqueda(Convert.ToInt32(Session["DocenteLegajo" + Session.SessionID]), Convert.ToInt64(Session["IdComision" + Session.SessionID]));
+                    comision.Materia = new Materia();
+                    comision.Turno = new Turno();
+                    comision = comisionServices.BusquedaID(Convert.ToInt32(Session["DocenteLegajo" + Session.SessionID]), Convert.ToInt64(Session["IdComision" + Session.SessionID]));
+                    LblTitulo.Text = comision.Materia.Nombre.ToString() + " - Turno " + comision.Turno.Nombre.ToString() +" - " + comision.Anio.ToString() +" " ;
+                    Session["DatosComision" + Session.SessionID] = LblTitulo.Text;
                     CargaDGVInstancia();
                 }
             }

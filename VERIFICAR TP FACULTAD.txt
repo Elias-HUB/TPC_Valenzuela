@@ -2,6 +2,14 @@ double PU = Convert.ToDouble((dgvDetalles.Rows[e.RowIndex].FindControl("LblTprod
 txbFecha.Text = DateTime.Now.ToString("dd/MM/yyyy")
 
 Cosas a revisar
+-Realizar filtros, año, materia , etc.    DATABASE JS O AJAX O Con filtro
+-Registrar docente
+-Mail incorrecto.
+-DGV agregar arriba y paginado
+-preguntar para salir de crear comision
+-Agregar nota
+
+
 *ABM Comision
 Request.QueryString["IdComision"]) = 22041997
 Session["ABMComisionNuevo-Materia" + Session.SessionID]
@@ -32,6 +40,15 @@ ori lo hizo en Marcas en rowdeleting , despues de ver pregunta por pantalla DESP
 *Validad mail vacio
 
 
+
+REALIZADO
+-Ocultar clave
+-Sacar Hora
+-Clicl en logo UTN
+-Mapa de Sitio
+-De donde proviene
+Session["DatosComision" + Session.SessionID]
+Session["DatosInstancia" + Session.SessionID]
 *Enviar mail cargando desde 0	LISTORTI
 *Mejorar navegabilidad 		LISTORTI
 *Reparar envio de mail         	LISTORTI

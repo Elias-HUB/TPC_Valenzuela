@@ -87,7 +87,7 @@
     </style>
 
     <div class="container  row">
-        <div>
+        <div style ="margin-left: 20px">
             <a href="Comisiones.aspx">Comisiones </a>
         </div>
         <p>> </p>
@@ -99,10 +99,14 @@
             <a href="List-Alumnos.aspx?valor=<% =(Session["IdComision-Instancia" + Session.SessionID]) %>">Alumnos Insciptos</a>
         </div>
     </div>
-    <hr style="margin-top: 0rem;    margin-bottom: 0,3rem;"/>
+    <hr style="margin-top: 0rem; margin-bottom: 0,3rem;" />
 
     <div class="Container">
-
+        <div class="container">
+            <p>
+                <asp:Label Text="text" ID="LblTitulo" runat="server" />
+            </p>
+        </div>
         <div class="form-group row">
             <div class="col-3"></div>
             <div class=" col-6">

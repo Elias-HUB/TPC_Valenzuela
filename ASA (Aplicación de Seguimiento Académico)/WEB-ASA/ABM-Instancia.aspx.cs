@@ -16,7 +16,10 @@ namespace WEB_ASA
             try
             {
                 if (!IsPostBack)
-                {
+                 {
+                    var Titulo = (Session["DatosComision" + Session.SessionID]);
+                    LblTitABM.Text = Titulo.ToString();
+                    
                     CargaDGVInstancia();
                 }
             }

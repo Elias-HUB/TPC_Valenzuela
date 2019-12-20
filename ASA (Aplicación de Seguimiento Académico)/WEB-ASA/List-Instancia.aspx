@@ -37,19 +37,20 @@
 
 
     <div class="container  row">
-        <div>
+        <div style="margin-left: 20px;">
             <a href="Comisiones.aspx">Comisiones</a>
         </div>
     </div>
-    <hr style="margin-top: 0rem;    margin-bottom: 0,3rem;"/>
+    <hr style="margin-top: 0rem; margin-bottom: 0,3rem;" />
 
 
 
 
     <%--Inicio GridView Instancias--%>
     <div class="container">
-
-        <p> </p>
+        <p>
+            <asp:Label Text="" ID="LblTitulo" runat="server" />
+        </p>
 
         <div class="container-fluid">
             <a href="ABM-Instancia.aspx?IdComision=<% =(Session["IdComision" + Session.SessionID]) %>" class="btn btn-info btn-block">Agregar o Modificar Instancias</a>
@@ -78,7 +79,7 @@
                     </asp:TemplateField>
 
                     <%--Fecha inicio--%>
-                 <%--   <asp:TemplateField HeaderText="Fecha Inicio">
+                    <%--   <asp:TemplateField HeaderText="Fecha Inicio">
                         <ItemTemplate>
                             <asp:Label Text='<%# Eval("FechaInicio","{0:d}")%>' runat="server" />
                         </ItemTemplate>

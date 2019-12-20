@@ -20,7 +20,6 @@ namespace WEB_ASA
                 if (!IsPostBack)
                 {
                     Comisions = (new ComisionServices().Listar(Convert.ToInt32(Session["DocenteLegajo" + Session.SessionID])));
-                    LblLogin.Text = "";
                 }
             }
             catch (Exception ex)

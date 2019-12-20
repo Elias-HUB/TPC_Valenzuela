@@ -49,6 +49,9 @@
     <hr style="margin-top: 0rem;    margin-bottom: 0,3rem;"/>
 
         <div class="container">
+            <p>
+    <asp:Label Text="" ID="LblTitulo" runat="server" />
+            </p>
             <a href="ABM-Alumno-List.aspx?IdComision=<% =(Session["IdComision" + Session.SessionID]) %>" class="btn btn-info btn-block">Agregar o Modificar Alumnos</a>
             <%--Inicio GridView Alumnos--%>
 

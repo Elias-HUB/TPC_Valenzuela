@@ -145,8 +145,8 @@
     </style>
 
 
-    <div class="container  row">
-        <div>
+    <div class="container  row" >
+        <div style="margin-left: 20px;">
             <a href="Comisiones.aspx">Comisiones </a>
         </div>
         <p>> </p>
@@ -162,11 +162,13 @@
             <a href="ABM-Alumno-List.aspx?IdComision=<% =Session["IdComision" + Session.SessionID] %>">Ventana Anterior</a>
         </div>
     </div>
+
     <hr style="margin-top: 0rem;    margin-bottom: 0,3rem;"/>
 
     <div class="container">
-        <div class="form-row">
 
+
+        <div class="form-row">
             <%--LEGAJO--%>
             <div class="form-group col-md-3">
                 <asp:Label Text="Legajo" ID="LblLegajo" ClientIDMode="Static" runat="server" CssClass="control-label" />

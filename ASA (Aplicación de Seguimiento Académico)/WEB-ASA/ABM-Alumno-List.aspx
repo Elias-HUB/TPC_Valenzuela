@@ -36,33 +36,61 @@
             }
     </style>
 
-    <div class="container  row">
-        <div>
-            <a href="Comisiones.aspx">Comisiones </a>
-        </div>
-        <p>> </p>
-        <div>
-            <a href="List-Instancia.aspx?valor=<% =Session["IdComision" + Session.SessionID] %>">Instancias Evaluativas</a>
-        </div>
-        <p>> </p>
-        <div>
-            <a href="List-Alumnos.aspx?valor=<% =(Session["IdComision-Instancia" + Session.SessionID]) %>">Alumnos Insciptos</a>
+    <div class="container" style="height: 22px;">
+        <div class="row ">
+            <div style="margin-left: 20px;">
+                <a href="Comisiones.aspx">Comisiones </a>
+            </div>
+            <p>> </p>
+            <div>
+                <a href="List-Instancia.aspx?valor=<% =Session["IdComision" + Session.SessionID] %>">Instancias Evaluativas</a>
+            </div>
+            <p>> </p>
+            <div>
+                <a href="List-Alumnos.aspx?valor=<% =(Session["IdComision-Instancia" + Session.SessionID]) %>">Alumnos Insciptos</a>
+            </div>
         </div>
     </div>
-    <hr style="margin-top: 0rem;    margin-bottom: 0,3rem;"/>
+    <hr style="margin-top: 0px; margin-bottom: 4px;" />
 
-    <%--<a href="List-Alumnos.aspx?valor=<% =Session["IdComision" + Session.SessionID] %>" class="btn btn-lg btn-info">Alumnos</a>--%>
-    <div class="container-fluid">
+    <div class="form-row align-content-center" style="margin-left: 25px; margin-right: 25px; justify-content: center;">
+        <h3>
+            <asp:Label Text="" ID="LblTitulo" runat="server" Style="margin-left: 20px;" />
+        </h3>
+    </div>
+
+
+    <%-- FILTRO --%>
+    <div class="form-row align-content-center" style="margin-left: 25px; margin-right: 25px; justify-content: center;">
+        <div style="margin-left: 10px;">
+            <asp:TextBox runat="server" ID="TboxLegajo" placeholder="Legajo" CssClass="form-control" />
+        </div>
+        <div style="margin-left: 10px;">
+            <asp:TextBox runat="server" ID="TboxNombre" placeholder="Nombre" CssClass="form-control" />
+        </div>
+        <div style="margin-left: 10px;">
+            <asp:TextBox runat="server" ID="TboxApellido" placeholder="Apellido" CssClass="form-control" />
+        </div>
+        <div>
+            <asp:Button Text="Buscar" runat="server" ID="BtnBuscar" OnClick="BtnBuscar_Click" class="btn btn-info" />
+        </div>
+    </div>
+    <%-- Fin Filtro --%>
+
+
+
+
+    <div class="container-fluid" style="margin-top: 10px;">
         <asp:Label ID="lblCorrecto" Text="" runat="server" ForeColor="Green" />
-        <br />
-        <asp:Label ID="lblIncorrecto" Text="" runat="server" ForeColor="Red" />
 
+        <asp:Label ID="lblIncorrecto" Text="" runat="server" ForeColor="Red" />
+        <asp:Button Text="Agregar Alumno" OnClick="BtnAlumno_Click" ID="BtnAlumno" runat="server" class="btn btn-block btn-info" />
         <%--* Inicio GRID Alumnos*--%>
 
-        <asp:GridView ID="DGVAlumnos" runat="server" ShowFooterWhenEmpty="True" AutoGenerateColumns="false" ShowFooter="true" DataKeyNames="Legajo"
+        <asp:GridView ID="DGVAlumnos" runat="server" ShowFooterWhenEmpty="True" AutoGenerateColumns="false" ShowFooter="false" DataKeyNames="Legajo"
             OnRowCommand="dgvIntancia_RowCommand" OnRowEditing="dgvIntancia_RowEditing" OnRowCancelingEdit="dgvIntancia_RowCancelingEdit"
             OnRowUpdating="dgvIntancia_RowUpdating" OnRowDeleting="dgvIntancia_RowDeleting" OnSelectedIndexChanged="DGVAlumnos_SelectedIndexChanged"
-            OnRowDataBound="dgvIntancia_RowDataBound" OnRowCreated="DGVInstancia_RowCreated" ShowHeaderWhenEmpty="True" Class="customers">
+            OnRowDataBound="dgvIntancia_RowDataBound" OnRowCreated="DGVInstancia_RowCreated" ShowHeaderWhenEmpty="True" Class="customers GridPager" AllowPaging="True" PageSize="4" OnPageIndexChanging="DGV_PageIndChamging" PagerSettings-Mode="NextPreviousFirstLast">
             <Columns>
                 <%--Legajo--%>
                 <asp:TemplateField HeaderText="Legajo">
@@ -119,9 +147,11 @@
                     </FooterTemplate>
                 </asp:TemplateField>
             </Columns>
+
+<PagerSettings Mode="NumericFirstLast"></PagerSettings>
+            <PagerStyle HorizontalAlign="Center" />
         </asp:GridView>
 
         <%--* Fin GRID Alumnos*--%>
     </div>
-
 </asp:Content>

@@ -20,12 +20,17 @@ namespace WEB_ASA
                 if (!IsPostBack)
                 {
                     Session["IdComision-Alumno" + Session.SessionID] = Request.QueryString["valor"];
+                    ASA.Models.Alumno alumnoAUX = new Alumno();
+                    AlumnoServices alumnoServices = new AlumnoServices();
+                    alumnoAUX=alumnoServices.BuscarAlumno(Convert.ToInt64(Session["IdComision-Alumno" + Session.SessionID]));
+                    LblTitulo.Text = Session["DatosComision" + Session.SessionID] + " - " + Session["DatosInstancia" + Session.SessionID] + " - " + alumnoAUX.Apellido + " " + alumnoAUX.Nombre;
                 }
                 long Comision = Convert.ToInt64(Session["IdComision" + Session.SessionID]);
                 long Instancia = Convert.ToInt64(Session["IdComision-Instancia" + Session.SessionID]);
                 long Alumno = Convert.ToInt64(Session["IdComision-Alumno" + Session.SessionID]);
                 ComentarioServices comentarioServices = new ComentarioServices();
                 comentarios = comentarioServices.ComentariosCIA(Comision, Instancia, Alumno);
+                
             }
             catch (Exception ex)
             {
