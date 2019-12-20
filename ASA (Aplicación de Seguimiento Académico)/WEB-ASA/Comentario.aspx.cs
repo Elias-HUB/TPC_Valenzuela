@@ -53,6 +53,7 @@ namespace WEB_ASA
             ComentarioServices comentarioServices = new ComentarioServices();
             ASA.Models.Comentario comentario = new ASA.Models.Comentario();
             comentario.Descripcion = TboxDescripcion.Text;
+            comentario.Nota = DlistNota.SelectedItem.Text;
             comentarioServices.Agregar(comentario, Convert.ToInt64(Session["IdComision" + Session.SessionID]), Convert.ToInt64(Session["IdComision-Instancia" + Session.SessionID]), Convert.ToInt64(Session["IdComision-Alumno" + Session.SessionID]));
             Response.Redirect("List-Alumnos.aspx?valor=" + Convert.ToInt64(Session["IdComision-Instancia" + Session.SessionID]));
         }

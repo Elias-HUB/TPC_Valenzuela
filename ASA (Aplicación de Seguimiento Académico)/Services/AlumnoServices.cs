@@ -81,7 +81,7 @@ namespace ASA.Services
             }
         }
 
-        public List<Alumno> ListarAlumnosComision(long comision, string Legajo = "%%", string Nombre = "%%", string Apellido = "%%")
+        public List<Alumno> ListarAlumnosComision(long comision, string Legajo = "", string Nombre = "", string Apellido = "")
         {
             AccesoDatos.AccesoDatos Datos = new AccesoDatos.AccesoDatos();
             Alumno Alumno;
@@ -91,9 +91,9 @@ namespace ASA.Services
                 Datos.SetearQuery("exec sp_ComiAlumnos @IdCom , @Legajo , @Nombre, @Apellido");
                 Datos.Clear();
                 Datos.agregarParametro("@IdCom", comision);                
-                Datos.agregarParametro("@Legajo", Legajo);
-                Datos.agregarParametro("@Nombre", Nombre);
-                Datos.agregarParametro("@Apellido", Apellido);
+                Datos.agregarParametro("@Legajo", "%" + Legajo + "%");
+                Datos.agregarParametro("@Nombre", "%" + Nombre + "%");
+                Datos.agregarParametro("@Apellido", "%" + Apellido + "%");
                 Datos.EjecutarLector();
                 while (Datos.Lector.Read())
                 {

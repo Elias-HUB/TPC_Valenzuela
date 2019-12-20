@@ -31,10 +31,19 @@ namespace WEB_ASA
                     }
                     Instancia instancia = new Instancia();
                     InstanciaServices instanciaServices = new InstanciaServices();
-                    instancia=instanciaServices.Busqueda(Convert.ToInt64(Request.QueryString["valor"]));
-                    Session["DatosInstancia" + Session.SessionID] = instancia.Nombre.ToString();
-                    LblTitulo.Text = Session["DatosComision" + Session.SessionID] + " - " + Session["DatosInstancia" + Session.SessionID];
+                    LblTitulo.Text = Session["DatosComision" + Session.SessionID].ToString();
+                    instancia = instanciaServices.Busqueda(Convert.ToInt64(Request.QueryString["valor"]));
+                    if (Request.QueryString["valor"] != "22041997")
+                    {
+                        
+                        Session["DatosInstancia" + Session.SessionID] = instancia.Nombre.ToString();
+                        LblTitulo.Text = Session["DatosComision" + Session.SessionID] + " - " + Session["DatosInstancia" + Session.SessionID];
+                    }
                 }
+            }
+            catch (System.Threading.ThreadAbortException)
+            {
+
             }
             catch (Exception ex)
             {
@@ -52,10 +61,11 @@ namespace WEB_ASA
                 List<Alumno> alumnos = new List<Alumno>();
                 if (Request.QueryString["valor"] != "22041997")
                 {
-                    alumnos = alumnoServices.Listar(Convert.ToInt64(Session["IdComision" + Session.SessionID]));
+                    alumnos = alumnoServices.ListarAlumnosComision(Convert.ToInt64(Session["IdComision" + Session.SessionID]), TboxLegajo.Text, TboxNombre.Text, TboxApellido.Text);
                 }
                 else
                 {
+                    alumnos = null;
                     alumnos = Session["ABMComisionNuevo-ListAlumnos" + Session.SessionID] as List<Alumno>;
                 }
                 DGVAlumnos.DataSourceID = null;
@@ -85,6 +95,10 @@ namespace WEB_ASA
                 {
                     DGVAlumnos.DataBind();
                 }
+            }
+            catch (System.Threading.ThreadAbortException)
+            {
+
             }
             catch (Exception ex)
             {
@@ -123,7 +137,7 @@ namespace WEB_ASA
         {
             if (Request.QueryString["valor"] == "22041997")
             {
-                e.Row.Cells[3].Visible = false;
+                DGVAlumnos.Columns[3].Visible = false;
             }
         }
 
@@ -184,6 +198,17 @@ namespace WEB_ASA
 
             Response.Redirect("Comisiones.aspx");
 
+        }
+
+        protected void BtnBuscar_Click(object sender, EventArgs e)
+        {
+            CargaDGVInstancia();
+        }
+
+        protected void DGVAlumnos_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            DGVAlumnos.PageIndex = e.NewPageIndex;
+            CargaDGVInstancia();
         }
     }
 }

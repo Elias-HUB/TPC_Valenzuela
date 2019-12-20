@@ -15,7 +15,7 @@ namespace ASA.Services
             AccesoDatos.AccesoDatos Datos = new AccesoDatos.AccesoDatos();
             try
             {
-                Datos.SetearQuery("SELECT [Id],[Descripcion],[FechaAlta],[FechaModificacion] FROM [Valenzuela_DB].[dbo].[Comentario] where IdInstancia = @InsId and idComision = @ComId and IdAlumno = @Legajo order by FechaAlta desc");
+                Datos.SetearQuery("SELECT [Id],[Descripcion],[FechaAlta],[FechaModificacion],Nota FROM [Valenzuela_DB].[dbo].[Comentario] where IdInstancia = @InsId and idComision = @ComId and IdAlumno = @Legajo order by FechaAlta desc");
                 Datos.Clear();
                 Datos.agregarParametro("@ComId", ComId);
                 Datos.agregarParametro("@Legajo", Legajo);
@@ -30,6 +30,7 @@ namespace ASA.Services
                     Aux.Descripcion = Datos.Lector.GetString(1);
                     Aux.FechaAlta = Datos.Lector.GetDateTime(2);
                     Aux.FechaModificacion = Datos.Lector.GetDateTime(3);
+                    Aux.Nota = Datos.Lector.GetString(4);
                     Listado.Add(Aux);
                 }
                 return Listado;
@@ -85,13 +86,14 @@ namespace ASA.Services
             //AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.SetearQuery("insert into Comentario values (@idComision, @IdInstancia, @IdAlumno, @Descripcion, @FechaAlta, @FechaModificacion)");
+                datos.SetearQuery("insert into Comentario values (@idComision, @IdInstancia, @IdAlumno, @Descripcion, @FechaAlta, @FechaModificacion, @Nota)");
                 datos.agregarParametro("@idComision",idComision);
                 datos.agregarParametro("@IdInstancia",IdInstancia);
                 datos.agregarParametro("@IdAlumno",IdAlumno);
                 datos.agregarParametro("@Descripcion", Aux.Descripcion);
                 datos.agregarParametro("@FechaAlta", DateTime.Now);
                 datos.agregarParametro("@FechaModificacion", DateTime.Now);
+                datos.agregarParametro("@Nota", Aux.Nota);
                 //datos.agregarParametro("@estado", 1);
                 datos.EjecutarAccion();
             }

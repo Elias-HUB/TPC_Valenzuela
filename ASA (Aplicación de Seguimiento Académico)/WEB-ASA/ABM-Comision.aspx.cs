@@ -55,14 +55,17 @@ namespace WEB_ASA
             comision.Materia = new Materia();
             comision.Materia.Id = Convert.ToInt64(DlistMateria.SelectedValue);
             Session["ABMComisionNuevo-Materia" + Session.SessionID] = comision.Materia;
+            Session["DatosComisionNuevo-Materia" + Session.SessionID] = DlistMateria.SelectedItem.Text;
 
             comision.Turno = new Turno();
             comision.Turno.Id = Convert.ToInt64(DlistTurno.SelectedValue);
             Session["ABMComisionNuevo-Turno" + Session.SessionID] = comision.Turno;
+            Session["DatosComisionNuevo-Turno" + Session.SessionID] = DlistTurno.SelectedItem.Text;
 
             comision.Cuatrimestre = new Cuatrimestre();
             comision.Cuatrimestre.Id = Convert.ToInt64(DlistCuatrimestre.SelectedValue);
             Session["ABMComisionNuevo-Cuatrimestre" + Session.SessionID] = comision.Cuatrimestre;
+            Session["DatosComisionNuevo-Cuatrimestre" + Session.SessionID] = DlistTurno.SelectedItem.Text;
 
 
             //VERIFICAR DOCENTE 
@@ -71,6 +74,7 @@ namespace WEB_ASA
 
             comision.Anio = Convert.ToInt32(TboxAnio.Text);
             Session["ABMComisionNuevo-Anio" + Session.SessionID] = Convert.ToInt32(TboxAnio.Text);
+            Session["DatosComisionNuevo-Anio" + Session.SessionID] = TboxAnio.Text;
 
             Comision Aux = new Comision();
             Aux = comisionServices.Busqueda(Convert.ToInt64(Session["DocenteLegajo" + Session.SessionID]), comision);

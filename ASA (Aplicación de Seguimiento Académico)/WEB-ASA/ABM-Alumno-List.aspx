@@ -82,7 +82,6 @@
 
     <div class="container-fluid" style="margin-top: 10px;">
         <asp:Label ID="lblCorrecto" Text="" runat="server" ForeColor="Green" />
-
         <asp:Label ID="lblIncorrecto" Text="" runat="server" ForeColor="Red" />
         <asp:Button Text="Agregar Alumno" OnClick="BtnAlumno_Click" ID="BtnAlumno" runat="server" class="btn btn-block btn-info" />
         <%--* Inicio GRID Alumnos*--%>
@@ -90,7 +89,8 @@
         <asp:GridView ID="DGVAlumnos" runat="server" ShowFooterWhenEmpty="True" AutoGenerateColumns="false" ShowFooter="false" DataKeyNames="Legajo"
             OnRowCommand="dgvIntancia_RowCommand" OnRowEditing="dgvIntancia_RowEditing" OnRowCancelingEdit="dgvIntancia_RowCancelingEdit"
             OnRowUpdating="dgvIntancia_RowUpdating" OnRowDeleting="dgvIntancia_RowDeleting" OnSelectedIndexChanged="DGVAlumnos_SelectedIndexChanged"
-            OnRowDataBound="dgvIntancia_RowDataBound" OnRowCreated="DGVInstancia_RowCreated" ShowHeaderWhenEmpty="True" Class="customers GridPager" AllowPaging="True" PageSize="4" OnPageIndexChanging="DGV_PageIndChamging" PagerSettings-Mode="NextPreviousFirstLast">
+            OnRowDataBound="dgvIntancia_RowDataBound" OnRowCreated="DGVInstancia_RowCreated" ShowHeaderWhenEmpty="True" Class="customers"
+            AllowPaging="True" PageSize="4" OnPageIndexChanging="DGV_PageIndChamging" PagerSettings-Mode="NextPreviousFirstLast">
             <Columns>
                 <%--Legajo--%>
                 <asp:TemplateField HeaderText="Legajo">
@@ -148,7 +148,7 @@
                 </asp:TemplateField>
             </Columns>
 
-<PagerSettings Mode="NumericFirstLast"></PagerSettings>
+            <PagerSettings Mode="NumericFirstLast"></PagerSettings>
             <PagerStyle HorizontalAlign="Center" />
         </asp:GridView>
 

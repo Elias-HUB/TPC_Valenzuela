@@ -14,13 +14,47 @@
     </style>
 
     <div class="form-row align-content-center" style="margin-left: 25px; margin-right: 25px; justify-content: center;">
-        <div >
-            <h3>Comisiones</h3>                        
+        <div>
+            <h3>Comisiones</h3>
         </div>
     </div>
-    <asp:Button Text="Agregar Comisión" runat="server" class="btn btn-lg btn-info" Style="margin-left: 100px;" OnClick="BtnComision_Click" />
-    <div class="row" style="margin-left: 25px; margin-right: 25px; margin-top: 10px;">
 
+    <div class="container">
+        <div class="form-row align-content-center align-items-center" style="justify-content: center;">
+            <asp:Button Text="Agregar Comisión" runat="server" class="btn btn-lg btn-block btn-info" OnClick="BtnComision_Click" />
+        </div>
+    </div>
+
+
+    <%-- FILTRO --%>
+    <div class="form-row align-content-center" style="justify-content: center; margin-top: 10px;">
+        <div>
+            <asp:DropDownList ID="DlistMateria" runat="server" Class="custom-select custom-select-lg" Style="height: 48px;" AppendDataBoundItems="True">
+                <asp:ListItem Selected="True" Value="0">Todos</asp:ListItem>
+            </asp:DropDownList>
+        </div>
+        <div style="margin-left: 10px;">
+            <asp:DropDownList ID="DlistTurno" runat="server" Class="custom-select custom-select-lg" Style="height: 48px;" AppendDataBoundItems="True">
+                <asp:ListItem Selected="True" Value="0">Todos</asp:ListItem>
+            </asp:DropDownList>
+        </div>
+        <div style="margin-left: 10px;">
+            <asp:DropDownList ID="DlistCuatrimestre" runat="server" Class="custom-select custom-select-lg" Style="height: 48px;" AppendDataBoundItems="True">
+                <asp:ListItem Selected="True" Value="0">Todos</asp:ListItem>
+            </asp:DropDownList>
+        </div>
+        <div class="col-1">
+            <asp:TextBox runat="server" ID="TboxAnio" placeholder="Año" CssClass="form-control" Style="height: 48px;" />
+        </div>
+        <div class="col-2">
+            <asp:Button Text="Buscar" runat="server" ID="BtnBuscar" OnClick="BtnBuscar_Click" class="btn btn-block btn-info" Style="height: 48px;" />
+        </div>
+    </div>
+
+    <%-- Fin Filtro --%>
+
+    <div class="row" style="margin-left: 25px; margin-right: 25px;">
+        <asp:Label ID="lblIncorrecto" Text="" runat="server" ForeColor="Red" />
         <% foreach (var item in Comisions)
             { %>
         <div class="col-sm-4" style="margin-top: 25px;">

@@ -12,5 +12,6 @@ namespace ASA.Models
         //public Instancia Instancia { get; set; }
         public DateTime FechaAlta { get; set; }
         public DateTime FechaModificacion { get; set; }
+        public string Nota { get; set; }
     }
 }

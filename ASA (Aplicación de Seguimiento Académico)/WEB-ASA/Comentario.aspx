@@ -86,31 +86,54 @@
         }
     </style>
 
-    <div class="container  row">
-        <div style ="margin-left: 20px">
-            <a href="Comisiones.aspx">Comisiones </a>
+    <div class="container" style="height: 22px;">
+        <div class="row ">
+            <div style="margin-left: 20px;">
+                <a href="Comisiones.aspx">Comisiones </a>
+            </div>
+            <p>> </p>
+            <div>
+                <a href="List-Instancia.aspx?valor=<% =Session["IdComision" + Session.SessionID] %>">Instancias Evaluativas</a>
+            </div>
+            <p>> </p>
+            <div>
+                <a href="List-Alumnos.aspx?valor=<% =(Session["IdComision-Instancia" + Session.SessionID]) %>">Alumnos Insciptos</a>
+            </div>
         </div>
-        <p>> </p>
-        <div>
-            <a href="List-Instancia.aspx?valor=<% =Session["IdComision" + Session.SessionID] %>">Instancias Evaluativas</a>
-        </div>
-        <p>> </p>
-        <div>
-            <a href="List-Alumnos.aspx?valor=<% =(Session["IdComision-Instancia" + Session.SessionID]) %>">Alumnos Insciptos</a>
-        </div>
+
     </div>
-    <hr style="margin-top: 0rem; margin-bottom: 0,3rem;" />
+    <hr style="margin-top: 0px; margin-bottom: 4px;" />
+
+
+    <div class="form-row align-content-center" style="margin-left: 25px; margin-right: 25px; justify-content: center;">
+        <h3>
+            <asp:Label Text="" ID="LblTitulo" runat="server" Style="margin-left: 20px;" />
+        </h3>
+    </div>
+
 
     <div class="Container">
-        <div class="container">
-            <p>
-                <asp:Label Text="text" ID="LblTitulo" runat="server" />
-            </p>
-        </div>
+
         <div class="form-group row">
             <div class="col-3"></div>
             <div class=" col-6">
-                <asp:Label Text="Nuevo Comentario:" runat="server" />
+                <div class="row-group">
+                    <asp:Label ID="Label1" Text="Nota:" runat="server" Style="height: 48px;" />
+                    <asp:DropDownList runat="server" ID="DlistNota" Class="custom-select " Style="height: 48px;">
+                        <asp:ListItem Text="1" />
+                        <asp:ListItem Text="2" />
+                        <asp:ListItem Text="3" />
+                        <asp:ListItem Text="4" />
+                        <asp:ListItem Selected="True" Text="5" />
+                        <asp:ListItem Text="6" />
+                        <asp:ListItem Text="7" />
+                        <asp:ListItem Text="8" />
+                        <asp:ListItem Text="9" />
+                        <asp:ListItem Text="10" />
+                    </asp:DropDownList>
+                </div>
+                <asp:Label ID="lblComentario" Text="Nuevo Comentario:" runat="server" Style="height: 48px;" />
+
                 <asp:TextBox ID="TboxDescripcion" class="form-control HV" Height="200px" runat="server" TextMode="MultiLine" onkeyup="validarVacio(this.id)" onfocus="Seleccionar(this.id)" ClientIDMode="Static" />
 
                 <div class="form-group">
@@ -128,17 +151,16 @@
 
             <div class="form-group col-4">
                 <div class="row-group">
-                    <label for="comment">Fecha Alta: </label>
-                    <label for="comment"><% =item.FechaAlta %></label>
+                    <label for="comment">Fecha: </label>
+                    <label for="comment"><% =item.FechaAlta.ToString("dd/MM/yyyy") %></label>
                 </div>
-                <%--  <div class="row-group">
-                    <label for="comment">Ultima Modificaion: </label>
-                    <label for="comment"><% =item.FechaModificacion %></label>
-                </div>--%>
+                <div class="row-group">
+                    <label for="comment">Nota: </label>
+                    <label for="comment"><% =item.Nota %></label>
+                </div>
                 <textarea class="form-control" id="LblDescr" style="height: 100px" disabled="disabled"><% =item.Descripcion%></textarea>
                 <div class=" form-group">
                     <a href="List-Alumnos.aspx?valor=<% = (Session["IdComision-Instancia" + Session.SessionID]) + "&Mail=" + item.Id + "&LegajoAlumno=" + (Session["IdComision-Alumno" + Session.SessionID]) %>" class="btn btn-info btn-lg btn-block">Enviar por mail</a>
-
                 </div>
             </div>
             <% } %>

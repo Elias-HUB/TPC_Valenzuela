@@ -36,82 +36,90 @@
     </style>
 
 
-    <div class="container  row">
-        <div style="margin-left: 20px;">
-            <a href="Comisiones.aspx">Comisiones</a>
+    <div class="container" style="height: 22px;">
+        <div class="row ">
+            <div style="margin-left: 20px;">
+                <a href="Comisiones.aspx">Comisiones</a>
+            </div>
         </div>
     </div>
-    <hr style="margin-top: 0rem; margin-bottom: 0,3rem;" />
+    <hr style="margin-top: 0px; margin-bottom: 4px;" />
 
+    <div class="form-row align-content-center" style="margin-left: 25px; margin-right: 25px; justify-content: center;">
+        <h3>
+            <asp:Label Text="" ID="LblTitulo" runat="server" Style="margin-left: 20px;" />
+        </h3>
+    </div>
 
-
-
-    <%--Inicio GridView Instancias--%>
-    <div class="container">
-        <p>
-            <asp:Label Text="" ID="LblTitulo" runat="server" />
-        </p>
-
-        <div class="container-fluid">
-            <a href="ABM-Instancia.aspx?IdComision=<% =(Session["IdComision" + Session.SessionID]) %>" class="btn btn-info btn-block">Agregar o Modificar Instancias</a>
-            <asp:GridView ID="DGVInstancia" Style="margin-top: 20px" runat="server" Class="customers" AutoGenerateColumns="false" DataKeyNames="Id" OnRowCreated="DGVInstancia_RowCreated" EmptyDataText="No tiene nada">
-                <EmptyDataRowStyle BackColor="LightBlue" ForeColor="Red" />
-                <Columns>
-                    <asp:TemplateField HeaderText="ID">
-                        <ItemTemplate>
-                            <asp:Label ID="LBLId" Text='<%# Eval("Id")%>' runat="server" />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-
-                    <%--Nombre--%>
-                    <asp:TemplateField HeaderText="Nombre">
-                        <ItemTemplate>
-                            <asp:Label Text='<%# Eval("Nombre")%>' runat="server" />
-                        </ItemTemplate>
-
-                    </asp:TemplateField>
-
-                    <%--Tipo Instancia Nombre--%>
-                    <asp:TemplateField HeaderText="Tipo de la Instancia">
-                        <ItemTemplate>
-                            <asp:Label Text='<%# Eval("TipoInstancia.Nombre")%>' runat="server" />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-
-                    <%--Fecha inicio--%>
-                    <%--   <asp:TemplateField HeaderText="Fecha Inicio">
-                        <ItemTemplate>
-                            <asp:Label Text='<%# Eval("FechaInicio","{0:d}")%>' runat="server" />
-                        </ItemTemplate>
-                    </asp:TemplateField>--%>
-
-                    <%--Fecha Fin--%>
-                    <%--<asp:TemplateField HeaderText="Fecha Fin">
-                        <ItemTemplate>
-                            <asp:Label Text='<%# Eval("FechaFin","{0:d}")%>' runat="server" />
-                        </ItemTemplate>
-                    </asp:TemplateField>--%>
-
-
-                    <%--Alumnos--%>
-                    <asp:TemplateField HeaderText="">
-                        <ItemTemplate>
-                            <a href="List-Alumnos.aspx?valor=<%# Eval("Id")%>" class="btn btn-info btn-info btn-block">Alumnos</a>
-                            <%--<asp:Button Text="Alumnos" runat="server" />--%>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-
-
-                </Columns>
-
-            </asp:GridView>
-            <asp:Label ID="lblCorrecto" Text="" runat="server" ForeColor="Green" />
-            <asp:Label ID="lblIncorrecto" Text="" runat="server" ForeColor="Red" />
-            <%--Fin GridView Instancias--%>
-            <% if (Request.QueryString["valor"] == "22041997" && lblIncorrecto.Text == "")
-                { %>
-            <a href="List-Alumnos.aspx?valor=22041997" class="btn btn-info btn-info btn-block">Agregar Alumnos</a>
-            <%} %>
+    <%-- FILTRO --%>
+    <div class="form-row align-content-center" style="margin-left: 25px; margin-right: 25px; justify-content: center;">
+        <div style="margin-left: 10px;">
+            <asp:TextBox runat="server" ID="TboxNombreIns" placeholder="Instancia" CssClass="form-control" Style="height: 48px;" />
         </div>
+        <div style="margin-left: 10px;">
+            <asp:DropDownList ID="DpTipo" runat="server" Class="custom-select custom-select-lg" Style="height: 48px;" AppendDataBoundItems="True">
+                <asp:ListItem Selected="True" Value="0">Todos</asp:ListItem>
+            </asp:DropDownList>
+        </div>
+        <div>
+            <asp:Button Text="Buscar" runat="server" ID="BtnBuscar" OnClick="BtnBuscar_Click" class="btn btn-info" Style="height: 48px;" />
+        </div>
+    </div>
+    <%-- Fin Filtro --%>
+
+
+    <div class="container-fluid" style="margin-top: 10px;">
+        <asp:Label ID="lblCorrecto" Text="" runat="server" ForeColor="Green" />
+        <asp:Label ID="lblIncorrecto" Text="" runat="server" ForeColor="Red" />
+        <a href="ABM-Instancia.aspx?IdComision=<% =(Session["IdComision" + Session.SessionID]) %>" class="btn btn-info btn-block">Agregar o Modificar Instancias</a>
+
+        <% if (Request.QueryString["valor"] == "22041997" && lblIncorrecto.Text == "")
+            { %>
+        <a href="List-Alumnos.aspx?valor=22041997" class="btn btn-info btn-info btn-block">Agregar Alumnos</a>
+        <%} %>
+
+
+        <%--Inicio GridView Instancias--%>
+
+        <asp:GridView ID="DGVInstancia" runat="server" Class="customers" AutoGenerateColumns="false" DataKeyNames="Id"
+            OnRowCreated="DGVInstancia_RowCreated" AllowPaging="True"
+            PagerSettings-Mode="NumericFirstLast" PageSize="4" OnPageIndexChanging="DGVInstancia_PageIndexChanging"
+            PagerSettings-Position="Bottom">
+            <Columns>
+                <asp:TemplateField HeaderText="ID">
+                    <ItemTemplate>
+                        <asp:Label ID="LBLId" Text='<%# Eval("Id")%>' runat="server" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+                <%--Nombre--%>
+                <asp:TemplateField HeaderText="Nombre">
+                    <ItemTemplate>
+                        <asp:Label Text='<%# Eval("Nombre")%>' runat="server" />
+                    </ItemTemplate>
+
+                </asp:TemplateField>
+
+                <%--Tipo Instancia Nombre--%>
+                <asp:TemplateField HeaderText="Tipo de la Instancia">
+                    <ItemTemplate>
+                        <asp:Label Text='<%# Eval("TipoInstancia.Nombre")%>' runat="server" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+
+
+                <%--Alumnos--%>
+                <asp:TemplateField HeaderText="">
+                    <ItemTemplate>
+                        <a href="List-Alumnos.aspx?valor=<%# Eval("Id")%>" class="btn btn-info btn-info btn-block">Alumnos</a>
+                        <%--<asp:Button Text="Alumnos" runat="server" />--%>
+                    </ItemTemplate>
+                </asp:TemplateField>
+            </Columns>
+            <PagerSettings Mode="NumericFirstLast"></PagerSettings>
+            <PagerStyle HorizontalAlign="Center" />
+        </asp:GridView>
+
+        <%--Fin GridView Instancias--%>
     </div>
 </asp:Content>

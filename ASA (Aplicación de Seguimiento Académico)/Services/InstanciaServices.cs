@@ -86,16 +86,26 @@ namespace ASA.Services
             }
         }
 
-        public List<Models.Instancia> ListarXComision(long Id)
+        public List<Models.Instancia> ListarXComision(long Id, string Nombre = "", string Tinstancia = "")
         {
             List<Models.Instancia> Listado = new List<Models.Instancia>();
             Models.Instancia Aux;
             AccesoDatos.AccesoDatos Datos = new AccesoDatos.AccesoDatos();
             try
             {
-                Datos.SetearQuery("SELECT Ins.Id, Ins.Nombre, Ins.FechaInicio, Ins.FechaFin, TI.Id, TI.Nombre  FROM Instancia as Ins inner join TipoInstancia as TI on IdTipoinstancia = TI.Id inner join DetComisionInstancia on DetComisionInstancia.IdInstancia = Ins.Id where DetComisionInstancia.idComision = @Id");
+                Datos.SetearQuery("exec sp_ComisionInstancia @Id,@Nombre,@Tinstancia;");
                 Datos.Clear();
                 Datos.agregarParametro("@Id", Id);
+                Datos.agregarParametro("@Nombre", "%" + Nombre + "%" );
+                if (Tinstancia == "Todos")
+                {
+                    Datos.agregarParametro("@Tinstancia", "%%");
+                }
+                else
+                {
+                    Datos.agregarParametro("@Tinstancia", "%" + Tinstancia + "%");
+                }
+
                 Datos.EjecutarLector();
 
                 while (Datos.Lector.Read())
@@ -131,8 +141,8 @@ namespace ASA.Services
                 accesoDatos.SetearQuery("update Instancia set Nombre = @Nombre, FechaInicio = @FechaInicio, FechaFin = @FechaFin, IdTipoinstancia = @TIins  where id = @Id");
                 accesoDatos.Clear();
                 accesoDatos.agregarParametro("@Nombre", Aux.Nombre);
-                accesoDatos.agregarParametro("@FechaInicio", Aux.FechaInicio);
-                accesoDatos.agregarParametro("@FechaFin", Aux.FechaFin);
+                accesoDatos.agregarParametro("@FechaInicio", DateTime.Now);
+                accesoDatos.agregarParametro("@FechaFin", DateTime.Now);
                 accesoDatos.agregarParametro("@TIins", Aux.TipoInstancia.Id);
                 accesoDatos.agregarParametro("@Id", Aux.Id);
                 accesoDatos.EjecutarAccion();
@@ -181,8 +191,8 @@ namespace ASA.Services
                 datos.Clear();
                 datos.SetearQuery("INSERT INTO Instancia (Nombre,FechaInicio,FechaFin,IdTipoinstancia) VALUES (@Nombre,@FechaInicio,@FechaFin,@IdTipoinstancia) SELECT CAST(scope_identity() AS int);");
                 datos.agregarParametro("@Nombre", Aux.Nombre);
-                datos.agregarParametro("@FechaInicio", Aux.FechaInicio);
-                datos.agregarParametro("@FechaFin", Aux.FechaFin);
+                datos.agregarParametro("@FechaInicio", DateTime.Now);
+                datos.agregarParametro("@FechaFin", DateTime.Now);
                 datos.agregarParametro("@IdTipoinstancia", Aux.TipoInstancia.Id);
                 //datos.agregarParametro("@estado", 1);
                 //datos.EjecutarAccionSinCerrar();

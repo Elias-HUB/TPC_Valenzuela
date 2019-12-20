@@ -22,13 +22,31 @@ namespace WEB_ASA {
         protected global::System.Web.UI.WebControls.Label LblTitulo;
         
         /// <summary>
-        /// Control DGVInstancia.
+        /// Control TboxNombreIns.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView DGVInstancia;
+        protected global::System.Web.UI.WebControls.TextBox TboxNombreIns;
+        
+        /// <summary>
+        /// Control DpTipo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DpTipo;
+        
+        /// <summary>
+        /// Control BtnBuscar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnBuscar;
         
         /// <summary>
         /// Control lblCorrecto.
@@ -47,5 +65,14 @@ namespace WEB_ASA {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblIncorrecto;
+        
+        /// <summary>
+        /// Control DGVInstancia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView DGVInstancia;
     }
 }

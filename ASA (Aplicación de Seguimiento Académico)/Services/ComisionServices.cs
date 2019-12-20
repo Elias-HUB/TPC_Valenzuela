@@ -9,7 +9,7 @@ namespace ASA.Services
 {
     public class ComisionServices
     {
-        public List<Models.Comision> Listar(int IdDocente)
+        public List<Models.Comision> Listar(int IdDocente, string Materiaa = "", string Turnoo = "", string Cuatrimestree = "", string Anio = "")
         {
             List<Models.Comision> Listado = new List<Models.Comision>();
             Models.Comision Aux;
@@ -17,8 +17,36 @@ namespace ASA.Services
             AccesoDatos.AccesoDatos Datos = new AccesoDatos.AccesoDatos();
             try
             {
-                Datos.SetearQuery("SELECT Comision.Id, Materia.Id, Materia.Nombre, Carrera.Id, Carrera.Nombre, Universidad.Id, Universidad.Nombre, Turno.Id, Turno.Nombre, Cuatrimestre.Id, Cuatrimestre.Nombre, Comision.Anio FROM  Comision inner join Materia on IdMateria = Materia.Id inner join Carrera on Carrera.Id = Materia.IdCarrera inner join Universidad on Universidad.Id = Carrera.IdUniversidad inner join Turno on  Turno.id = IdTurno inner join Cuatrimestre on IdCuatrimestre = Cuatrimestre.Id inner join Docente on IdDocente = Docente.Legajo where IdDocente = @IdDocente order by Anio desc,Cuatrimestre.Nombre desc");
+                Datos.SetearQuery("exec sp_ComisionesDocente @IdDocente,@Materia,@Turno,@Cuatrimestre,@Anio;");
+                Datos.Clear();
                 Datos.agregarParametro("@IdDocente", IdDocente);
+                if (Materiaa == "Todos")
+                {
+                    Datos.agregarParametro("@Materia", "%%");
+                }
+                else
+                {
+                    Datos.agregarParametro("@Materia", Materiaa);
+                }
+
+                if (Turnoo == "Todos")
+                {
+                    Datos.agregarParametro("@Turno", "%%");
+                }
+                else
+                {
+                    Datos.agregarParametro("@Turno",Turnoo);
+                }
+
+                if (Cuatrimestree == "Todos")
+                {
+                    Datos.agregarParametro("@Cuatrimestre", "%%");
+                }
+                else
+                {
+                    Datos.agregarParametro("@Cuatrimestre",Cuatrimestree);
+                }
+                Datos.agregarParametro("@Anio", "%" + Anio + "%");
                 Datos.EjecutarLector();
 
                 while (Datos.Lector.Read())
@@ -46,7 +74,7 @@ namespace ASA.Services
                     Aux.Cuatrimestre.Id = Datos.Lector.GetInt64(9);
                     Aux.Cuatrimestre.Nombre = Datos.Lector.GetString(10);
 
-                    Aux.Anio= Datos.Lector.GetInt32(11);
+                    Aux.Anio = Datos.Lector.GetInt32(11);
 
                     //Aux.docente = new Docente();
                     //Aux.docente = docenteServices.BuscarDocente(IdDocente);
@@ -79,7 +107,7 @@ namespace ASA.Services
                 Datos.SetearQuery("SELECT Comision.Id, Materia.Id, Materia.Nombre, Carrera.Id, Carrera.Nombre, Universidad.Id, Universidad.Nombre, Turno.Id, Turno.Nombre, Cuatrimestre.Id, Cuatrimestre.Nombre, Comision.Anio FROM  Comision inner join Materia on IdMateria = Materia.Id inner join Carrera on Carrera.Id = Materia.IdCarrera inner join Universidad on Universidad.Id = Carrera.IdUniversidad inner join Turno on  Turno.id = IdTurno inner join Cuatrimestre on IdCuatrimestre = Cuatrimestre.Id inner join Docente on IdDocente = Docente.Legajo where Comision.Id = @comision order by Anio desc,Cuatrimestre.Nombre desc");
                 Datos.agregarParametro("@IdDocente", IdDocente);
                 Datos.agregarParametro("@comision", comision);
-                
+
                 Datos.EjecutarLector();
 
                 while (Datos.Lector.Read())
@@ -169,7 +197,7 @@ namespace ASA.Services
 
                     Aux.docente = new Docente();
                     Aux.docente = docenteServices.BuscarDocente(IdDocente);
-                    
+
                 }
                 return Aux;
             }
@@ -236,7 +264,7 @@ namespace ASA.Services
             }
         }
 
-        public void ListarAlumnosComision (Comision comision)
+        public void ListarAlumnosComision(Comision comision)
         {
             AccesoDatos.AccesoDatos Datos = new AccesoDatos.AccesoDatos();
             Alumno Alumno;
@@ -245,7 +273,7 @@ namespace ASA.Services
             {
                 Datos.SetearQuery("SELECT Comision.Id, Alumno.* FROM [Valenzuela_DB].[dbo].[DetComisionAlumnos] inner join Comision on Comision.Id = DetComisionAlumnos.idComision inner join Alumno on Alumno.Legajo = DetComisionAlumnos.IdAlumno where Comision.Id = '" + comision.Id + "'");
                 Datos.EjecutarLector();
-                while(Datos.Lector.Read())
+                while (Datos.Lector.Read())
                 {
                     Alumno = new Alumno();
                     Alumno.Legajo = Datos.Lector.GetInt64(1);

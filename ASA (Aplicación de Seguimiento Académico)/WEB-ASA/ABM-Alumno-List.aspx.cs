@@ -101,10 +101,10 @@ namespace WEB_ASA
                     }
                     else
                     {
-                        lblIncorrecto.Visible = true;
+                        lblIncorrecto.Visible = true;                        
+                        CargaDGVInstancia();
                         lblIncorrecto.Text = "Este Alumno no puede ser eliminado ya que tiene comentarios realizos en la instancia.";
                         lblCorrecto.Text = "";
-                        CargaDGVInstancia();
                     }
 
                 }
@@ -155,26 +155,12 @@ namespace WEB_ASA
         {
             try
             {
+                lblIncorrecto.Text = "";
                 AlumnoServices alumnoServices = new AlumnoServices();
                 List<Alumno> alumnos = new List<Alumno>();
                 if (Request.QueryString["IdComision"] != "22041997")
                 {
-                    if ("" == TboxLegajo.Text)
-                    {
-                        TboxLegajo.Text = "%%";
-                    }
-                    if ("" == TboxNombre.Text)
-                    {
-                        TboxNombre.Text = "%%";
-                    }
-                    if ("" == TboxApellido.Text)
-                    {
-                        TboxApellido.Text = "%%";
-                    }
                     alumnos = alumnoServices.ListarAlumnosComision(Convert.ToInt64(Request.QueryString["IdComision"]), TboxLegajo.Text, TboxNombre.Text, TboxApellido.Text);
-                    TboxApellido.Text = "";
-                    TboxLegajo.Text = "";
-                    TboxNombre.Text = "";
                 }
                 else
                 {
@@ -201,6 +187,10 @@ namespace WEB_ASA
                     DGVAlumnos.DataSource = Listado;
                     DGVAlumnos.DataBind();
                     DGVAlumnos.Rows[0].Visible = false;
+                    if (TboxApellido.Text != "" || TboxLegajo.Text != "" || TboxNombre.Text != "")
+                    {
+                        lblIncorrecto.Text = "No se encontraron datos";
+                    }
                 }
                 else
                 {
