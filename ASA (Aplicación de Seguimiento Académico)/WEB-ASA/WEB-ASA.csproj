@@ -70,6 +70,7 @@
     <Content Include="ABM-Alumno-List.aspx" />
     <Content Include="ABM-ALumno.aspx" />
     <Content Include="ABM-Comision.aspx" />
+    <Content Include="ABM-Docente.aspx" />
     <Content Include="ABM-Instancia.aspx" />
     <Content Include="Comentario.aspx" />
     <Content Include="Comisiones.aspx" />
@@ -111,6 +112,13 @@
     </Compile>
     <Compile Include="ABM-Comision.aspx.designer.cs">
       <DependentUpon>ABM-Comision.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ABM-Docente.aspx.cs">
+      <DependentUpon>ABM-Docente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ABM-Docente.aspx.designer.cs">
+      <DependentUpon>ABM-Docente.aspx</DependentUpon>
     </Compile>
     <Compile Include="ABM-Instancia.aspx.cs">
       <DependentUpon>ABM-Instancia.aspx</DependentUpon>

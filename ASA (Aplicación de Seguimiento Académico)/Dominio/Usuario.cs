@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ASA.Models;
 
-namespace Dominio
+namespace ASA.Models
 {
     public class Usuario
     {

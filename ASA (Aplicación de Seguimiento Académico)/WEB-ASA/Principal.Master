@@ -59,7 +59,7 @@
 
                 <% if (Session["DocenteLegajo" + Session.SessionID] != null)
                     {%>
-                <div class="row" style="margin-left: 20px;">
+                <%--     <div class="row" style="margin-left: 20px;">
                     <div class="display-field" style="justify-content: center;">
                         <a href='Comisiones.aspx'>
                             <asp:Image runat="server" ImageUrl="~/Imagenes/Cabecera.png" Width="350px" /></a>
@@ -73,6 +73,31 @@
                         <asp:Label Text="ghfhfgh" ID="LblSession" runat="server" />
 
                         <asp:Button Text="Cerrar sessión" OnClick="BtnSession_Click" class="btn btn-link" ForeColor="#0000cc" ID="BtnSession" runat="server" />
+                    </div>
+                </div>--%>
+
+                <div class="row" style="margin-left: 20px;">
+                    <div class="display-field" style="justify-content: center;">
+                        <a href='Comisiones.aspx'>
+                            <asp:Image runat="server" ImageUrl="~/Imagenes/Cabecera.png" Width="350px" /></a>
+                    </div>
+                    <div style="margin-top: 45px;">
+                        <p>ASA (Aplicación de Seguimiento Académico)</p>
+                    </div>
+                </div>
+                <div class="topcorner">
+                    <div>
+                        <asp:Label Text="ghfhfgh" ID="LblSession" runat="server" />
+                        <div class="dropdown">
+                            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Mi Perfil
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="ABM-Docente.aspx?Legajo=<% =Session["DocenteLegajo" + Session.SessionID] %>">Modifar Docente</a>
+                                <asp:Button Text="Cerrar sessión" OnClick="BtnSession_Click" class="dropdown-item" ID="BtnSession" runat="server" />
+                            </div>
+                        </div>
+                        <%--<asp:Button Text="Cerrar sessión" OnClick="BtnSession_Click" class="btn btn-link" ForeColor="#0000cc" ID="BtnSession" runat="server" />--%>
                     </div>
                 </div>
                 <% }
@@ -95,13 +120,13 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-        
-        <footer style="font-family: 'Roboto', sans-serif; height: 22px;"">
+
+        <%--<footer style="font-family: 'Roboto', sans-serif; height: 22px;"">
             <div style="text-align: center;">
                 <hr  style="margin-top: 2rem; margin-bottom: 2px"/>
                 <p>&copy; <%: DateTime.Now.Year %> -  ASA (Aplicación de Seguimiento Académico)  -  <a target="_blank" href="https://www.instagram.com/elias_pachu/">Valenzuela Elias</a></p>
             </div>
-        </footer>
+        </footer>--%>
     </form>
 </body>
 

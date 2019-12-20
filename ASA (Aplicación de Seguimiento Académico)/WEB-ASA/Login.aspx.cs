@@ -6,8 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using ASA.Models;
 using ASA.Services;
-using Services;
-using Dominio;
+
 
 namespace WEB_ASA
 {
@@ -36,7 +35,7 @@ namespace WEB_ASA
             {
                 usuario.Docente.Legajo = Convert.ToInt64(TboxUsuario.Text);
                 usuario.Clave = TboxContrasenia.Text;
-                if (usuarioServices.VerificarMail(usuario.Docente.Legajo, usuario.Clave) == true)
+                if (usuarioServices.BuscarDocenteUsuario(usuario.Docente.Legajo, usuario.Clave) == true)
                 {
                     Session["DocenteLegajo" + Session.SessionID] = Convert.ToInt64(TboxUsuario.Text);
                     Response.Redirect("Comisiones.aspx");

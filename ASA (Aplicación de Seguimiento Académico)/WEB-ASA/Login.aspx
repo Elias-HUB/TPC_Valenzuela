@@ -322,7 +322,7 @@
 
             <!-- Remind Passowrd -->
             <div id="formFooter">
-                <%--<a class="underlineHover" href="#">Olvido su contraseña?</a>--%>
+                <a class="underlineHover" href="ABM-Docente.aspx?Legajo=Vacio">Crear Cuenta</a>
             </div>
         </div>
     </div>
